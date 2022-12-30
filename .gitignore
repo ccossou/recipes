@@ -1,0 +1,15 @@
+*.aux
+*.idx
+*.ilg
+*.ind
+*.log
+*.maf
+*.mtc*
+*.out
+*.tmp
+*.tex.backup
+*.tex2
+*.tex2
+*.toc
+*.tex~
+

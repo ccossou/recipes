@@ -1,0 +1,95 @@
+\documentclass[a4paper,twoside]{article}
+\usepackage{autiwa}
+\title{Temps de levés précis}
+\author{Autiwa}
+\makeindex
+\begin{document}
+\input{title.tex}
+\tableofcontents
+\newpage
+\section{Introduction}
+Le but de ce texte est de fournir des équations afin de calculer les nouveaux temps de levée en fonction de divers paramètres. Le but, c'est de partir d'une recette officielle qui fourni la population initiale (en g de levure), la ou les températures ainsi que les temps de levées. 
+
+Suivant les équations de la section~\ref{yeast_formulae}
+\subsection{Principe}
+La croissance des levures se décompose en 3 phases :
+\begin{enumerate}
+\item lag phase : C'est la première phase lors de l'introduction des levures dans un nouveau milieu. Dans cette phase, les levures sont actives mais ne se dupliquent pas. la durée de cette phase dépend de la population initiale de levures et des conditions environnementales (température, pH, alcool, oxygène, concentration de sel, nutriments,\dots)
+\item La phase exponentielle : cette phase de croissance rapide est caractérisée par le temps de doublage (Generation Time)
+\item La phase stationaire : la croissance rapide s'arrête, généralement à cause d'une haute densité de cellules
+\end{enumerate}
+
+
+Les levures ont deux types de métabolisme énergétique :
+\begin{itemize}
+\item Par respiration (avec oxygène). consommation de dioxygène + glucose et
+rejet de dioxyde de carbone, mécanisme très efficace car oxydation
+complète des molécules organiques en CO2 avec récupération de toute
+l'énergie possible.
+\item Par fermentation alcoolique (pas besoin d'oxygène). Peut se
+faire en absence de dioxygène, consommation de glucose et rejet d'éthanol, moins efficace que la respiration car le déchet n'est pas
+totalement oxydé donc "contient" encore de l'énergie
+\end{itemize}
+
+\begin{remarque}
+Les levures ne meurent qu'au bout d'une centaine de génération environ (une génération étant liée au Generation time). Dans la plupart des cas on peut négliger ce phénomène. 
+\end{remarque}
+
+\subsection{Formule}\label{yeast_formulae}
+La levure de boulanger fait partie de la famille \emph{saccharomyces cerevisiae}.
+
+La formule générale est de la forme :
+\begin{align}
+\log(\mathrm{GT}) &= a + bT + cT^2
+\end{align}
+où GT, Generation Time est le temps pour doubler les levures.
+
+Pour la souche AB1, la formule est :
+\begin{align}
+a&= 2.747 & b&= -0.1865 & c&= 0.00413
+\end{align}
+
+Ces données sont extraites de "Growth of Saccharomyces cerevisiae and Saccharomyces uvarum in a temperature gradient incubator" (R. M. Walsh et P. A. Martin, 11 octobre 1976, Journal of the Institute of Brewing). La souche AB140 a été écartée car c'est une autre famille. Ceci dit, je ne sais pas si les mesures effectuées sont parfaitement identiques pour les souches de levures de boulanger, et de quel ordre de grandeur sont les barres d'erreur compte tenu de l'incertitude des souches (il y a plusieurs sous variétés dans cette famille là).
+
+L'évolution des levures dans la phase exponentielle s'écrit :
+\begin{align}
+N(t) &= N_0 e^{\left(\frac{t\ln(2)}{\mathrm{GT}}\right)}\label{exponential_growth}
+\end{align}
+
+\section{Levée à une seule température}
+En suivant la formule de croissance exponentielle \refeq{exponential_growth}, on arrive alors à:
+\begin{align}
+t &= \mathrm{GT} \left[\frac{t_\text{ref}}{\mathrm{GT_\text{ref}}} - \frac{\ln\left(\frac{N_\text{ref}}{N_0}\right)}{\ln 2} \right]
+\end{align}
+où les valeurs préfixées ``ref'' sont les valeurs de la recettes, GT est le generation time à la température voulue, $N_0$ la population initiale que l'on veut utiliser et qui peut servir de paramètre d'ajustement afin d'augmenter ou diminuer le temps de levée en fonction des besoins (pour atteindre la durée d'une nuit complète par exemple).
+
+Cette section est donnée à titre indicative, la vraie formule comporte deux températures puisque j'utilise une levée la nuit au frigo. 
+
+\begin{center}
+\begin{tabular}{|l|l|}\hline
+T ($^\circ$C) & Growth time (h)\\\hline
+6 & 43h 31min \\\hline
+7 & 32h 3min \\\hline
+8 & 24h 4min \\\hline
+9 & 18h 25min \\\hline
+10 & 14h 21min \\\hline
+11 & 11h 25min \\\hline
+12 & 9h 14min \\\hline
+13 & 7h 38min \\\hline
+14 & 6h 25min \\\hline
+15 & 5h 30min \\\hline
+16 & 4h 49min \\\hline
+17 & 4h 17min \\\hline
+18 & 3h 53min \\\hline
+19 & 3h 36min \\\hline
+20 & 3h 24min \\\hline
+21 & 3h 16min \\\hline
+22 & 3h 12min \\\hline
+23 & 3h 12min \\\hline
+24 & 3h 15min \\\hline
+\end{tabular}
+\end{center}
+
+
+\printindex
+\end{document}

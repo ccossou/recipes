@@ -1,0 +1,51 @@
+= Atelier Pizza
+:author: Autiwa
+:sectnums:
+:toc: left
+:toclevels: 4
+:source-language: asciidoc
+:experimental:
+:xrefstyle: short
+
+== Infos sur l'atelier
+
+* Cuisine Italienne Paris
+* contact@cuisineitalienne.paris
+* fb : @CuisineItalienneParis
+* insta : @cuisine_italienne_paris
+* + 33 (0) 6 59151070
+
+== Notes generales
+. Faire mûrir le pâton au frigo dans une boite bien fermee (pendant 24/48 heures).
+. Laisser la boite à temperature ambiante pendant 3 heures.
+. Insérer une pierre réfractaire ou une plaque en métal dans le four.
+. Chauffer à la température la plus haute possible (de préférence en modalité statique.
+. Étaler, garnir et poser la pâte sur la surface bouillante.
+. Cuire pendant 4/5 minutes et servir aussitôt.
+
+NOTE: Ajouter à la sortie du four les ingrédients délicats (charcuterie, mozzarella de bufflonne, burrata, etc.)
+
+.Informations importantes:
+* Le mélange est constitué de plusieurs types de farine (T45, T55 et farine complète).
+* On utilise de la sauce tomate ou simplement des tomates écrasées. Inutile d'en mettre beaucoup.
+* Utilisation de semoule de blé très fine, soit pour la pâte si on la veut plus douce, soit simplement quand on étale la pâte pour qu'elle soit plus croustillante
++
+WARNING: Il faut enlever le surplus de semoule avant d'enfourner (notamment sur le plan de travail devant la pelle) parce que ça donne un goût amer.
+
+== Petrissage
+. Ajouter la moitié de l'eau dans la farine et la levure sèche.
+Pétrir un peu comme un rabattage. 
+. Ajoutez de l'eau au fur et à mesure pour conserver la texture élastique.
+. Une fois fini, ajoutez le sel et pétrissez/rabattez jusqu'à incorporation complète du sel
+
+== Preparation et cuisson
+.Pour étaler la pâte:
+* On étale d'abord grossièrement jusqu'à pouvoir l'étirer
+* Il faut dessiner et marquer la croute avec le bout des doigts, la pâte sera alors plus facile à étaler.
+* Pour étaler il faut faire un C avec la tranche de chaque main, puis on étire et on tourne pour agrandir petit à petit.
+* Si on sens que ça colle, on peut rajouter de la farine dessous et retourner la pâte.
+* On ne prépare pas la pizza sur la pelle parce que sinon elle va coller, on la met dessus au dernier moment.
+
+.Pour enfourner:
+* On met la pizza sur la pelle en soulevant une croute avec 4 doigts et en tirant  tout en poussant la pelle
+* En met la pelle tout au fond du four et on fait des petits à coups pour la déposer sur la pierre à pizza

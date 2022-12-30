@@ -1,0 +1,1929 @@
+\documentclass[a4paper,twoside]{report}
+\usepackage[print]{autiwa}
+
+\setcounter{secnumdepth}{2}
+
+\fancyhead[LE]{}
+
+\makeatletter
+
+% macros qui servent à la mise en page, elles ne doivent pas être utilisées directement
+\newcommand{\preparationTopSep}{\vspace{.2cm} \hrule height0.25pt width\hsize \vspace{1em}}
+\newcommand{\statistiqueTopSep}{\vspace{.3cm} \hrule height1pt width\hsize \nobreak \vskip\parskip \vspace{.3cm}}
+\newcommand{\ingredientsTopSep}{\vspace{.4cm} \hrule height0.75pt width\hsize\vspace*{1\p@}\hrule height0.25pt width\hsize \vspace{1em}}
+\newcommand{\partStyle}{\bfseries \large}
+
+% redéfinition d'une nouvelle commande de section qui n'a pas de numérotation, est centrée, avec mise en page modifiée. C'est pour afficher le titre des recettes et qu'elles apparaissent dans le menu. J'avais fait avec addcontentline mais la référence n'était pas bonne et pointait sur la page précédente parfois. Bref, pas propre.
+\newcommand\nomRecette{\@startsection {section}{6}{\z@}{0ex}{2.3ex }%
+	{\reset@font\Huge\bfseries\centering}}
+
+\usepackage{bbding}%to add \FiveStar and \FiveStarOpen
+\newcommand{\note}[1]
+{
+  \ifthenelse{\equal{#1}{0}}{non testé}{}
+  \ifthenelse{\equal{#1}{1}}{\FiveStar\FiveStarOpen\FiveStarOpen\FiveStarOpen\FiveStarOpen}{}
+  \ifthenelse{\equal{#1}{2}}{\FiveStar\FiveStar\FiveStarOpen\FiveStarOpen\FiveStarOpen}{}
+  \ifthenelse{\equal{#1}{3}}{\FiveStar\FiveStar\FiveStar\FiveStarOpen\FiveStarOpen}{}
+  \ifthenelse{\equal{#1}{4}}{\FiveStar\FiveStar\FiveStar\FiveStar\FiveStarOpen}{}
+  \ifthenelse{\equal{#1}{5}}{\FiveStar\FiveStar\FiveStar\FiveStar\FiveStar}{}
+}
+
+\newcommand{\ingredient}[1][]{\ifthenelse{\equal{#1}{}}{\item }{\vspace{1ex}\hrule\vspace{1ex}\item[\textcurrency]\textbf{#1}}}
+
+\newcommand{\etape}[1][]{\ifthenelse{\equal{#1}{}}{\item }{\item[\textbf{#1}]}}
+
+% Environnement qui crée une nouvelle recette. Ingrédients, étape, cuisson etc doivent être contenus dans un environnement recette.
+\newenvironment{recette}[4]{\newpage \nomRecette{#1}\statistiqueTopSep\note{#2}\ifthenelse{\equal{#4}{}}%
+{\hfill\includegraphics[width=1em]{figures/logo_minuterie.pdf} \; \begin{itshape}\textbf{Préparation \& Cuisson :} #3\end{itshape}}%if none
+{\hfill\includegraphics[width=1em]{figures/logo_minuterie.pdf} \; \begin{itshape}\textbf{Préparation :} #3 \hfill \includegraphics[width=1em]{figures/logo_minuterie.pdf} \;\textbf{Cuisson :} #4\end{itshape}}}{}
+
+% Environnement pour la mise en page des ingrédients. Un argument optionnel de l'environnement permet de spécifier pour combien de personnes sont les doses. Les entrées de cet environnement doivent être ``\ingredient nom de l'ingrédient''. Si on veut séparer les ingrédients, pour dénoter deux sortes de choses, ingrédient pour une sauce et une pâte par exemple, il faut faire une ligne du style \ingredient[pour la sauce] afin de séparer.
+\newenvironment{ingredients}[1][]{\ingredientsTopSep{\partStyle Ingrédients\ifthenelse{\equal{#1}{}}{}{ (#1)}}\begin{multicols}{2}\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}}{\end{itemize}\end{multicols}}
+
+% Environnement pour mettre en page la préparation du plat. Les entrées sont de la forme ``\etape texte de l'étape``. Si on veut séparer les étapes, pour dénoter un groupement d'étape par exemple, il faut faire une ligne du style \etape[pour la sauce] afin de séparer.
+\newenvironment{preparation}{\preparationTopSep{\partStyle Préparation }\vspace{0.5em}\begin{enumerate}}{\end{enumerate}}
+
+% À utiliser si on souhaite faire une mise en page un peu plus évoluée, avec deux listes par exemples.
+\newenvironment{preparation*}{\preparationTopSep{\partStyle Préparation }\vspace{0.5em}\par}{}
+
+% Environnement pour mettre en page la cuisson du plat
+\newenvironment{cuisson}{\bigskip{\bfseries \large Cuisson }\par}{}
+\makeatother
+
+%TODO Faire une commande pour que dans l'index on voit la liste des recettes en fonction de la note qu'elles ont. 
+
+\title{Recettes de Cuisine}
+\author{Autiwa}
+\begin{document}
+\input{title.tex}
+\tableofcontents
+
+\chapter{Autre}
+\section{Faire fumer de la viande au barbecue}
+Faire tremper des petites copeaux de bois ou de branches de thym par exemple dans de l'eau pendant 30 minutes. Puis enveloppez de papier aluminium, Faites des trous pour laisser passer la fumée. 
+
+Mettez alors sur le feu du barbecue, avec la viande au dessus.
+
+% Beginning of group where section is deactivated
+% This is only to get the good structure of the document 
+% since ``section'' is in fact embedded in the 'recette' environment.
+% This group allow us to deactivate sections ONLY in the given file and 
+% not for the entire document.
+{\renewcommand{\section}[1]{}
+
+% En règle générale, il vaut mieux y laisser s'imprégner au moins une heure une viande, et parfois, plusieurs heures sont même 
+% recommandées. Attention aux poissons, qui \og cuisent \fg sous l'effet du citron notamment. Il est donc recommandé de ne pas 
+% les laisser baigner trop longtemps.
+
+\chapter{Recettes qui ne m'ont pas plu}
+
+Il est possible d'essayer de les améliorer mais je n'ai généralement pas été fan du goût.
+
+\begin{recette}{Gigot d'agneau rôti au lard}{3}{}{}
+\begin{ingredients}
+\ingredient gigot raccourci
+\ingredient $150\unit{g}$ de fines tranches de poitrine fumée (prévoir le double si le gigot est relativement gros)
+\ingredient 1 gousse d'ail
+\ingredient 5 brins de romarins et de thym
+\ingredient $50\unit{g}$ de beurre
+\ingredient 1 cuillère à soupe de moutarde
+\ingredient 1 cuillère à café de fond de veau déshydraté
+\ingredient $10\unit{cl}$ de vin blanc sec
+\ingredient sel,poivre
+\end{ingredients}
+
+\begin{preparation}
+\etape Sortez le gigot du frigo 2h avant la cuisson. Allumez le fout th. 7 (210\degres C). Mélangez le beurre ramolli avec le thym effeuillé, le romarin et l'ail haché et étalez le sur le gigot.
+\etape Posez le gigot dans un plat à rôtir et couvrez-le entièrement de tranches de poitrine fumée chevauchées. Glissez le plat dans le four. Laissez cuire $12\unit{min}$ par livre de viande (environ 1h).
+\etape Retirez la viande cuite du plat et laissez-la reposer $20\unit{min}$ sous un papier d'alu. Dégraissez le jus, ajoutez la moutarde, le vin et le fond de veau dilué dans $15\unit{cl}$ d'eau.
+\etape Mettez le plat sur le feu, faites bouillir $5\unit{min}$ en grattant pour décoller les sucs du fond. Versez en saucière. Tranchez le gigot et servez vite.
+\end{preparation}
+
+\begin{remarque}
+Vous pouvez aussi ajouter dans le plat du gigot des gousses d'ails entières qui deviendront fondantes à l'issue de la cuisson.
+
+Si le gigot est épais, il est possible qu'une heure ne soit pas suffisant pour le cuire. Surtout si le four n'a pas eu le temps de bien préchauffer.
+\end{remarque}
+\end{recette}
+
+\begin{recette}{Soupe de poisson}{0}{}{}
+\begin{ingredients}
+\ingredient 500g de Lotte
+\ingredient 500g de loup de mer
+\ingredient 500g de rouget
+\ingredient 500g de dorade
+\ingredient 500g de coulis de tomate
+\ingredient Un poireau
+\ingredient 2 oignons
+\ingredient 2 gousses d'ail
+\ingredient sel, poivre, huile d'olive, sucre, jus de citron
+\end{ingredients}
+
+\begin{preparation}
+\etape Hachez l'oignon et le poireau
+\etape Dans une marmite haute, faites revenir l'oignon, l'ail et le poireau dans de l'huile d'olive. Laissez légèrement dorer le tout puis réservez-les.
+\etape Faites dorer les poissons dans un peu d'huile, puis une fois colorés (pas besoin qu'ils soient cuits), ajoutez l'oignon et les poireaux pour laisser mijoter le tout à feux doux pendant 5 minutes
+\etape Ajoutez le coulis de tomate et 2L d'eau et laissez bouillir 15 minutes. 
+\etape Retirez les poissons et passez-les au presse purée (ou mixez les) et passez-les au tamis.
+\etape Mettez la purée dans la marmite et complétez l'assaisonnement. 
+\etape Rectifiez l'assaisonnement et portez à ébullition.
+\end{preparation}
+
+Servez très chaud accompagné de petits croûtons de pain aillé et de fromage rapé.
+\end{recette}
+
+\begin{recette}{Porc à la créole}{3}{}{}%\index{porc}\index{créole}
+\begin{ingredients}
+\ingredient $500 \unit{g}$ d'échine de porc
+\ingredient $2$ tomates
+\ingredient $2$ piments verts
+\ingredient $1$ gousse d'ail
+\ingredient $1$ oignon
+\ingredient $1$ cuillère à soupe de thym émietté
+\ingredient $1$ cuillère à soupe de curcuma (ou curry)
+\ingredient $2$ cuillères à soupe d'huile
+\end{ingredients}
+
+\begin{preparation}
+\etape Épluchez l'oignon et coupez-le en lamelles.
+\etape Coupez la viande de porc en cubes.
+\etape Épluchez les tomates : pour cela, plongez-les quelques minutes dans de l'eau bouillante et ôtez la peau à l'aide d'un couteau à lame fine.
+\etape Coupez la chair des tomates en petits dés.
+\etape Épluchez la gousse d'ail et les piments verts.
+\etape Faites revenir l'oignon dans l'huile.
+\etape Lorsqu'il a pris une belle couleur, ajoutez la viande de porc et laissez cuire pendant 3 minutes.
+\etape Ajoutez le thym émietté, les dés de tomates, le curcuma (ou le curry), puis les piments et l'ail après les avoir écrasés.
+\etape Laissez cuire le tout à feu doux pendant une dizaine de minutes.
+\end{preparation}
+
+\end{recette}
+
+\begin{recette}{Paëlla (garniture déjà prête)}{0}{}{}
+\begin{ingredients}
+\ingredient garniture pour paëlla
+\ingredient 2 cuillères à soupe d'huile
+\ingredient $200$ g de riz
+\ingredient $30$ cl d'eau
+\ingredient épices pour paëlla
+\end{ingredients}
+
+\begin{preparation}
+\etape Dans une grande poêle, faites chauffer à feu moyen l'huile.
+\etape Versez le riz et laissez rissoler pendant 2 minutes environ en remuant de temps en temps.
+\etape Versez l'eau dans la poêle et ajoutez les épices (safran et autres)
+\etape Mélangez et portez à ébullition. Couvrez la poêle et laissez cuire 5 minutes jusqu'à absorption de l'eau.
+\etape Rajoutez la garniture et répartissez son contenu sur le riz. Couvrez et faites cuire jusqu'à ce que le riz soit cuit et que le bouillon soit réduit. En ajoutant de l'eau si nécessaire.
+\etape Servez dans la poêle de cuisson.
+\end{preparation}
+
+\end{recette}
+
+\begin{recette}{Katlietkis}{2}{}{}
+\begin{ingredients}
+\ingredient 500g de viande hachée
+\ingredient 250g de mie de pain
+\ingredient 2 oignons
+\ingredient 2 œufs
+\ingredient sel aux herbes, poivre, aneth
+\end{ingredients}
+
+\begin{preparation}
+\etape Faites ramolir la mie dans de l'eau pendant une petite heure. En gros, mettez la mie dans un saladier et mettez un peu d'eau.
+\etape Égouttez la mie de pain (mettez la dans une passoire et appuyez sur la mie pour enlever le gros de l'eau).
+\etape Mélangez la mie ainsi ramollie avec la viande, les oignons mixés (ou coupés très fin), les deux œufs. Poivrez, salez, rajoutez un peu d'aneth et mélangez bien.
+\etape  Formez des boulettes (diamètre de 5--7 cm et épaisseur de quelques centimètres) puis passez les dans la chapelure
+
+\etape[La préparation des galettes]
+
+\etape Préparez de la chapelure dans une assiette.
+\etape formez, d'une main (et avec une cuillère à soupe dans l'autre, une boule de garniture.
+\etape posez là dans la chapelure sans l'écraser.
+\etape avec la cuillère à soupe, saupoudrez de chapelure, puis retournez la.
+\etape posez ensuite la boule dans la poele avec l'huile chaude, saisissez quelques minutes puis tournez afin que la galette prenne forme et ne se casse pas quand vous tournez avec la spatule.
+\end{preparation}
+
+
+\begin{cuisson}
+
+Baissez le feu et laissez cuire 3/4 d'heure environ en les tournant de temps en temps. (Ne couvrez pas, afin que l'eau puisse s'évaporer.)
+
+Si vous ne pouvez pas mettre toutes les galettes dans la poële en une seule fois, vous pouvez en faire cuire certaines au four une fois celles-ci dorées à la poële.
+
+\begin{remarque}
+Ça se garde quelques temps au frigo et ça se mange autant froid que chaud.
+\end{remarque}
+\end{cuisson}
+\end{recette}
+
+\begin{recette}{Porc à l'ananas}{3}{1h30}{}
+
+\begin{ingredients}
+\ingredient viande de porc (des cubes taillés dans du roti dans l'échine par exemple)
+\ingredient 40 à 50cl de jus d'ananas
+\ingredient 2 cuillères à soupe rase de gelée de groseille
+\ingredient 2 cuillères à soupe rase de fécule de pomme de terre%TODO j'ai essayé avec 2 cas de farine la dernière fois, c'était un peu liquide, mais à vérifier.
+\ingredient 15cl de bouillon de volaille
+\ingredient 30g de sucre
+\ingredient 15cl de vinaigre de xeres
+\end{ingredients}
+
+\begin{preparation}
+\etape Faites saisir les morceaux de porc puis réservez-les.
+\etape Faites chauffer le sucre et le vinaigre et laissez réduire jusqu'à la formation d'un caramel et la dissipation des odeurs de vinaigre.
+\begin{attention}
+Lors de la disparition complète des odeurs de vinaigre, le caramel va commencer à prendre, il faut donc que ça aille vite à ce moment là, afin de ne pas se retrouver avec un vrai caramel très épais. 
+\end{attention}
+
+\etape Une fois pris, rajoutez de suite le jus d'ananas, les morceaux de carotte et le citron. Laissez cuire 10 à 15 minutes
+\etape Pendant ce temps, préparez à peu près 2 cuillères à soupe de fécule de pomme de terre dans 15cl de bouillon.
+\etape Mélangez les deux et laissez cuire environ 10 minutes en remuant tout le temps. Ajoutez la gelée de groseille (en rajouter si c'est trop acide)
+\etape rajoutez les morceaux de viande et laissez mijoter pendant une heure environ.
+\end{preparation}
+\end{recette}
+
+
+\section{Pain}
+\begin{recette}{Pain}{3}{30 min+48h}{30 min}\index{pain}
+\begin{ingredients}
+\ingredient 540g de farine de blé
+\ingredient 300mL d'eau
+\ingredient 150g de levain liquide (entretenu avec 50-50 d'eau et farine)
+\ingredient 10g de sel (ou deux cac rase)
+\end{ingredients}
+
+\begin{remarque}
+Plus le paton est épais, et moins la mie sera légère. Plus le paton est liquide et plus il va s'affaisser pendant la dernière 
+montée (vous aurez donc un pavé aplati au lieu d'une baguette en demi lune. 
+\end{remarque}
+
+
+\begin{preparation}
+\etape La veille, préparez le levain en le rafraichissant. 
+\etape Le lendemain, mélangez le levain, la farine et l'eau. Laissez la boule reposer 20 minutes (autolyse : les réseaux de 
+gluten commencent à se former, ça donne l'élasticité à la pâte)
+\etape Ajoutez alors le sel et pétrissez de nouveau. 
+\etape Enduisez le récipient d'huile et farinez. Déposez la pâte dedans en la bombant pour faire une boule et mettant la 
+partie ``non boulière'' vers le bas. Laissez la pâte lever jusqu'à ce qu'elle double de volume. ça peut prendre 3-4h. On peut 
+la laisser plus longtemps si c'est bien protégé avec un couvercle quasi intégralement hermétique. La pâte colle, c'est normal, 
+il faut qu'elle soit relativement liquide pour que la mie soit légère. 
+ 
+\etape Façonnez alors les pâtons dans la forme que vous voulez, de baguette ou de boule. Une fois fait, vous ne devrez plus y 
+toucher jusqu'à la cuisson. Laissez monter à couvert 1h environ (j'utilise un couvercle de boite à gâteau)
+\end{preparation}
+
+
+\begin{cuisson}
+Préchauffez le four à 300°C (je met un verre d'eau avant car une fois le four chaud, c'est pas évident à faire). (si 
+l'intérieur est trop cuit, le four n'est pas assez chaud, si la croute est dorée mais 
+l'intérieur pas assez cuit, c'est l'inverse). Le temps de cuisson est à peu près de 10-15 minutes.
+
+On peut humidifier les baguettes avec un pinceau. Moi je ne le fais pas (je trouve que ça épaissi la croute). Par 
+contre, avant de préchauffer le four, je met un verre d'eau au fond du four. 
+Saupoudrez un peu de farine. Puis à l'aide d'un couteau tranchant, entaillez le pain en diagonale à plusieurs endroits, ne pas 
+hésiter à y aller franchement. De l'ordre d'1cm de profond. 
+
+Quand la croute est dorée, et si ça a été trop rapide, baissez le four à 200°C. (normalement c'est 250 au début mais mon four 
+n'est pas bien).
+
+Surveillez le pain et sortez le du four quand la cuisson vous convient.
+
+\end{cuisson}
+\begin{center}
+\begin{tabular}{|l|p{10cm}|}
+\hline Défaut & Origine\\\hline
+\multirow{4}*{croûte cloquée} & eau trop froide\\
+ & manque de pointage (1\iere levée)\\
+ & pain retombé à la mise au four\\
+ & qualité de la farine\\\hline
+\multirow{3}*{manque de volume} & manque d'apprêt (2\ieme levée)\\
+ & pâte trop ferme\\
+ & pâte trop froide\\\hline
+\multirow{3}*{pain plat} & apprêt trop long\\
+ & trop d'eau\\
+ & pâton maltraité à l'enfournement\\\hline
+\multirow{3}*{pain déchiré} & manque de buée\\
+ & manque de pointage\\
+ & coup de lâme trop rapprochés\\\hline
+\multirow{2}*{pain trop acide} & réduire les temps de levée\\
+ & changer de levain\\\hline
+\multirow{4}*{manque d'acidité, de goût} & allonger les temps de levée\\
+ & incorporer des farines plus complètes (T80, T120,\dots)\\
+ & Utiliser de l'eau minérale si celle du robinet est trop chlorée (en dernier recours, le chlore limite l'activité du 
+levain)\\
+ & augmenter la proportion de levain\\\hline
+\end{tabular}
+\end{center}
+
+\end{recette}
+
+
+\section{Pain au levain à la moi}
+\begin{recette}{Pain au levain à la moi}{3}{30 min+48h}{30 min}\index{pain}
+\begin{ingredients}
+\ingredient 540g de farine de blé T45 (avec le T55 c'est trop liquide, à retester)
+\ingredient 300mL d'eau
+\ingredient 150g de levain liquide (entretenu avec 50-50 d'eau et farine) (et conservé au frigo)
+\ingredient 10g de sel (ou deux cac rase)
+\end{ingredients}
+
+\begin{remarque}
+Plus le paton est épais, et moins la mie sera légère. Plus le paton est liquide et plus il va s'affaisser pendant la dernière 
+montée (vous aurez donc un pavé aplati au lieu d'une baguette en demi lune. 
+\end{remarque}
+
+
+\begin{preparation}
+\etape La veille au soir : Mettez dans un saladier la farine disposée en puit. Rafraichissez le levain et disposez 150g de 
+levain frais dedans. Couvrez hermétiquement (j'ai un couvercle de gâteau en plastique transparent pour ça)
+\etape Le lendemain matin, rajoutez l'eau, et pétrissez au robot. Laissez la boule 
+reposer 20 minutes (autolyse : les réseaux de 
+gluten commencent à se former, ça donne l'élasticité à la pâte)
+\etape Ajoutez alors le sel et pétrissez de nouveau. 
+\etape Façonnez grossièrement une boule, toujours dans le même saladier. Couvrez et laissez monter toute la journée 
+pendant que vous êtes au boulot.
+ 
+\etape En rentrant le soir, façonnez alors les pâtons dans la forme que vous voulez, de baguette ou de boule. Une fois fait, 
+vous ne devrez plus y 
+toucher jusqu'à la cuisson. Laissez monter à couvert 4h environ (j'utilise un couvercle de boite à gâteau)
+\end{preparation}
+
+
+\begin{cuisson}
+Préchauffez le four pendant 25 minutes à 300°C avec une pierre à pizza. 
+
+À l'aide d'un spray, aspergez d'eau les patons avant de les enfourner. 
+Saupoudrez un peu de farine. Puis à l'aide d'un couteau tranchant, entaillez le pain en diagonale à plusieurs endroits, ne pas 
+hésiter à y aller franchement. De l'ordre d'1cm de profond. 
+
+Juste avant d'enfourner, prenez le spray et vaporisez abondamment de l'eau sur les 
+parois latérales et la pierre. 
+
+Le temps de cuisson est à peu près de 15 minutes.
+
+Surveillez le pain et sortez le du four quand la cuisson vous convient.
+
+\begin{itemize}
+\item Si la pâte a des bulles en surface à la fin de la cuisson, c'est qu'elle a subit un choc thermique, le four était trop 
+chaud. 
+\item Si la pâte n'est pas assez dorée à la fin du temps, c'est que le four n'était pas assez chaud (ou pas assez d'humidité)
+\item si la pâte n'est pas assez montée, c'est soit un problème de levure, soit que la pâte était trop sèche (pas assez d'eau). 
+La pâte doit rester souple (et l'élasticité provient des premières 20 minutes avant la toute première levée (autolyse)
+\item Si la pâte colle vraiment trop aux doigts pendant le façonnage des patons, c'est qu'elle est trop liquide, il manque de 
+la farine. Notez que lors du façonnage, il faut des mouvements vifs des doigts qui ne doivent pas rester trop en contact, sinon 
+même la pâte correcte vous collera aux doigts. Un bon moyen de vérifier ça est de tapoter le dessus de la pâte avec le bout des 
+doigts (comme la calebote de benny hill). En faisant ça, la pâte ne doit pas coller. 
+\end{itemize}
+\end{cuisson}
+\end{recette}
+
+\section{Pain poolish à la moi}
+\begin{recette}{Pain poolish à la moi}{3}{8h+2h+2h}{30 min}\index{pain}\index{poolish}\index{levure de boulanger}
+\begin{ingredients}
+\ingredient 525g de farine de blé T55
+\ingredient 195mL d'eau (essayer d'en mettre un chouillat plus pour avoir une pate plus aérée)
+\ingredient poolish (90g de farine, 180mL d'eau, levure fraiche). Compter 10g pour 2h, ou 3g pour 8h)
+\ingredient 10g de sel (ou deux cac rase)
+\end{ingredients}
+
+\begin{remarque}
+Cette recette est prévue pour être faire au long d'une journée de travail. C'est pour ça que très peu de levure est utilisée, 
+pour avoir un temp de fermentation du poolish plus long. 
+\end{remarque}
+
+
+\begin{preparation}
+\etape Le matin, délayez la levure dans 180mL d'eau, puis ajoutez la farine et homogénéisez. Dans un grand récipient, 
+disposez les 540g de farine en forme de puit avec une assise de farine pour pas que le poolish touche le fond. Versez le 
+poolish, couvrez hermétiquement et laissez fermenter jusqu'à voir des bulles en surface. Si ça commence à s'afaisser, c'est 
+qu'il est plus que temps.
+\etape Quelques heures plus tard, ajoutez les 195mL d'eau puis pétrissez au robot. Laissez alors reposer 20 minutes
+\etape Ajoutez alors le sel et pétrissez de nouveau. 
+\etape Avec une spatule en silicone, déclosez un peu des bords pour faire une boule grossière. Couvrez de nouveau et laisser 
+doubler de volume.
+ 
+\etape Toujours à l'aide d'une spatule silicone, décolez la pâte et versez la sur un plan de travail fariné. Avec des 
+mouvements vifs pour ne pas coller aux doigts, faites une sorte de rectangle d'à peu près 10cm de large. Découpez en 6 tranches 
+égales avec la spatule et roulez pour faire vos patons que vous disposez sur un papier cuisson de la taille de votre four. 
+Couvrez avec un torchon humide afin que ça ne sèche pas et que ça soit à l'abris de l'air. Laissez monter 1h30 environ (ça 
+dépend de la température et autre.
+\end{preparation}
+
+
+\begin{cuisson}
+Préchauffez le four pendant 20 minutes à 260°C avec une pierre à pizza et un lèche frite en bas. 
+
+À l'aide d'un spray, aspergez d'eau les patons avant de les enfourner. 
+Saupoudrez un peu de farine. Puis à l'aide d'un couteau tranchant, entaillez le pain en diagonale à plusieurs endroits, ne pas 
+hésiter à y aller franchement. De l'ordre d'1cm de profond. Des mouvements vifs du couteaux permettent d'entailler plus 
+facilement.
+
+Juste après avoir mis les patons, mais avant de fermer la porte du four, versez 1/3 de verre d'eau sur le lèche 
+frite.
+
+Mettez alors le four à 250-260°C pendant 15-20 minutes (ou un peu plus pour que ce soit doré). 
+
+
+
+Surveillez le pain et sortez le du four quand la cuisson vous convient.
+
+\begin{itemize}
+\item Si la pâte a des bulles en surface à la fin de la cuisson, c'est qu'elle a subit un choc thermique, le four était trop 
+chaud. 
+\item Si la pâte n'est pas assez dorée à la fin du temps, c'est que le four n'était pas assez chaud (ou pas assez d'humidité)
+\item si la pâte n'est pas assez montée, c'est soit un problème de levure, soit que la pâte était trop sèche (pas assez d'eau). 
+La pâte doit rester souple (et l'élasticité provient des premières 20 minutes avant la toute première levée (autolyse)
+\item Si la pâte colle vraiment trop aux doigts pendant le façonnage des patons, c'est qu'elle est trop liquide, il manque de 
+la farine. Notez que lors du façonnage, il faut des mouvements vifs des doigts qui ne doivent pas rester trop en contact, sinon 
+même la pâte correcte vous collera aux doigts. Un bon moyen de vérifier ça est de tapoter le dessus de la pâte avec le bout des 
+doigts (comme la calebote de benny hill). En faisant ça, la pâte ne doit pas coller. 
+\end{itemize}
+
+\end{cuisson}
+\end{recette}
+
+\section{Pain poolish à la moi2}
+\begin{recette}{Pain poolish à la moi2}{3}{24h+4h}{30 min}\index{pain}\index{poolish}\index{levure de boulanger}
+\begin{ingredients}[4 baguettes]
+\ingredient 390g de farine de blé T55
+\ingredient 200mL d'eau 
+\ingredient poolish (200g de farine, 200mL d'eau, 1g de levure fraiche, 12h à 20°C ou 24h à 12°C). 
+\ingredient 6g de levure fraiche
+\ingredient 10g de sel (ou deux cac rase)
+\end{ingredients}
+
+\begin{remarque}
+Cette recette est prévue pour être faire au long d'une journée de travail. C'est pour ça que très peu de levure est utilisée, 
+pour avoir un temp de fermentation du poolish plus long. 
+\end{remarque}
+
+
+\begin{preparation}
+\etape La veille au soir, délayez la levure dans 200mL d'eau, puis ajoutez la farine et homogénéisez. Dans un grand 
+récipient, 
+disposez les 390g de farine en forme de puit avec une assise de farine pour pas que le poolish touche le fond. Versez le 
+poolish, couvrez hermétiquement et laissez fermenter jusqu'à voir des bulles en surface. Si ça commence à s'afaisser, c'est 
+qu'il est plus que temps.
+\etape Quelques heures plus tard, ajoutez l'eau, la levure (délayez dedans), le sel (surtout pas dans l'eau directement). 
+\etape Pétrissez 3 minutes à vitesse 1
+\etape (falcultatif) Laissez alors reposer 20 minutes
+\etape Pétrissez 12 minutes à vitesse 2
+\etape Étalez la pâte en un rectangle dont vous allez rabattre les bords successivement sans réétaler. Tapotez pour faire 
+partir le surplus de farine. 
+\etape Disposez cette boule en mettant les plis dessous. Couvrez de 
+nouveau. 
+
+\etape Rabattez la pâte au bout d'une heure, et replacez la pâte et laissez doubler de volume.
+ 
+\etape Toujours à l'aide d'une spatule silicone, décollez la pâte et versez la sur un plan de travail fariné. Avec des 
+mouvements vifs pour ne pas coller aux doigts, faites une sorte de rectangle d'à peu près 10cm de large. Découpez en 4 tranches 
+égales avec la spatule et roulez pour faire vos patons que vous disposez sur un papier cuisson de la taille de votre four. 
+Couvrez avec un torchon humide afin que ça ne sèche pas et que ça soit à l'abris de l'air. Laissez monter 1h30 environ (ça 
+dépend de la température et autre.
+\end{preparation}
+
+
+\begin{cuisson}
+Préchauffez le four pendant 20 minutes à 260-275°C avec un lèche frite en bas. 
+
+À l'aide d'un spray, aspergez d'eau les patons avant de les enfourner. 
+Saupoudrez un peu de farine. Puis à l'aide d'un couteau tranchant, entaillez le pain en diagonale à plusieurs endroits, ne pas 
+hésiter à y aller franchement. De l'ordre d'1cm de profond. Des mouvements vifs du couteaux permettent d'entailler plus 
+facilement.
+
+Juste après avoir mis les patons, mais avant de fermer la porte du four, versez 1/3 de verre d'eau sur le lèche 
+frite.
+
+Mettez alors le four à 250-260°C pendant 15-20 minutes (ou un peu plus pour que ce soit doré). Ne pas utiliser la chaleur 
+tournante. 
+
+
+
+Surveillez le pain et sortez le du four quand la cuisson vous convient.
+
+
+\end{cuisson}
+\end{recette}
+
+\section{Pâte à Pizza}
+\begin{recette}{Pâte à Pizza}{3}{30 min+72h}{15 min}\index{pizza}\index{pâte à pizza}
+\begin{ingredients}[Pour deux petites pizza]
+\ingredient 225 g de farine de blé
+\ingredient 3 cuillères à soupe d’huile d’olive
+\ingredient 1 cuillère à café rase de sel
+\ingredient 1/2 cuillère à café de sucre
+\ingredient poolish (150 ml d’eau, 75g de farine, 5g de levure de boulanger fraiche)
+%autre essai :
+% 1/4 du cube de levure fraiche (environ 10 gramme)
+% 500g de farine
+% un peu de sel dans la farine, mais pas dans l'eau de levain, parce que ça tue les levures
+% un peu de sucre parce que les levures adorent ça
+% 5 cuillère à soupe d'huile d'olive, à peu près 25cl d'eau (l'eau équivaut à peu près la moitié du poids en farine)
+% Laisser monter au frigo, dans un récipient hermétiquement fermé
+% les doses théoriques, c'est 400g de farine pour 4 boules individuelles, une boule par pizza
+% 10 minutes à 280°C
+\end{ingredients}
+\begin{remarque}
+\begin{itemize}
+\item On ne parle que de levure de boulanger. La levure chimique ne sert à rien ici.
+\item Je préfère la levure fraiche, mais pour utiliser de la levure sèche, il suffit de diviser les quantités de levure par 
+deux.
+\item La levure meurt dans de l'eau trop chaude (35-40°C), mieux vaut tiède que trop chaud.
+\item Les levures aiment le sucre, et n'aiment pas le sel. Pourtant, il faut saler la pâte, donc ne surtout pas mettre le sel 
+dans l'eau tiède lors de l'activation des levures.
+\item Théoriquement, c'est 2 pizzas pour 250g de farine. Dans la pratique, je n'en fait qu'une.
+\end{itemize}
+\end{remarque}
+
+\begin{preparation}
+\etape Émiettez la levure fraiche dans l'eau froide ou tiède avec une demi cuillère à café de sucre, ajoutez 75g de farine, 
+mélangez à l'aide d'un fouet, et 
+laissez reposer jusqu'à ce que ça gonfle et fasse des bulles
+\etape Dans un grand récipient, mettez la farine, le sel.
+\etape Creusez un puit dans la farine et versez-y le poolish et l'huile. 
+\etape Pétrissez au robot avec l'outil adapté. Laissez reposer la boule ainsi formée pendant une vingtaine de minutes (permet 
+de créer les réseaux de gluten). 
+\etape Repétrissez légèrement puis séparez ensuite la pâte par paquet individuel. Compter deux pizzas avec les doses que je 
+fournis (300g de farine).
+\etape Disposez les boules de pâtes dans des tupperwares pouvant contenir à peu près 3 fois le volume actuel de la pâte. Fermez 
+les tupperwares (il ne faut pas que la pâte soit à l'air libre)
+\etape Laissez alors la pâte lever tranquillement au frigo pendant 72h.
+
+
+\etape Faites préchauffer le four à 280°C (le four des pros est à plus de 500°C, moi c'est limité à 280).
+\etape Étalez le pâte à la main pour le début, puis finissez au rouleau.
+\etape Laissez reposer la pâte étalée une vingtaine de minutes avant de garnir afin que la pâte lève un peu, elle sera ainsi 
+plus aérée. (j'étalais un peu la pate, à peu près la moitié du diamètre voulu, je laisse reposer, puis je fini le travail après)
+
+\etape Garnissez la pizza selon votre goût et enfournez 10 minutes à 280°C.
+\end{preparation}
+
+
+\begin{cuisson}
+Faites cuire la pizza environ 10 minutes à 280\degres C au four, chaleur tournante si vous avez. À ces températures, surveillez 
+la cuisson, si le four est bien chaud ça peut être fait en 5 minutes à peine.
+
+La pizza sera meilleure si vous faites cuire la pizza sur une pierre, chauffée au préalable. Utilisez une spatule à crêpe pour 
+faire glisser la pâte depuis la pelle à pizza vers la pierre que vous aurez enlevé du four le temps d'y mettre la pizza. 
+
+\begin{attention}
+Ne faites pas cuire avec le four en mode grill !
+\end{attention}
+
+\end{cuisson}
+\end{recette}
+
+\section{Pain à la moi}
+\begin{recette}{Pain à la moi}{3}{45min+12h+5h}{30 min}\index{pain}\index{levure de boulanger}
+\begin{ingredients}[4 baguettes]
+\ingredient 530g de farine de blé T55
+\ingredient 315mL d'eau 
+\ingredient 4g de levure fraiche (ou 2g de levure sèche)
+\ingredient 8g de sel 
+\end{ingredients}
+%début montée au frigo à 18h30 pour mon test
+% 13h de montée (il y a une odeur un peu de vinaigre, mais c'est bon)
+%  7h de montée (la pate est super, élastique, pas collante)
+% 10h de montée (la pate est super, élastique, pas collante, mieux que 7h)
+
+\begin{preparation}
+\etape La veille au soir, mélangez farine et sel puis faites en un puit. Dans un bol, délayez la levure dans l'eau. Versez 
+l'eau dans le puit puis effondrez les bords du puits dans l'eau (sinon ça met trop de temps à se mélanger)
+\etape Pétrissez 4 minutes à vitesse 1
+\etape Laissez alors reposer 20 minutes
+\etape Pétrissez 10 minutes à vitesse 2
+\etape Disposez la pâte dans un récipient hermétique (de préférence avec un couvercle transparent) et mettez au frigo toute la 
+nuit (normalement, c'est 4h avec 5g de levure sèche, avec 4g de levure fraiche ça devrait faire théoriquement 12h de montée) 
+\etape Le lendemain matin, démarrez un chrono de 4h. Rabattez la pâte, attendez 20 minutes à température ambiante, rabattez à 
+nouveau, 20 minutes de plus et rabattez une 3e et dernière fois
+\etape Couvrez puis attendez la fin des 4h ( $\sim$3h si vous avez oubliez de regarder le temps total depuis la 
+sortie du frigo.
+ 
+\etape Toujours à l'aide d'une spatule silicone, décollez la pâte et versez la sur un plan de travail fariné. Avec des 
+mouvements vifs pour ne pas coller aux doigts, faites une sorte de boudin de section carrée. 
+Découpez en 4 tranches 
+égales avec la spatule et roulez pour faire vos patons. Faites des mouvements de haut en bas en tenant les extrémités pour 
+étirer le paton à la longueur désirée. Disposez-les sur un papier cuisson de la taille de votre four. 
+Couvrez avec un torchon sec afin que ça ne sèche pas et que ça soit à l'abris de l'air. Laissez monter 1h environ
+\end{preparation}
+
+
+\begin{cuisson}
+% Préchauffez le four pendant 20 minutes à 260-275°C avec un lèche frite en bas. 
+Préchauffez le four pendant 10 minutes à 240°C avec un lèche frite en bas.
+
+Saupoudrez un peu de farine. Puis à l'aide d'un couteau tranchant, entaillez le pain en diagonale à plusieurs endroits, ne pas 
+hésiter à y aller franchement. De l'ordre d'1cm de profond. Des mouvements vifs du couteau permettent d'entailler plus 
+facilement.
+
+Juste après avoir mis les patons, mais avant de fermer la porte du four, versez 1/3 de verre d'eau sur le lèche 
+frite.
+
+% Mettez alors le four à 250-260°C pendant 15-20 minutes. Moi je fais 5 minutes à 275°C puis 15 minutes à 240°C. Ne pas  
+Mettez alors le four à 240°C pendant 20-25 minutes. {\red essayer avec chaleur tournante pour voir si le dessous est mieux cuit 
+comme ça, ça cuit mal à cause du lèche frite qui empêche la chaleur du bas d'atteindre le pain}
+%Ne pas 
+%utiliser la chaleur tournante. 
+
+Surveillez le pain et sortez-le du four quand la cuisson vous convient.
+\end{cuisson}
+\end{recette}
+
+\section{Pain (frigo/nuit)}
+\begin{recette}{Pain (frigo/nuit)}{3}{45min+12h+5h}{30 min}\index{pain}\index{levure de boulanger}
+\begin{ingredients}[4 baguettes]
+\ingredient 500g de farine de blé T55
+\ingredient 350mL d'eau 
+% +20g d'eau de bassinage à ajouter s'il y a lieu ensuite (présent dans la recette originale, je n'ai 
+% jamais eu besoin d'en utiliser. 
+\ingredient 4g de levure fraiche (ou 2g de levure sèche qu'il faudra parfaitement activer avec de l'eau tiède avec un peu de 
+farine et de sucre dans l'eau tiède)
+\ingredient 8g de sel 
+\end{ingredients}
+%début montée au frigo à 18h30 pour mon test
+% 13h de montée (il y a une odeur un peu de vinaigre, mais c'est bon)
+% 11H c'est parfait. 7h c'est pas assez, il en faut un peu plus. 12h doit être l'optimum
+% 12h avec 6g au lieu de 4 de fraiche, et c'est bon
+%  7h de montée (la pate est super, élastique, pas collante)
+% 10h de montée (la pate est super, élastique, pas collante, mieux que 7h)
+
+\begin{preparation}
+\etape La veille au soir, mélangez farine et sel puis faites en un puit. Dans un bol, délayez la levure dans l'eau. Versez 
+l'eau dans le puit puis effondrez les bords du puits dans l'eau (sinon ça met trop de temps à se mélanger)
+\etape Pétrissez 4 minutes à vitesse 1
+\etape Laissez alors reposer 20 minutes
+\etape Pétrissez 10 minutes à vitesse 2
+\etape Disposez la pâte dans un récipient hermétique (de préférence avec un couvercle transparent) et mettez au frigo toute la 
+nuit (normalement, c'est 4h avec 5g de levure sèche, avec 4g de levure fraiche ça devrait faire théoriquement 12h de montée) 
+\etape Le lendemain matin, démarrez un chrono de 4h. Rabattez la pâte, attendez 20 minutes à température ambiante, rabattez à 
+nouveau, 20 minutes de plus et rabattez une 3e et dernière fois
+\etape Couvrez puis attendez la fin des 4h ( $\sim$3h si vous avez oublié de regarder le temps total depuis la 
+sortie du frigo.
+ 
+\etape Toujours à l'aide d'une spatule silicone, décollez la pâte et versez la sur un plan de travail fariné. Découpez 4 
+morceaux égaux en volume. 
+\etape Déposez une couche de farine sur le moule à baguette à l'aide d'une passoire fine. 
+\etape Formez un boudin grossièrement sans trop le manipuler, puis saisissez une extrémité dans chaque main. Faites des 
+mouvements de haut en bas pour que la pâte s'étire jusqu'à la longueur voulue, en prenant garde que la section reste à peu 
+près constante partout
+\etape Disposez-les sur un papier cuisson de la taille de votre four. 
+Couvrez avec un torchon sec afin que ça ne sèche pas et que ça soit à l'abris de l'air. Laissez monter 1h environ
+\end{preparation}
+
+
+\begin{cuisson}
+Préchauffez le four pendant 10 minutes à 240°C avec un lèche frite en bas.
+
+Saupoudrez un peu de farine. Puis à l'aide d'un couteau tranchant, entaillez le pain en diagonale à plusieurs endroits, ne pas 
+hésiter à y aller franchement. De l'ordre d'1cm de profond. Des mouvements vifs du couteau permettent d'entailler plus 
+facilement.
+
+Juste après avoir mis les patons, mais avant de fermer la porte du four, versez un tiers de verre d'eau chaude sur le lèche 
+frite (pas trop d'eau sinon le pain collera à la plaque).
+
+Mettez alors le four à 240°C pendant 16 minutes à chaleur tournante.
+
+Surveillez le pain et sortez-le du four quand la cuisson vous convient.
+\end{cuisson}
+\end{recette}
+
+\section{Pain (frigo/nuit) sans bassinage}
+\begin{recette}{Pain (frigo/nuit) sans bassinage}{3}{45min+10h+3h}{30 min}\index{pain}\index{levure de boulanger}
+\begin{ingredients}[4 baguettes]
+\ingredient 500g de farine de blé T55
+\ingredient 350mL d'eau 
+
+\ingredient 3.5g de levure sèche
+\ingredient 8g de sel 
+\end{ingredients}
+
+
+\begin{preparation}
+\etape La veille au soir, mélangez farine et sel puis faites en un puit. Dans un bol, délayez la levure dans l'eau. Versez 
+l'eau dans le puit puis effondrez les bords du puits dans l'eau (sinon ça met trop de temps à se mélanger)
+\etape Pétrissez 4 minutes à vitesse 1
+\etape Laissez alors reposer 20 minutes
+\etape Pétrissez 10 minutes à vitesse 2
+\etape Disposez la pâte dans un récipient hermétique (de préférence avec un couvercle transparent) et mettez au frigo toute la 
+nuit (10h environ) 
+\etape Le lendemain matin, démarrez un chrono de 2h30. Rabattez la pâte, attendez 20 minutes à température ambiante, rabattez à 
+nouveau, 20 minutes de plus et rabattez une 3e et dernière fois
+\etape Couvrez puis attendez la fin des 2h30 ( $\sim$1h30 si vous avez oublié de regarder le temps total depuis la 
+sortie du frigo.
+ 
+\etape Toujours à l'aide d'une spatule silicone, décollez la pâte et versez la sur un plan de travail fariné. Découpez 4 
+morceaux égaux en volume. 
+\etape Déposez une couche de farine sur le moule à baguette à l'aide d'une passoire fine. 
+\etape Formez un boudin grossièrement sans trop le manipuler, puis saisissez une extrémité dans chaque main. Faites des 
+mouvements de haut en bas pour que la pâte s'étire jusqu'à la longueur voulue, en prenant garde que la section reste à peu 
+près constante partout
+\etape Disposez-les sur un papier cuisson de la taille de votre four. 
+Couvrez avec un torchon sec afin que ça ne sèche pas et que ça soit à l'abris de l'air. Laissez monter 1h environ
+\end{preparation}
+
+
+\begin{cuisson}
+Préchauffez le four pendant 10 minutes à 240°C avec un lèche frite en bas.
+
+Saupoudrez un peu de farine. Puis à l'aide d'un couteau tranchant, entaillez le pain en diagonale à plusieurs endroits, ne pas 
+hésiter à y aller franchement. De l'ordre d'1cm de profond. Des mouvements vifs du couteau permettent d'entailler plus 
+facilement.
+
+Juste après avoir mis les patons, mais avant de fermer la porte du four, versez un tiers (entre 1/3 et 1/2) de verre d'eau 
+chaude sur le lèche 
+frite.
+
+Mettez alors le four à 240°C pendant 16 minutes à chaleur tournante.
+
+Surveillez le pain et sortez-le du four quand la cuisson vous convient.
+\end{cuisson}
+\end{recette}
+
+\section{Pâtes à la bolognaise (à la moi)}
+\begin{recette}{Pâtes à la bolognaise (à la moi)}{4}{1h}{1h}\index{pâtes}\index{pâtes à la bolognaise}\index{bolognaise}
+\begin{ingredients}
+\ingredient 400g de viande hachée
+\ingredient 100g de lardons (ou 50g lardon et 130g de chair à saucisse)
+\ingredient deux oignons
+\ingredient 1 carotte
+\ingredient 25cl de vin rouge (un verre)
+\ingredient 500g de purée de tomate
+\ingredient sel, poivre, céleri, laurier (deux feuilles), sucre
+\end{ingredients}
+
+\begin{preparation}
+\etape Faites revenir à feu vif les lardons puis réservez-les.
+\etape Faites revenir la viande hachée émiettée et rajoutez un peu d'huile au besoin (en plus du gras des lardons). Pas besoin 
+que la viande soit parfaitement cuite, c'est pour faire dorer la viande un peu.
+\etape Réservez la viande.
+\etape Faites revenir l'oignon émincé, l'ail et les carottes en petits morceaux (plutôt que des tranches ; typiquement des 
+$\sfrac{1}{4}$ de tranche).
+\etape Une fois fait, saupoudrez le tout de farine et mélangez. Mouillez ensuite avec un verre de vin blanc.
+\etape Ajoutez la boîte de coulis de tomate et une pincée de sucre puis mélangez.
+\etape Rajoutez enfin la viande et mélangez.
+\end{preparation}
+
+\end{recette}
+
+
+% Too complicated, too long, and too hard to get the correct texture. It took me hlaf a day, for a complete failure that ended up in the trashbin in the end.
+\section{Gnocchi}
+\begin{recette}{Gnocchi}{3}{}{}\index{Gnocchi}\index{pomme de terre}
+\begin{ingredients}
+\ingredient 1 grosse pomme de terre par personne
+\begin{remarque}
+Il faut des patates qui tiennent la cuisson, pas des farineuses)
+\end{remarque}
+
+\ingredient 1 œuf (même pour 10 personnes)
+\ingredient farine T55
+\end{ingredients}
+
+\begin{preparation}
+\etape Il faut faire cuire les pommes de terre (de préférence à la vapeur et pas à l'eau pour qu'elles tiennent mieux)
+\etape Les écraser et laisser refroidir la purée
+\etape Faire un puit de pomme de terre. Une pincée de farine (juste pour blanchir un peu le dessus) et l'œuf entier.
+
+\etape Mélanger une première fois. Et il faut rajouter de la farine jusqu'à ce que la pâte n'accroche plus aux mains (il ne faut pas rajouter trop de farine)
+
+\etape Il faut faire des rouleaux fins (1cm de diamètre environ), puis couper pour faire des petits cylindres. 
+
+\etape Test de la consistance de la pâte: tester 2-3 gnocchi dans l'eau bouillante salée pour vérifier que le gnocchi ne se détruit pas. 
+
+\begin{remarque}
+Le gnocchi est cuit quand il remonte à la surface de l'eau. S'il explose, il faut rajouter de la farine. 
+\end{remarque}
+
+\etape Quand la pâte est bonne, il faut décorer les gnocchi avec une fourchette. Il faut poser la fourchette (ou une rape du coté qui rape pas) par terre. Puis avec le pouce dans la longueur du gnocchi, il faut passer le gnocchi sur la fourchette, et d'un coté il y aura des strilles, et de l'autre, la marque du pouce qui fait un petit trou. 
+\end{preparation}
+
+\begin{cuisson}
+Plonger les gnocchi dans l'eau bouillante salée. Les gnocchi sont cuits quand ils remontent à la surface, les enlever au fur et à mesure. 
+\end{cuisson}
+\end{recette}
+
+% avant de tester une plus grande pour améliorer un peu la recette et tout
+\section{Pâte à Pizza}
+\begin{recette}{Pâte à Pizza}{3}{30 min+72h}{15 min}\index{pizza}\index{pâte à pizza}
+\begin{ingredients}[Pour deux petites pizza]
+\ingredient 300 g de farine T55
+\ingredient 15cl d'eau (l'autre recette parle de 19cl)
+\ingredient 3g de levure sèche (de boulanger donc)
+\ingredient 6g de sel
+\ingredient une cuillère à soupe d'huile d'olive
+%autre essai :
+% 1/4 du cube de levure fraiche (environ 10 gramme)
+% 500g de farine
+% un peu de sel dans la farine, mais pas dans l'eau de levain, parce que ça tue les levures
+% un peu de sucre parce que les levures adorent ça
+% 5 cuillère à soupe d'huile d'olive, à peu près 25cl d'eau (l'eau équivaut à peu près la moitié du poids en farine)
+% Laisser monter au frigo, dans un récipient hermétiquement fermé
+% les doses théoriques, c'est 400g de farine pour 4 boules individuelles, une boule par pizza
+% 10 minutes à 280°C
+\end{ingredients}
+\begin{remarque}
+\begin{itemize}
+\item Avec de la levure fraiche, doubler la quantité (1g de levure sèche, ou 2g de levure fraiche).
+\item La levure meurt dans de l'eau trop chaude (35-40°C), mieux vaut tiède que trop chaud.
+\item Ne surtout pas mettre le sel dans l'eau tiède lors de l'activation des levures.
+\end{itemize}
+\end{remarque}
+
+\begin{preparation}
+\etape Mélangez farine et sel puis faites en un puit. Dans un bol, délayez la levure dans l'eau. 
+Versez l'eau dans le puit. Ajoutez l'huile.
+\etape Pétrissez 4 minutes à vitesse 1
+\etape Laissez alors reposer 20 minutes (autolyse)
+\etape Pétrissez 10 minutes à vitesse 2 (au batteur à main, parfois moins. Je conseille de n'utiliser qu'un seul des deux crochets du batteur)
+\etape Rabattez là (étalez pour faire un carré le plus grand possible, puis rabattez les coins jusqu'à former une boule)
+\etape Disposez la pâte dans un tupperware. Vous séparerez les pâtes au moment de faire les pizzas. 
+\etape Laissez alors la pâte lever tranquillement au frigo pendant 72h.
+
+\etape Sortez la pâte une heure avant.
+\etape Faites préchauffer le four à 280°C (le four des pros est à plus de 500°C, moi c'est limité à 280).
+\etape Étalez la pâte à la main autant que possible. Pour celà, posez la boule sur le plan de travail fariné, et appuyez dessus, puis poussez les bords à la main. Une fois plus étalé, vous pouvez la faire tourner. À défaut, vous pouvez aussi utiliser un rouleau à patisserie. L'inconvénient est que la croûte fera moins ``pizza'' si vous ne le faites pas à la main.
+%\etape Laissez reposer la pâte étalée une vingtaine de minutes avant de garnir afin que la pâte lève un peu, elle sera ainsi 
+%plus aérée. (j'étalais un peu la pate, à peu près la moitié du diamètre voulu, je laisse reposer, puis je fini le travail après)
+
+\etape Garnissez la pizza selon votre goût et enfournez à 280°C. 
+\end{preparation}
+\end{recette}
+
+\section{Flan coco au lait concentré}
+\begin{recette}{Flan coco au lait concentré}{}{45 min.}{1h}
+\index{lait de coco}\index{flan}
+\begin{ingredients}
+\ingredient[Flan]
+\ingredient 400g (300ml) de lait concentré sucré (dont 340g de sucre, non, y'a pas d'erreur)
+\ingredient 400g de lait concentré non sucré (dont 40g de sucre)
+\ingredient 4 œufs (6 si on veut plus épais)
+\ingredient 350 mL de lait de coco
+\ingredient parfums (vanille ou autre)
+\ingredient[Caramel]
+\ingredient 100g de sucre
+\ingredient 3cl d'eau
+\end{ingredients}
+
+\begin{preparation}
+\etape Faire préchauffer le four à $180\degres C$
+\etape Dans une casserole, faites brunir 100g de sucre. Vous pouvez ajouter une goutte d'eau pour que le caramel se fasse plus 
+vite.
+\etape Pendant ce temps, mélangez les ingrédients du flan dans un récipient. 
+\etape Versez le caramel au fond du moule, puis ajoutez la préparation avec le lait.
+\end{preparation}
+
+\begin{cuisson}
+Mettre le moule dans un autre récipient plus grand contenant de l'eau, et faites cuire au bain marie pendant 45min. à 1h (la surface doit 
+être roussie).
+\end{cuisson}
+\end{recette}
+
+\section{Pandoro}
+\begin{recette}{Pandoro}{3}{4h+10h+4h}{30 min}\index{pandoro}\index{levure de boulanger}
+\begin{ingredients}
+\ingredient[Etape 1]
+\ingredient 50g de farine de blé T55
+\ingredient 6cl de lait tiède
+\ingredient 7.5g de levure sèche de boulanger
+\ingredient 15g de sucre en poudre
+\ingredient 1 jaune d'oeuf
+\ingredient[Etape 2]
+\ingredient 200g de farine T55
+\ingredient 100g de sucre en poudre
+\ingredient 1 oeuf
+\ingredient 1.5g de levure sèche de boulanger
+\ingredient 5cl de lait
+\ingredient 30g de beurre pommade
+\ingredient[Etape 3]
+\ingredient 200g de farine T55
+\ingredient 2 oeufs
+\ingredient 25g de sucre en poudre
+\ingredient 1 pincée de sel
+\ingredient 3cl d'arôme vanille
+\ingredient[Etape 4]
+\ingredient 140g de beurre pommade
+\ingredient[Finition]
+\ingredient Sucre glace
+
+\end{ingredients}
+
+
+\begin{preparation}
+\etape \textbf{Etape 1} Mélanger le lait tiède, la levure, le sucre et le jaune d'oeuf
+\etape Ajoutez la farine
+\etape Couvrir et laissez reposer une heure
+\etape \textbf{Etape 2} Mélangez la levure, le lait tiède, le sucre et l'oeuf entier
+\etape Mélangez à la préparation de l'étape 1
+\etape Ajoutez la farine et mélangez à la spatule
+\etape Incorporez le beurre pommade
+\etape Cornez les bords, couvrez et laisser reposer une heure
+\etape \textbf{Etape 3} Ajoutez la farine, les deux oeufs, le sucre, le sel et la vanille puis mélangez
+\etape Cornez les bords
+\etape Couvrez et laisser reposer une heure
+\etape Chassez les bulles, cornez les bords, couvrez puis mettez au frais une nuit
+\etape \textbf{Etape 4 (le lendemain)} Etalez la pâte au rouleau à patisserie
+\etape Etalez le beurre pommade un peu chaud (car la pâte étant froide, ça va figer dessus sinon) en une fine couche puis rabattez les pointes vers le centre (jointez les bords)
+\etape Etalez la pâte en bande rectangulaire verticale (longueur 3, largeur 1) en veillant à ce que le beurre ne déborde pas
+\etape . Faites un 1/4 de tour vers la gauche. Pliez en 3 dans la longueur, la partie droite en premier, afin d'avoir un carré et laissez reposer 30 minutes (même méthode que la pâte feuilletée)
+\etape Etalez en rectangle vertical, 1/4 de tour, puis pliez en 3. Laissez reposer 30 minutes
+\etape Etalez en rectangle vertical, 1/4 de tour, puis pliez en 3. Laissez reposer 30 minutes
+\etape Etalez en carré, puis rabattez les coins jusqu'à former une boule
+\etape Beurrez le moule et disposez la boule au fond en tassant bien
+\etape Couvrir et laissez monter une à deux heures. Découvrez quand la pâte s'approche du haut
+\end{preparation}
+
+
+\begin{cuisson}
+Préchauffez le four à 170°C. 
+
+Enfournez le moule avec un bol rempli d'eau chaude. Faites cuire 15 minutes. 
+
+Baissez alors la température à 160°C puis poursuivre la cuisson pendant 30 minutes
+
+Démoulez le pandoro lorsqu'il est encore chaud et laissez refroidir. 
+
+\end{cuisson}
+\end{recette}
+
+
+\section{Canard aux pêches en cocotte}
+\begin{recette}{Canard aux pêches en cocotte}{4}{30 min}{1h30}\index{canard aux pêches}\index{canard}\index{pêches}
+
+\begin{ingredients}
+\ingredient 1 canard prêt à cuire, avec ses abattis à part (cou, ailerons, foie, cœur et gésier)
+\ingredient 1 oignon
+\ingredient 1 carotte
+\ingredient 2 échalotes
+\ingredient 2 gousses d'ail
+\ingredient 10 cl de bouillon de volaille
+\ingredient 100g de champignons de paris
+\ingredient 4 pêches au sirop
+\ingredient 10 cl du sirop des pêches
+\ingredient 3 cuil. à soupe de sucre
+\ingredient 1 cuil. à soupe de vinaigre
+\ingredient 5cl de Cognac
+\ingredient sel et poivre, huile d'olive
+\end{ingredients}
+
+\begin{preparation}
+\etape Faites chauffer le four à 180°C, th. 6.
+\etape Hachez le foie, le cœur et le gésier.
+\etape Pelez l'oignon, la carotte et les échalotes, coupez l'oignon et la carotte en tout petits dés et hachez les échalotes. 
+Préparez la gousse d'ail pour la réduire en bouillie (avec une fourchette).
+\etape Salez et poivrez le canard à l'intérieur et à l'extérieur, puis piquez la peau régulièrement avec une fourchette.
+\etape Mettez l'huile à chauffer dans une cocotte et faites-y revenir le canard 10 min environ, de tous les côtés, puis 
+réservez-le et jetez le surplus de graisse de cuisson.
+\etape Faites revenir les champignons dans la cocotte où vous avez fait revenir le canard.
+\etape Mettez alors carotte, échalote, oignon, ail, bouillon de volaille et haché des abats dans la cocotte hors du feu. 
+Mélangez.
+\etape Remettez le canard dans la cocotte, les ailerons et le cou. Salez, poivrez.
+\etape Mettez la cocotte au four, sans couvercle, et laissez cuire une heure. Ensuite, égouttez le canard, découpez-le en 
+morceaux, disposez ces derniers dans un plat de service et tenez-les au chaud dans le four éteint.
+\etape Versez le sucre dans une casserole. Ajoutez une cuillerée à soupe d'eau et faites caraméliser. Dès que c'est un peu 
+épaissi, pas forcément coloré, et que vous ne voyez plus de vapeur d'eau, retirez du feu et arrosez avec le vinaigre.
+\etape Posez la cocotte sur feu vif, versez-y le sirop des pêches, les pêches et le caramel vinaigré. Faites bouillir en 
+grattant le fond du récipient pour dissoudre les sucs de viande et rectifiez l'assaisonnement au besoin.
+\etape Retirez du feu, ajoutez le Cognac et mélangez.
+\etape Disposez les pêches autour du canard, arrosez avec la sauce et servez aussitôt.
+\end{preparation}
+\end{recette}
+
+\section{Canard au sauterne}
+\begin{recette}{Canard au sauterne}{4}{1h30}{45 min}\index{canard au sauterne}\index{canard}\index{sauterne}
+
+\begin{ingredients}
+\ingredient 75cl de vin blanc doux (sauterne)
+\ingredient 4 cuisses de canard
+\ingredient 4 oignons
+\ingredient 2 gousses d'ail
+\ingredient sel, poivre, céleri, farine
+\ingredient 100g de raisins secs
+\end{ingredients}
+
+\begin{preparation}
+\etape Séparez pilon et cuisse des cuisses de canard. Émincez l'oignon. Hachez 
+finement l'ail à l'aide d'une fourchette
+\etape Dans une marmite, faites mijoter à feu moyen et à couvert le vin blanc, les raisins et l'ail, avec un peu de céleri et du 
+poivre. 
+Laissez ainsi mijoter pendant que vous préparez le reste
+\etape Saisissez à feu très vif dans une sauteuse les morceaux de canard. Il faut faire dorer l'extérieur mais que l'intérieur 
+soit cru. En appuyant avec une spatule, les morceaux seront moelleux. 
+\etape Réservez les morceaux de canard dans un premier récipient puis faites revenir les oignons dans les sucs du canard. 
+\etape Saupoudrez de farine. Homogénéisez la préparation. 
+\etape Ajoutez cette préparation dans le vin blanc, mélangez afin d'obtenir la sauce. 
+\etape Ajoutez les morceaux de canard, couvrez. 
+\end{preparation}
+
+\begin{cuisson}
+Faites alors cuire 45 minutes environ à feu doux et à couvert (il ne faut pas que le canard soit trop cuit).
+\end{cuisson}
+\end{recette}
+
+
+\section{Crépinettes de canard aux raisins}
+\begin{recette}{Crépinettes de canard aux raisins}{0}{}{}\index{crépinettes de canard aux 
+raisins}\index{raisins}\index{canard}\index{crépinettes}\index{paupiettes}
+\begin{ingredients}
+\ingredient 6 crépinettes
+\ingredient 200g de champignons
+\ingredient 100g de lardons
+\ingredient 100g de raisins
+\ingredient 1 cuillère à soupe rase de farine
+\ingredient 10cl de vin blanc
+\ingredient 5cl de calvados
+\ingredient 20cl de bouillon de volaille
+\ingredient sel, poivre, beurre
+\end{ingredients}
+
+\begin{preparation}
+\etape Mettre les raisins à tremper dans le bouillon de volaille et 5cl de calvados puis commencez la recette.
+\etape Faites revenir les lardons puis réservez les.
+\etape Ajoutez un peu de beurre et faites saisir les crépinettes sur toutes les faces (pas besoin qu'elles soient cuites).
+\etape Réservez les crépinettes et ajoutez les champignons finement émincés, puis poivrez.
+\etape Une fois bien revenus, ajoutez la farine et mélangez bien. Ajoutez le calvados, le vin blanc, le fond de veau et les 
+raisins. Puis une fois mélangé, rajoutez les lardons et les crépinettes.
+\etape Laissez mijoter à feu doux à couvert pendant une heure environ.
+\end{preparation}
+\end{recette}
+
+\section{Crépinettes en sauce}
+\begin{recette}{Crépinettes en sauce}{3}{}{}\index{crépinettes en sauce}\index{crépinettes}\index{paupiettes}
+
+\begin{ingredients}
+\ingredient 1 gousse d'ail
+\ingredient 1 oignon
+\ingredient 100g de champignons
+\ingredient 4 crépinettes
+\ingredient 1 verre de vin blanc sec
+\ingredient 1 cuillère à café de fond de veau
+\ingredient huile, herbes de Provence, cognac
+\end{ingredients}
+
+\begin{preparation}
+\etape Faire revenir les crépinettes dans l'huile chaude pour qu'elles soient dorées, puis les sortir.
+\etape Déglacez les sucs avec un peu de cognac, puis faites revenir les champignons.
+\etape Une fois fait, réservez les avec les crépinettes et faites cuire les oignons et l'ail jusqu'à ce qu'ils soient bien dorés 
+; au besoin, rajoutez un peu d'huile.
+\etape Remettre les crépinettes, les champignons et ajouter le vin blanc, un verre d'eau et le fond de veau. Salez, poivrez et 
+mettez les herbes.
+\etape Couvrez et laissez cuire à feu doux pendant une heure. Remuez de temps en temps.
+\end{preparation}
+
+\begin{remarque}
+Cette recette marche très bien avec des paupiettes. Elle est d'ailleurs relativement proche de la recette du lapin en gibelotte 
+(qui s'adapte lui aussi pour les paupiettes)
+\end{remarque}
+
+\end{recette}
+
+
+\section{Filet mignon de porc aux champignons}
+\begin{recette}{Filet mignon de porc aux champignons}{4}{}{}\index{filet mignon de porc aux champignons}\index{filet 
+mignon}\index{porc}
+\begin{ingredients}
+\ingredient 2 filets mignons de porc
+\ingredient 100g de champignons
+\ingredient 20cl de bouillon (eau + bouillon-cube par défaut)
+\ingredient 20cl de fond de veau (2 cuillères à café de fond de veau dans de l'eau)
+\ingredient 5cl de porto
+\ingredient 20cl de crème fraîche
+\ingredient persil
+\ingredient sel, poivre, beurre
+\end{ingredients}
+
+\begin{preparation}
+\etape Faites chauffer la sauteuse puis saisissez les 4 faces des filets mignons à feu vif. Ajoutez ensuite le bouillon et 
+laissez cuire à couvert pendant 20 minutes à feu moyen.
+\etape Pendant ce temps, émincez les champignons et le persil.
+\etape Au bout des 20 minutes, retirez les filets mignons de la sauteuse et réservez-les au chaud (papier d'alu + papier journal 
+autour). Dans la sauteuse, déglacez les sucs de cuisson avec le porto et laissez réduire de moitié.
+\etape Ajoutez ensuite les champignons, le persil et le fond de veau et laissez à nouveau réduire de moitié.
+\etape Ajoutez enfin la crème fraîche et laissez réduire jusqu'à obtenir la consistance que vous souhaitez (quand même un peu 
+épais).
+\etape À la toute fin, juste avant de servir, ajoutez à la sauce le jus qu'auront rendu les filets mignons, laissez mijoter 
+quelques instants en remuant pour que la sauce soit homogène et à votre convenance.
+\end{preparation}
+
+\end{recette}
+
+\section{Filet mignon de porc au bleu}
+\begin{recette}{Filet mignon de porc au bleu}{2}{}{}\index{filet mignon de porc au bleu}\index{filet 
+mignon}\index{porc}\index{roquefort}\index{bleu}
+\begin{ingredients}
+\ingredient 2 filets mignons de porc
+\ingredient 3 petites échalote émincées
+\ingredient 10 cl de porto (ou un autre vin cuit)
+\ingredient 25 cl de bouillon de bœuf
+\ingredient 100g de bleu de bresse.
+\ingredient 4 cuillères à café de poudre d'amande (à garder ? ; c'est à mettre avec la crème)
+\end{ingredients}
+
+\begin{preparation}
+\etape Salez les filets mignons. Dans une poêle, faites fondre le beurre et colorez les filets mignons sur toutes les faces à 
+feux vif. Sortez les filets et gardez-les dans un endroit tiède.
+\etape Faites dorer les échalotes à feu doux. Pendant ce temps, dans un mixeur, mélangez la crème, le fromage, et éventuellement 
+la poudre d'amande.
+\etape Déglacez avec le porto et laisser réduire de moitié. Ajouter ensuite le bouillon et le mélange du mixeur. Remuez 
+doucement.
+\etape Laissez mijoter pour faire réduire et homogénéiser la sauce, ne pas couvrir totalement. 
+\etape Une fois la consistance plus agréable, rajoutez les filets mignons et laissez mijoter à feu doux pendant 10 minutes 
+environ.
+\end{preparation}
+
+\begin{remarque}
+En accompagnement, des tagliatelles vont très bien.
+\end{remarque}
+\end{recette}
+
+
+\section{Morue à la Portugaise}
+\begin{recette}{Morue à la Portugaise}{3}{}{}\index{morue}
+\begin{ingredients}
+\ingredient 1 kg de morue dessalée
+\ingredient 1 bouquet garni
+\ingredient 2kg de pomme de terre
+\ingredient 3 oignons moyens
+\ingredient 3 gousses d'ail
+\ingredient 25cl de vin blanc sec
+\ingredient 1 cuillère à soupe de persil
+\end{ingredients}
+
+\begin{preparation}
+\item Faire cuire la morue avec le bouquet garni dans un grand faitout d'eau, laisser cuire à frémissement pendant 20 min.
+\item Conserver le liquide de cuisson, retirer la peau et les arêtes de la morue.
+\item Faire cuire les pommes de terre dans l'eau de cuisson. Puis les peler et les couper en rondelles.
+\item Préchauffer le four à 220°C.
+\item Faire chauffer l'huile dans une sauteuse, ajouter les oignons et l'ail broyé, les laisser blondir. 
+\item Ajouter la morue et le persil puis continuer à faire rissoler un peu tout en émiettant la morue. 
+\item Réservez tout ça, puis faites frire les pommes de terre. Laisser roussir un peu. 
+\item Mouiller avec le vin blanc, poivrer.
+\end{preparation}
+
+\begin{cuisson}
+Le four doit maintenant être chaud (220°C).
+Verser le tout dans un plat à four et laisser gratiner 30 min environ à four bien chaud.
+\end{cuisson}
+\end{recette}
+
+
+\section{Poulet aux pruneaux et à la crème de whisky}
+\begin{recette}{Poulet aux pruneaux et à la crème de whisky}{3}{1h30}{}\index{poulet}\index{pruneau}\index{crème de 
+whisky}\index{bailey's}
+\begin{ingredients}
+\ingredient 8 morceaux de poulet
+\ingredient 25 cl de crème de whisky (Bailey's)
+\ingredient 3 échalotes
+\ingredient 1 gousse d'ail
+\ingredient 100g de pruneaux
+\ingredient 15cl d'eau et un cube de bouillon de volaille
+\ingredient 1 cuillère à soupe de farine
+\ingredient huile, sel, poivre, jus de citron
+\end{ingredients}
+
+\begin{preparation}
+\etape Émincez l'échalote et l'ail très finement. Mettez les pruneaux dans 15cl d'eau chaude
+\etape Saisissez les morceaux de poulets dans la sauteuse puis réservez-les
+\etape Dans le jus du poulet, faites revenir les échalotes et la gousse d'ail écrasée.
+\etape Quand les échalotes sont prêtes, réservez les pruneaux et préparez le bouillon cube dans le jus des pruneaux. Saupoudrez 
+la farine et mélangez afin que la farine entoure les morceaux d'échalote
+\etape Ajoutez le bouillon, mélangez puis ajoutez la crème de whisky. Ajoutez ensuite les pruneaux et un peu de jus de citron. 
+Mélangez puis ajoutez les morceaux de poulet. Salez et poivrez.
+\etape Laissez mijoter une heure environ, à couvert et à feux doux.
+\end{preparation}
+
+\end{recette}
+
+
+\section{Calamars à l'armoricaine}
+\begin{recette}{Calamars à l'armoricaine}{2}{}{}\index{calamar à l'armoricaine}\index{calamar}
+\begin{ingredients}
+\ingredient 1 grosse boite de tomates en dés
+\ingredient 500g de calamars
+\ingredient 4 échalotes
+\ingredient 3 ou 4 oignons
+\ingredient 1 gousse d'ail
+\ingredient 25cl de vin blanc
+\ingredient 5 cl de cognac
+\ingredient 20g de beurre
+\ingredient sel, poivre, huile d'olive, piment ou sauce piquante, sucre
+\end{ingredients}
+
+\begin{remarque}
+J'ai mis 750g de calamars (une poche et demie) pour 4. Ça diminue beaucoup durant la cuisson. Donc en gros, on peut mettre une 
+poche, suivant le poids de la poche, c'est pas très grave qu'il y en ait un peu moins ou un peu plus.
+\end{remarque}
+
+
+\begin{preparation}
+\etape Pelez et hachez l'ail, l'oignon et l'échalote (avec un robot, pas besoin de s'embêter).
+\etape Faites revenir les ronds de calamars (sans les décongeler s'ils le sont) dans le beurre et l'huile pendant 2 minutes 
+environ. (dans la pratique, s'ils sont surgelés, faut au moins qu'ils soient décongelés). Une fois fait, réservez les calamars 
+et le jus rendu dans un récipient.
+\etape Faites revenir à feu doux la mixture oignon+échalote+ail. 
+\etape Une fois légèrement transparent, à peine doré, rajoutez les calamars, laissez un peu réchauffer, puis rajouter le cognac 
+et faites flamber.
+\etape Ajoutez les tomates en dés, le vin blanc, salez, poivrez et laissez mijoter à couvert pendant une heure environ.
+\etape Enfin, durant la cuisson, une fois que tout est un peu mélangé, goutez. Compensez les gouts avec sel poivre et piment 
+fort. Et s'il y a une sorte d'aigreur, rajoutez un peu de sucre afin de l'éliminer. Bien entendu, goutez jusqu'à ce que ça vous 
+convienne.
+\end{preparation}
+
+\end{recette}
+
+
+\section{Choucroute}
+\begin{recette}{Choucroute}{3}{30 min}{2h}\index{choucroute}
+\begin{ingredients}[6 pers.]
+\ingredient 2.5 kg de choucroute
+\ingredient 2 oignons
+\ingredient 1 ou 2 échalotes
+\ingredient 2 gousses d'ail
+\ingredient 1 palette fumée
+\ingredient 200g de lard fumé (ou lardons)
+\ingredient 6 saucisses de Strasbourg
+\ingredient 2 saucisses de Montbéliard
+\ingredient (700g de pommes de terre)
+\ingredient 25cl de vin blanc
+\ingredient 50cl de bouillon
+\ingredient 1 dizaine de baies de genièvre
+\ingredient 2 cuillères à café de baies de coriandre
+\ingredient 1 cuillère à café de cumin (ou carvi)
+\ingredient 2 clous de girofle
+\ingredient sel, poivre
+\begin{remarque}
+Il est possible de mettre une saucisse de Morteau, mais je trouve que le gout est similaire aux saucisses de Montbéliard en 
+beaucoup plus cher.
+\end{remarque}
+
+\end{ingredients}
+\begin{remarque}
+Il est possible de mettre votre petit salé dans un gros volume d'eau la veille.
+\end{remarque}
+\begin{preparation}
+\etape Lavez la choucroute plusieurs fois jusqu'à ce que l'eau de trempage soit claire. Égouttez-la et essorez-la bien en la 
+pressant entre les mains puis démêlez-la avec les doigts.
+\etape Émincez les oignons et les échalotes, hachez l'ail finement. 
+\etape Faites chauffer l'huile dans une marmite chaude. Faites blondir oignons, ail et échalotes.
+\etape Dans un grand récipient, mélangez cette préparation à la choucroute, Ajoutez les baies et épices (cumin, clous de 
+girofle, poivre, sel). 
+\etape Réduisez le feu et étalez au fond le lard. Recouvrez le lard avec la moitié de la choucroute. Rajoutez la palette au 
+milieu de ce nid de choucroute. Recouvrez enfin du reste de chou, baies et épices. Ajoutez enfin les saucisses de Montbéliard et 
+les pommes de terres lavées sous l'eau (coupez-les en deux ou quatre si elles sont grosses).
+\etape Ajoutez alors le vin blanc et le bouillon et laissez mijoter à feu doux pendant deux heures à couvert. 
+\etape 10 minutes avant la fin de la cuisson rajoutez les saucisses de Strasbourg.
+\end{preparation}
+\end{recette}
+
+
+\section{Magret de canard aux poires}
+\begin{recette}{Magret de canard aux poires}{4}{}{}\index{magret de canard aux poires}\index{magret}\index{canard}\index{poires}
+\begin{ingredients}
+\ingredient $2$ magrets de canard
+\ingredient $2$ échalotes
+\ingredient 20g sucre en poudre
+\ingredient  $10 \unit{cl}$ de vin rouge
+\ingredient  $10 \unit{cl}$ de floc de Gascogne
+\ingredient  $15 \unit{cl}$ de bouillon de volaille ou de bœuf
+\ingredient  une grosse poire comice ou deux petites.
+\ingredient une cuillère à soupe de farine
+\ingredient  Sel, poivre, jus de citron
+
+\end{ingredients}
+
+\begin{preparation}
+\etape Poser les magrets côté peau dans une sauteuse chauffée à vif afin de graisser un peu celle-ci. Retirez-les puis faites 
+les cuires au grill.
+\etape Faites suer les échalotes ciselées mais ne les laissez pas cuire trop longtemps, il ne faut pas qu'elles soient dorées. 
+\etape Saupoudrer du sucre sur les échalotes une fois qu'elle sont revenues et laisser caraméliser. 
+\etape Ajouter ensuite la farine puis remuez afin que ça soit homogène.
+\etape Déglacer ensuite avec le Floc et le vin rouge. 
+\etape Faire réduire à découvert quelques minutes. Préparez pendant ce temps la poire, que vous coupez en petit cubes d'un 
+centimètre environ.
+\etape Ajouter le bouillon et un tout petit peu de jus de citron. Remuez pour que ce soit homogène. Ajoutez enfin les cubes de 
+poire et laissez mijoter 5 minutes à couvert.
+\begin{remarque}
+Faites attention à remuer doucement la sauce une fois les poires ajoutées, afin de ne pas trop exploser les morceaux.
+\end{remarque}
+\etape Dresser les magrets escalopes en éventail et napper les pointes en sauce.
+\etape Le magret doit être servi rosé.
+\end{preparation}
+\end{recette}
+
+\section{Cochon roussi}
+\begin{recette}{Cochon roussi}{}{30 min.+1 nuit+1h}{2h}
+\begin{ingredients}
+\ingredient[Marinade]
+\ingredient 75g de jus de citron (1.5 citron)
+\ingredient 3 gousses d'ail
+\ingredient cives (ou les oignons d'une botte de 5 oignons)
+\ingredient 1 oignon
+\ingredient 2 clou de girofle
+\ingredient 100ml d'eau
+\ingredient 8g d'huile
+\ingredient 2 cac de colombo
+\ingredient 1/3 de cac de muscade
+\ingredient 1/3 de cac de canelle
+\ingredient 1g de poivre
+\ingredient 2g de thym
+\ingredient[cuisson]
+\ingredient 1 roti dans l'échine de 1.5kg
+\ingredient 1 cive (ou les tiges d'une botte de 5 oignons)
+\ingredient 10g de jus de citron (normalement 25, i.e 1/2 citron)
+\ingredient 450ml d'eau
+\ingredient 9g de sel
+
+\end{ingredients}
+
+\begin{preparation}
+\etape Coupez le roti en cube grossier (des 1/4 de cylindres, puis des tranches de 4-5cm de large)
+\etape Mixez l'oignon, la cive, l'ail et le clou de girofle
+\etape Ajoutez l'eau, l'huile et le jus de citron et les épices
+\etape Mettez la viande à mariner pendant la nuit
+\etape Le lendemain, séparez la viande de la marinade
+\etape Faites roussir le porc à feu vif (7/9) dans de l'huile chaude par petites quantité jusqu'à ce que ce soit bien doré (de préférence dans un plat sans téflon). Il ne faut pas que ce soit noirci, mais très doré
+\etape Réservez. Faites alors rissoler les cives
+\etape Ajoutez une cuillère à soupe de farine, puis ajoutez la marinade, l'eau, le sel et le jus de citron
+\end{preparation}
+
+\begin{cuisson}
+Faites mijoter pendant 1 à 2h environ à feu doux (4/9)
+\end{cuisson}
+\end{recette}
+
+
+\section{Porc effiloché (pulled pork)}
+\begin{recette}{Porc effiloché (pulled pork)}{}{10 min. + 12h}{8h}\index{porc}\index{pulled pork}
+\begin{ingredients}
+\ingredient 2 cac de paprika (3g)
+\ingredient 2 cac cumin (4g)
+\ingredient 2 cac poivre (5g)
+\ingredient 2 cac de sucre (10g)
+\ingredient 1 cac sel (5g)
+\ingredient 50cl de cidre (ou jus de pomme)
+\ingredient 2.5kg de porc (épaule)
+\ingredient Autres idées: ail, oignon, thym
+\end{ingredients}
+
+\begin{preparation}
+\etape Mélanger les épices et étaler sur le porc puis laissez reposer une nuit au frigo si possible
+\etape versez dans la cocotte le cidre, puis déposez quelque chose (une grille ou autre) qui permettra à la viande de ne pas entrer en contact avec le jus
+\etape Déposez alors la viande, fermez la cocotte du mieux possible.
+\end{preparation}
+
+\begin{cuisson}
+Faites cuire à 130°C avec ventilation, ou 150°C pendant 8h
+\end{cuisson}
+\end{recette}
+
+\section{Poulet au curry/coco}
+\begin{recette}{Poulet au curry/coco}{}{45 min.}{1h}
+\begin{ingredients}
+\ingredient 1kg de poulet
+\begin{remarque}
+ On peut aussi remplacer le poulet par des crevettes (même quantité)
+\end{remarque}
+
+\ingredient 2 oignon
+\ingredient 1 poivron
+\ingredient 2 courgettes
+\ingredient 50g de gingembre
+\ingredient 1 boite de lait de coco
+\ingredient 2-3 cuillère à soupe de curry
+\ingredient sel, poivre, jus de citron
+\end{ingredients}
+
+\begin{preparation}
+\etape faire revenir les morceaux de poulet, réserver
+\etape faire revenir l'oignon, le poivron et les courgettes
+\etape ajouter le curry, le gingembre, l'ail et le poulet de nouveau puis laissez cuire à feu moyen un petit peu plus
+\etape Ajouter enfin le lait de coco, un peu de jus de citron, le poivre et le sel
+\end{preparation}
+
+\begin{cuisson}
+Laisser mijoter une heure à feu doux. 
+
+En accompagnement, au delà du riz, ça va très bien avec des haricots verts, épinards ou des brocolis.
+\end{cuisson}
+\end{recette}
+
+
+\section{Poulet à l'ananas}
+\begin{recette}{Poulet à l'ananas}{}{45 min.}{1h}
+\begin{ingredients}
+\ingredient 1.5kg de poulet
+\ingredient jus d'un citron (50g/3CS/5cl)
+\ingredient un oignons rouge
+\ingredient 1/4 d'ananas voir 1/2 ananas frais
+\ingredient Un peu de gingembre frais (équivalent en volume de l'ail)
+\ingredient 1 gousse d'ail
+\ingredient 25cl de sauce soja
+\ingredient 1 CS d'huile vegetale
+\ingredient 2 CS de paprika
+\end{ingredients}
+
+\begin{preparation}
+\etape Mixez l'ail, l'oignon et le gingembre. 
+\etape Ajoutez le jus de citron, le paprika, la sauce soja, l'huile végétale et l'ananas coupé en morceaux. Laissez mariner au moins 30 minutes. 
+\etape Faire mijoter à couvert pendant 15-20 minutes (peut-être plus, faut que la viande soit cuite quoi)
+\end{preparation}
+\end{recette}
+
+\section{Sauce aux cèpes}
+\begin{recette}{Sauce aux cèpes}{3}{30min}{1h30}\index{cèpes}\index{sauce}
+\begin{ingredients}
+\ingredient 4 échalottes
+\ingredient 2 gousses d'ail
+\ingredient 2 ou 3 cèpes
+\ingredient 50g de lardons
+\ingredient 20 cl de vin blanc
+\ingredient 1 cuillère à soupe de farine
+\ingredient 12.5 cl de bouillon (ou fond de viande)
+\ingredient poivre, beurre
+\end{ingredients}
+
+\begin{preparation}
+\etape Pelez les échalottes et ciselez-les finement
+\etape Faites les blondir dans une petite sauteuse ou une casserole avec un peu de beurre et d'huile, juste le temps qu'elles deviennent translucide
+\etape Réservez-les. Émincez l'ail finement. Coupez les têtes de cèpes en morceaux grossiers, et les queues en morceaux un peu plus fins. 
+\etape Faites revenir l'ail et les morceaux de cèpes dans le reste de beurre. 
+\etape Une fois raisonnablement dorées, rajoutez les échalottes, saupoudrez la farine et mélangez le tout.
+\etape Ajoutez le vin blanc, mélangez jusqu'à ce que la préparation soit homogène. Ajoutez enfin le bouillon de volaille, poivrez et ajoutez les lardons.
+\end{preparation}
+
+\begin{cuisson}
+Couvrez, réduisez le feu au minimum et laissez mijoter pendant 1h30 environ.
+\end{cuisson}
+
+\end{recette}
+
+% recette issues de l'atelier pizza. mais il y a trop d'eau je trouve, c'est impossible à gérer. 
+\section{Pâte à Pizza atelier pizza}
+\begin{recette}{Pâte à Pizza}{3}{30 min+72h}{15 min}\index{pizza}\index{pâte à pizza}
+\begin{ingredients}[Pour deux petites pizza]
+\ingredient 212 g de farine T55
+\ingredient 37.5 g de farine complète
+\ingredient 175cl d'eau % avant 20cl
+\ingredient 1g de levure sèche (de boulanger donc)
+\ingredient 7g de sel
+\ingredient une cuillère à soupe d'huile d'olive
+\end{ingredients}
+
+\begin{preparation}
+\etape Mélangez les farines, la levure et l'eau
+\etape Pétrissez 4 minutes à vitesse 1
+\etape Laissez alors reposer 20 minutes (autolyse)
+\etape Pétrissez 10 minutes à vitesse 2
+\etape Quand la pâte est suffisamment élastique, étalez la grossièrement, mettez le sel et rabattez jusqu'à ce que le sel soit incorporé.
+\etape Séparez en deux pâtes individuelles et mettez les dans des tupperwares séparés. 
+\etape Laissez alors la pâte lever tranquillement au frigo pendant 48h.
+
+\etape Sortez la pâte 30 minutes à 3 heures avant (en fonction de la saison).
+\etape Faites préchauffer le four à 280°C (le four des pros est à plus de 500°C, moi c'est limité à 280).
+\etape Étalez la pâte à la main autant que possible. Pour celà, posez la boule sur le plan de travail fariné. Il faut dessiner et marquer la croute avec le bout des doigts, la pâte sera alors plus facile à étaler. Une fois plus étalé, il faut faire un C avec la tranche de chaque main, puis on étire et on tourne pour agrandir petit à petit. À défaut, vous pouvez aussi utiliser un rouleau à patisserie. L'inconvénient est que la croûte fera moins ``pizza'' si vous ne le faites pas à la main.
+%\etape Laissez reposer la pâte étalée une vingtaine de minutes avant de garnir afin que la pâte lève un peu, elle sera ainsi 
+%plus aérée. (j'étalais un peu la pate, à peu près la moitié du diamètre voulu, je laisse reposer, puis je fini le travail après)
+
+\etape Garnissez la pizza selon votre goût et enfournez à 280°C. 
+\end{preparation}
+
+
+\begin{cuisson}
+Faites cuire la pizza environ 10 minutes à 280\degres C au four, chaleur tournante si vous avez. À ces températures, surveillez 
+la cuisson, si le four est bien chaud ça peut être fait en 5 minutes à peine.
+
+La pizza sera meilleure si vous faites cuire la pizza sur une pierre, chauffée au préalable. Utilisez une spatule à crêpe pour 
+faire glisser la pâte depuis la pelle à pizza vers la pierre que vous aurez enlevé du four le temps d'y mettre la pizza. 
+
+\begin{attention}
+Ne faites pas cuire avec le four en mode grill !
+\end{attention}
+
+\end{cuisson}
+\end{recette}
+
+\section{Pâte à Pizza a la  moi epaisse}
+\begin{recette}{Pâte à Pizza}{3}{30 min+72h}{15 min}\index{pizza}\index{pâte à pizza}
+\begin{ingredients}[Pour deux petites pizza]
+\ingredient 350 g de farine T55
+\ingredient 18cl d'eau % avant 20cl
+\ingredient 3.5g de levure sèche (de boulanger donc)
+\ingredient 7g de sel
+\ingredient une cuillère à soupe d'huile d'olive
+%autre essai :
+% 1/4 du cube de levure fraiche (environ 10 gramme)
+% 500g de farine
+% un peu de sel dans la farine, mais pas dans l'eau de levain, parce que ça tue les levures
+% un peu de sucre parce que les levures adorent ça
+% 5 cuillère à soupe d'huile d'olive, à peu près 25cl d'eau (l'eau équivaut à peu près la moitié du poids en farine)
+% Laisser monter au frigo, dans un récipient hermétiquement fermé
+% les doses théoriques, c'est 400g de farine pour 4 boules individuelles, une boule par pizza
+% 10 minutes à 280°C
+\end{ingredients}
+\begin{remarque}
+\begin{itemize}
+\item Avec de la levure fraiche, doubler la quantité (1g de levure sèche, ou 2g de levure fraiche).
+\item La levure meurt dans de l'eau trop chaude (35-40°C), mieux vaut tiède que trop chaud.
+\item Ne surtout pas mettre le sel dans l'eau tiède lors de l'activation des levures.
+\end{itemize}
+\end{remarque}
+
+\begin{preparation}
+\etape Mélangez farine et sel puis faites en un puit. Dans un bol, délayez la levure dans l'eau. 
+Versez l'eau dans le puit. Ajoutez l'huile.
+\etape Pétrissez 4 minutes à vitesse 1
+\etape Laissez alors reposer 20 minutes (autolyse)
+\etape Pétrissez 10 minutes à vitesse 2 (au batteur à main, parfois moins. Je conseille de n'utiliser qu'un seul des deux crochets du batteur)
+\etape Séparez en deux pâtes individuelles et mettez les dans des tupperwares séparés. 
+\etape Laissez alors la pâte lever tranquillement au frigo pendant 72h.
+
+\etape Sortez la pâte une heure avant.
+\etape Faites préchauffer le four à 280°C (le four des pros est à plus de 500°C, moi c'est limité à 280).
+\etape Étalez la pâte à la main autant que possible. Pour celà, posez la boule sur le plan de travail fariné, et appuyez dessus, puis poussez les bords à la main. Une fois plus étalé, vous pouvez la faire tourner. À défaut, vous pouvez aussi utiliser un rouleau à patisserie. L'inconvénient est que la croûte fera moins ``pizza'' si vous ne le faites pas à la main.
+%\etape Laissez reposer la pâte étalée une vingtaine de minutes avant de garnir afin que la pâte lève un peu, elle sera ainsi 
+%plus aérée. (j'étalais un peu la pate, à peu près la moitié du diamètre voulu, je laisse reposer, puis je fini le travail après)
+
+\etape Garnissez la pizza selon votre goût et enfournez à 280°C. 
+\end{preparation}
+
+
+\begin{cuisson}
+Faites cuire la pizza environ 10 minutes à 280\degres C au four, chaleur tournante si vous avez. À ces températures, surveillez 
+la cuisson, si le four est bien chaud ça peut être fait en 5 minutes à peine.
+
+La pizza sera meilleure si vous faites cuire la pizza sur une pierre, chauffée au préalable. Utilisez une spatule à crêpe pour 
+faire glisser la pâte depuis la pelle à pizza vers la pierre que vous aurez enlevé du four le temps d'y mettre la pizza. 
+
+\begin{attention}
+Ne faites pas cuire avec le four en mode grill !
+\end{attention}
+
+\end{cuisson}
+\end{recette}
+
+\section{Pâte à Pizza (test nouvelle pizza basée sur pain, sans avoir testé}
+\begin{recette}{Pâte à Pizza}{3}{30 min+48h}{15 min}\index{pizza}\index{pâte à pizza}
+\begin{ingredients}[Pour deux petites pizza]
+\ingredient 340 g de farine T55
+\ingredient 10 g de farine complète % 3% de farine complete (dans la recette de l'atelier, c'est 15%)
+\ingredient 210ml d'eau
+\ingredient 2g de levure sèche (de boulanger donc)
+\ingredient 7g de sel
+\ingredient une cuillère à soupe d'huile d'olive
+\end{ingredients}
+
+\begin{preparation}
+\etape Mélangez les farines, la levure et l'eau
+\etape Pétrissez 4 minutes à vitesse 1
+\etape Laissez alors reposer 20 minutes (autolyse)
+\etape Pétrissez 10 minutes à vitesse 2
+\etape Quand la pâte est suffisamment élastique, étalez la grossièrement, mettez le sel et rabattez jusqu'à ce que le sel soit incorporé.
+\etape Séparez en deux pâtes individuelles et mettez les dans des tupperwares séparés. 
+\etape Laissez alors la pâte lever tranquillement au frigo pendant 48h.
+
+\etape Sortez la pâte 30 minutes à 3 heures avant (en fonction de la saison).
+\etape Faites préchauffer le four à 280°C (le four des pros est à plus de 500°C, moi c'est limité à 280).
+\etape Étalez la pâte à la main autant que possible. Pour celà, posez la boule sur le plan de travail fariné. Il faut dessiner et marquer la croute avec le bout des doigts, la pâte sera alors plus facile à étaler. Une fois plus étalé, il faut faire un C avec la tranche de chaque main, puis on étire et on tourne pour agrandir petit à petit. À défaut, vous pouvez aussi utiliser un rouleau à patisserie. L'inconvénient est que la croûte fera moins ``pizza'' si vous ne le faites pas à la main.
+%\etape Laissez reposer la pâte étalée une vingtaine de minutes avant de garnir afin que la pâte lève un peu, elle sera ainsi 
+%plus aérée. (j'étalais un peu la pate, à peu près la moitié du diamètre voulu, je laisse reposer, puis je fini le travail après)
+
+\etape Garnissez la pizza selon votre goût et enfournez à 280°C. 
+\end{preparation}
+
+\begin{cuisson}
+Faites cuire la pizza environ 10 minutes à 280\degres C au four, chaleur tournante si vous avez. À ces températures, surveillez 
+la cuisson, si le four est bien chaud ça peut être fait en 5 minutes à peine.
+
+La pizza sera meilleure si vous faites cuire la pizza sur une pierre, chauffée au préalable. Utilisez une spatule à crêpe pour 
+faire glisser la pâte depuis la pelle à pizza vers la pierre que vous aurez enlevé du four le temps d'y mettre la pizza. 
+
+\begin{attention}
+Ne faites pas cuire avec le four en mode grill !
+\end{attention}
+
+\end{cuisson}
+\end{recette}
+
+\section{Cochon roussi à la moi (ancienne version)}
+\begin{recette}{Cochon roussi à la moi}{}{30 min.+1 nuit+1h}{2h}
+\begin{ingredients}
+\ingredient[Marinade]
+\ingredient 3 gousses d'ail
+\ingredient cives (ou les oignons d'une botte de 5 oignons)
+\ingredient 1 oignon
+\ingredient 200ml d'eau
+\ingredient 8g d'huile
+\ingredient 2 cac de colombo
+\ingredient 1/3 de cac de muscade
+\ingredient 1/3 de cac de canelle
+\ingredient 1g de poivre
+\ingredient 2g de thym
+\ingredient[cuisson]
+\ingredient 1 roti dans l'échine de 1.5kg
+\ingredient 1 cive (ou les tiges d'une botte de 5 oignons)
+\ingredient 10g de jus de citron (normalement 25, i.e 1/2 citron)
+\ingredient 450ml d'eau
+\ingredient 9g de sel
+\ingredient \~ 750mL d'huile de tournesol
+\end{ingredients}
+
+\begin{preparation}
+\etape Coupez le roti en cube grossier (des 1/4 de cylindres, puis des tranches de 4-5cm de large)
+\etape Mixez l'oignon, la cive, l'ail et le clou de girofle
+\etape Ajoutez l'eau, l'huile et le jus de citron et les épices
+\etape Mettez la viande à mariner pendant la nuit
+\etape Le lendemain, séparez la viande de la marinade
+\etape Déposez le porc dans la marmite/cocotte et recouvrez d'huile. Puis faites cuire 1h15 environ à feu moyen (6/9) et à couvert. Tournez la viande toutes les demi heures environ. Passez à la suite quand la viande se dore et que ça accroche au fond. 
+\etape Réservez la viande, enlevez le surplus d'huile (à jeter plus tard). Faites alors rissoler les cives
+\etape Ajoutez une cuillère à soupe de farine, puis ajoutez la marinade, l'eau, le sel et le jus de citron
+\end{preparation}
+
+\begin{cuisson}
+Faites mijoter pendant 1h environ à feu doux (4/9)
+\end{cuisson}
+\end{recette}
+
+\section{Magret de canard à la poele}
+\begin{recette}{Magret de canard à la poele}{4}{20 min}{1h}\index{poulet}
+\begin{ingredients}
+\ingredient Magret de canard
+\ingredient gros sel
+\end{ingredients}
+
+\begin{preparation}
+\etape Sortez le magret du frigo 1h avant
+\etape Entaillez le gras du magret (quadrillez) puis frottez au gros sel des deux cotés
+\end{preparation}
+
+\begin{cuisson}
+\begin{itemize}
+\item Recette rejetée car c'est trop difficile de faire pas trop cuire à coeur, et que l'exterieur soit aussi pas trop cuit. La nouvelle recette coupe les magrets en deux. Avec un couvercle, c'était trop cuit, et sans le couvercle, ça manquait de cuisson a coeur.
+\item Faites chauffer la poele à feu vif (7/9) (Avec le couvercle c'est pas bon, trop cuit)
+\item Faites cuire le magret coté peau 3 minutes à feu vif (7/9) puis 3 minutes à feu un peu moins vif (6/9)
+\item Enlevez le surplus de graisse puis faites cuire 3 minutes coté chair à feu vif (6/9)
+\item Laissez alors le magret reposer enveloppé dans du papier aluminium pendant 6 minutes
+\end{itemize}
+\end{cuisson}
+\end{recette}
+
+\section{Brioche}
+\begin{recette}{Brioche}{3}{15h+8h}{35 min}\index{brioche}
+\begin{ingredients}
+\ingredient 250g de farine T45
+\ingredient 162g d'œufs ($\sim 3$ œufs) frais (il faut qu'ils soient bien frais, la pâte sera trop liquide sinon)
+\ingredient (+1 œuf pour la dorure, que le jaune)
+\ingredient 4g de sel
+\ingredient 10g de levure fraiche (ou 5g de levure sèche)
+\ingredient 37g de sucre
+\ingredient 125g de beurre mou
+\ingredient 14g de fleur d'oranger (1 cas)
+\end{ingredients}
+
+
+\begin{preparation}
+\etape Mettez la levure dans les œufs puis mélangez
+\etape Mélangez dans le bol du robot la farine, le sel, le sucre et faites un puit. Ajoutez alors le mélange œufs/levure ainsi 
+que les aromes si vous le souhaitez
+\etape Pétrissez 3 minutes à vitesse 1
+\etape Laissez alors reposer 20 minutes
+\etape Pétrissez 5 minutes à vitesse 2
+\etape Ajoutez le beurre mou (extrêmement mou) et pétrissez de nouveau 3 minutes à vitesse 2
+\etape Laissez monter 1h30 à température ambiante et à couvert
+\etape Faites un rabattage, puis mettez à lever au frigo (et couvert) pendant 12h
+\etape Appuyez au centre de la boule jusqu'à faire un trou. Façonnez ensuite la couronne et disposez la dans un plat à tarte 
+fariné.
+\etape Dorez au jaune d'œuf
+\etape Laissez lever pendant 1h30 de nouveau
+\end{preparation}
+
+
+\begin{cuisson}
+Préchauffez à 160°C avec un lèche frite en bas. 
+
+Versez 1/4 de verre au moment d'enfourner.
+
+Enfournez pendant 15 minutes à 160°C à four ventilé. 
+
+Pour tester la cuisson de la brioche, n’hésitez à la piquer avec un couteau, il doit ressortir sec sans trace de pâte.
+
+Faites refroidir votre brioche sur une grille.
+\end{cuisson}
+\end{recette}
+
+
+\section{Poisson au court-bouillon}
+\begin{recette}{Poisson au court-bouillon}{}{10min.+12h+20min.}{20 min.}\index{roucou}\index{poisson}
+\begin{ingredients}
+\ingredient 1kg de morceaux de poisson
+\ingredient 2 cives (ou oignons)
+\ingredient 2 gousses d'ail
+\ingredient huile de roucou (ou concentré de tomate à défaut)
+\ingredient 5cl de jus de citron (1/2 citron)
+\ingredient sel, poivre, clou de girofle
+\end{ingredients}
+
+\begin{preparation}
+\etape La veille, faites mariner le poisson avec l'ail, le citron et le sel, poivre, girofle puis recouvrez d'eau
+\etape Séparez le poisson de la marinade
+\etape Faites revenir les cives, puis le poisson dans de l'huile de roucou
+\etape Versez alors la marinade, l'ail, thym, laurier
+\etape couvrir d'eau de marinade puis compléter avec de l'eau si besoin
+\end{preparation}
+
+\begin{cuisson}
+Faites mijoter à couvert pendant 20 minutes à feux doux. Au dernier moment, rajoutez du jus de citron, éteignez le feu et couvrez. 
+\end{cuisson}
+\end{recette}
+
+%https://bistroguru.com/recette/recette-poulet-korma/
+%https://www.mesinspirationsculinaires.com/article-poulet-korma.html
+% ingredient for the korma sauce at safeway: Water, Sugar, Desiccated Coconut, Cream, Coconut Paste, Onion, Canola Oil, Food Starch Modified, Contains 2% or Less of Tomato Paste, Heavy Cream, Ginger, Garlic, Spices (Including Turmeric), Salt, Lactic Acid, Lemon, Juice Concentrate, Dried Cilantro Leaf. 
+\section{Poulet Korma}
+\begin{recette}{Poulet Korma}{0}{1h30}{}
+\begin{ingredients}
+\ingredient[marinade]
+\ingredient 1 yaourt nature (ou 20cl de creme fraiche) % aux us j'ai mis 450g de creme fraiche
+\ingredient 2 gousses ail écrasées
+\ingredient 1 c-a-c de gingembre frais râpé % aux us j'ai mis l'équivalent de 2-3 gousses d'ail
+\ingredient 1/2 c-a-c garam massala % aux us j'ai mis 2 cac)
+\ingredient 1kg de poulet coupé en morceau
+\ingredient[sauce]
+\ingredient 1/2 c-a-c garam massala
+\ingredient 70g de concentré de tomate (2 cas)
+\ingredient 2 oignons moyens hachés
+\ingredient 1 c-a-soupe huile végétale
+\ingredient 1 c-a-c coriandre en poudre
+\ingredient coriandre ciselée
+\ingredient 250 ml lait de coco
+\ingredient 200 ml bouillon de poulet
+\ingredient 30g d'amande moulu
+\ingredient Noix de cajou
+\ingredient sel
+\ingredient poivre
+\end{ingredients}
+
+\begin{preparation}
+\etape Placer les morceaux de poulet dans un saladier. Ajouter le yaourt et la moitie des épices.
+\etape Ajouter les gousses d'ail et le gingembre écrasées. Laisser mariner 3 heures.
+\etape Dans une sauteuse faire chauffer l'huile et 2 c-a-soupe de beurre. Ajouter les oignons hachées ainsi que la gousse d'ail.
+\etape Ajouter les epices restant et faire revenir afin de mélanger les saveurs (environs 10 minutes).
+\etape Ajouter les morceaux de poulet marinés et le bouillon de poulet. Laisser cuire 15 min ou jusqu’à ce que le poulet soit cuit en remuant fréquemment. Ajouter le concentre de tomate.
+\etape Ajouter le lait de coco ainsi que les amandes moulues.
+\etape Remettre quelques minutes à feu très doux (attention à ne pas faire bouillir la sauce) Rectifier l’assaisonnement.
+\etape Ajouter les noix de cajou, et saupoudrer de coriandre ciselée.
+\etape Servir chaud accompagne de riz.
+\end{preparation}
+\end{recette}
+
+\section{Court-bouillon de poisson}
+\begin{recette}{Court-bouillon de poisson}{}{30 min.+1 nuit+1h}{2h}
+\begin{ingredients}
+\ingredient[Marinade]
+\ingredient 5cl de jus de citron (1 citron)
+\ingredient 4 gousses d'ail
+\ingredient 20cl d'eau
+\ingredient sel, poivre
+\ingredient[cuisson]
+\ingredient morceaux de poisson
+\ingredient 2 gousses d'ail
+\ingredient 1 cive (200g)
+\ingredient 1 oignon
+\ingredient huile de roucou
+\ingredient un peu de mélange 4 épices
+\end{ingredients}
+
+\begin{preparation}
+\etape Faites mariner le poisson la veille (cf la haut pour les ingrédients de la marinade)
+\etape Faites chauffer l'huile de roucou dans la marmite
+\etape Faites revenir ail, cives et oignons émincés avec le poisson pendant 5 minutes à feu vif (7/9) (Faites cuire jusqu'à 5 minutes de plus si ça rends beaucoup d'eau)
+\etape Réservez le poisson. Ajoutez une seule cuillère à soupe de farine, mélangez
+\etape Ajoutez alors la marinade et portez à ébullition
+\etape Ajoutez le poisson, mettez à feu doux (3/9) et à couvert pendant 10 minutes
+\end{preparation}
+% Jacqueline  prépare un mélange avec un demi citron, deux gousses d'ail et un peu d'huile à verser en fin de cuisson mais j'ai remarqué qu'elle ne versait pas toute la marinade. Donc j'ai un peu modifié la recette
+% les temps de cuissons ne sont pas sûrs, car elle fait au pif et une fois couvert, elle n'a pas vraiment fait cuire, elle a coupé le feu, c'est tout
+\end{recette}
+
+% 11/12/2022
+\section{Cuisse de dinde au four}
+\begin{recette}{Cuisse de dinde au four}{3}{20min+12h}{1h30}\index{dinde}
+\begin{ingredients}
+\ingredient Une cuisse de dinde ($\sim$ 2kg)
+\ingredient sel caraïbe ou sel normal
+\ingredient 2-5 gousses d'ail
+\ingredient 2 oignons
+\ingredient 20cl d'eau
+\end{ingredients}
+
+\begin{preparation}
+\etape Piquer la viande (faut y aller franchement)
+\etape Saler abondamment la viande. Laissez mariner une nuit
+\etape Le lendemain, mixer ail et oignon et mettre dans l'eau
+\end{preparation}
+
+\begin{cuisson}
+Badigeonnez la dinde d'une couche de marinade (ne pas tout mettre) puis enfournez la (sans le papier aluminium) à 200°C, sans préchauffage. 
+
+Le temps de cuisson total est 1h30. 30 minutes avant la fin, grattez la marinade de la cuisse pour la faire tomber dans le plat, ajoutez le reste de marinade dedans, puis couvrez de papier aluminium pour la fin de cuisson.
+\end{cuisson}
+\end{recette}
+
+%28/12/2022
+\section{Pain (frigo/nuit) 1 fournée}
+\begin{recette}{Pain (frigo/nuit) 1 fournée}{3}{45min+10h+3h}{30 min}\index{pain}\index{levure de boulanger}
+\begin{ingredients}[4 baguettes]
+\ingredient 500g de farine de blé T55
+\ingredient 350mL d'eau (30-35°C)
+% avec 400g d'eau pour 500g de farine (cf pain rapide) la mie semble suffisamment hydratée comme les baguettes tradition que j'aime. pas encore testé avec cette recette ceci dit. il faudrait augmenter l'eau de bassinage j'imagine.
+\ingredient 10 mL d'eau de bassinage (avant, c'était 18mL)
+\ingredient 3.5g de levure sèche
+\ingredient 8g de sel 
+\end{ingredients}
+
+
+\begin{preparation}
+\etape La veille au soir, Pesez la farine dans un bol de robot.
+\etape Dans un bol, délayez la levure dans l'eau tiède, ajoutez deux cuillères à soupe de la farine pesée et laissez reposer 20 minutes jusqu'à que ça fasse de la mousse en surface (il faudra peut-être plus longtemps si la levure sèche n'est plus trop active, une pincée de sucre pourra alors aider). 
+\etape Pendant ce temps, pesez le sel et mélangez le à la farine. Puis faites un puit. 
+\etape Versez l'eau dans le puit puis effondrez les bords du puits dans l'eau (sinon ça met trop de temps à se mélanger)
+\etape Pétrissez 3 minutes à vitesse 1 (ou à défaut, arrêtez quand il n'y a plus de farine sur le coté du récipient.
+\etape Laissez alors reposer 20 minutes
+\etape Pétrissez 8 minutes à vitesse 1
+\etape Pétrissez 4 minutes à vitesse 2 tout en versant l'eau de bassinage en un mince filet (pas besoin que le versage de l'eau 
+dure 4 minutes cependant)
+\etape Disposez la pâte dans un récipient hermétique (de préférence avec un couvercle transparent) et mettez au frigo toute la 
+nuit (10h environ) 
+\etape Le lendemain matin, démarrez un chrono de 2h30. Rabattez la pâte, attendez 20 minutes à température ambiante, rabattez à 
+nouveau, 20 minutes de plus et rabattez une 3e et dernière fois
+\etape Couvrez puis attendez la fin du décompte, $\sim$ (total - 1h) si vous avez oublié de regarder le temps total depuis la 
+sortie du frigo.
+ 
+\etape Toujours à l'aide d'une spatule silicone, décollez la pâte et versez la sur un plan de travail fariné. Découpez 4 
+morceaux égaux en volume. 
+\etape Déposez une couche de farine sur le moule à baguette à l'aide d'une passoire fine. L'eau de bassinage rend la pâte 
+beaucoup plus 
+collante, il faut donc une petite couche. 
+\etape Formez un boudin grossièrement sans trop le manipuler, puis saisissez une extrémité dans chaque main. Faites des 
+mouvements de haut en bas pour que la pâte s'étire jusqu'à la longueur voulue, en prenant garde que la section reste à peu 
+près constante partout
+\etape Disposez-les sur le moule fariné. 
+Couvrez avec un torchon sec afin que ça ne sèche pas et que ça soit à l'abris de l'air. Laissez monter 1h environ
+\end{preparation}
+
+%29/12/2022
+%recette de la campaillette grand siècle
+\section{Pain (frigo/nuit) 1 fournée}
+\begin{recette}{Pain (frigo/nuit) 1 fournée}{3}{45min+12h+2h}{30 min}\index{pain}\index{levure de boulanger}
+\begin{ingredients}[4 baguettes]
+\ingredient 500g de farine de blé T55
+\ingredient 350g d'eau (30-35°C)
+\ingredient 15g d'eau de bassinage
+\ingredient 3.5g de levure sèche
+\ingredient 9g de sel 
+\end{ingredients}
+
+
+\begin{preparation}
+\etape La veille au soir, Pesez la farine dans un bol de robot.
+\etape Dans un bol, délayez la levure dans l'eau tiède
+\etape Faites un puit avec la farine, versez l'eau et effondrez les bords
+\etape \textbf{Frasage} Pétrissez pendant 5 minutes à vitesse 1
+\etape \textbf{Autolyse} Laissez reposer 1h
+\etape Ajoutez le sel, et pétrissez pendant 10 minutes à vitesse 1
+\etape \textbf{Bassinage} Ajoutez l'eau de bassinage en filet et pétrissez pendant 2 minutes à vitesse 2
+\etape \textbf{Pointage} laissez la pâte reposer pendant 1h (je met une plaque de verre sur le bol du robot)
+\etape \textbf{Rabatage} Rabattez la pâte
+\etape \textbf{Blocage} Mettez au frigo, couvert, pendant 12 à 14h à 4°C
+\etape \textbf{Détente} Le lendemain, à l'aide d'une spatule silicone, décollez la pâte et versez la sur un plan de travail fariné. Découpez 4 
+morceaux égaux en volume. Laissez-les reposer 1h
+\etape \textbf{Façonnage} Déposez une couche de farine sur le moule à baguette à l'aide d'une passoire fine. L'eau de bassinage rend la pâte 
+beaucoup plus 
+collante, il faut donc une petite couche. 
+\etape Formez un boudin grossièrement sans trop le manipuler, puis saisissez une extrémité dans chaque main. Faites des 
+mouvements de haut en bas pour que la pâte s'étire jusqu'à la longueur voulue, en prenant garde que la section reste à peu 
+près constante partout
+\etape \textbf{Apprêt} Disposez-les sur le moule fariné. 
+Couvrez avec un torchon sec afin que ça ne sèche pas et que ça soit à l'abris de l'air. Laissez monter 30-45 minutes environ
+\end{preparation}
+
+
+\begin{cuisson}
+Préchauffez le four pendant 10 minutes à 240°C avec un lèche frite en bas.
+
+Saupoudrez un peu de farine. Puis à l'aide d'un couteau tranchant, entaillez 
+le pain en diagonale à plusieurs endroits, pas besoin de tailler trop profond. Des mouvements vifs du couteau permettent 
+d'entailler plus 
+facilement.
+
+Juste après avoir mis les patons, mais avant de fermer la porte du four, versez un tiers (entre 1/3 et 1/2) de verre d'eau 
+chaude sur le lèche 
+frite.
+
+Mettez alors le four à 240°C pendant 16 minutes à chaleur tournante.
+% j'avais mis 17 minutes à 250°C et le dessous ne me semblait pas assez cuit, mais j'avais mis trop de buée je pense, ce qui a peut-être ramolli par le dessous.
+
+Surveillez le pain et sortez-le du four quand la cuisson vous convient.
+
+
+\end{cuisson}
+\end{recette}
+
+\end{document}

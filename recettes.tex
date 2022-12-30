@@ -1,0 +1,2881 @@
+\documentclass[a4paper,twoside,openright]{report}
+\usepackage[print]{autiwa}
+
+\setcounter{secnumdepth}{2}
+\usepackage{minitoc}
+\setcounter{minitocdepth}{1}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[RO,LE]{\footnotesize\textbf{\thepage}}
+\fancyhead[RE]{\footnotesize\leftmark}
+\fancyhead[LO]{\footnotesize\leftmark}
+
+\makeatletter
+
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+\hbox{} 
+\thispagestyle{empty}
+\newpage
+\if@twocolumn\hbox{}\newpage\fi\fi\fi} 
+
+% macros qui servent à la mise en page, elles ne doivent pas être utilisées directement
+\newcommand{\preparationTopSep}{\vspace{.2cm} \hrule height0.25pt width\hsize \vspace{1em}}
+\newcommand{\statistiqueTopSep}{\vspace{.3cm} \hrule height1pt width\hsize \nobreak \vskip\parskip \vspace{.3cm}}
+\newcommand{\ingredientsTopSep}{\vspace{.4cm} \hrule height0.75pt width\hsize\vspace*{1\p@}\hrule height0.25pt width\hsize \vspace{1em}}
+\newcommand{\partStyle}{\bfseries \large}
+
+% redéfinition d'une nouvelle commande de section qui n'a pas de numérotation, est centrée, avec mise en page modifiée. C'est pour afficher le titre des recettes et qu'elles apparaissent dans le menu. J'avais fait avec addcontentline mais la référence n'était pas bonne et pointait sur la page précédente parfois. Bref, pas propre.
+\newcommand\nomRecette{\@startsection {section}{6}{\z@}{0ex}{2.3ex }%
+	{\reset@font\Huge\bfseries\centering}}
+
+\usepackage{bbding}%to add \FiveStar and \FiveStarOpen
+\newcommand{\note}[1]
+{
+  \ifthenelse{\equal{#1}{0}}{non testé}{}
+  \ifthenelse{\equal{#1}{1}}{\FiveStar\FiveStarOpen\FiveStarOpen\FiveStarOpen\FiveStarOpen}{}
+  \ifthenelse{\equal{#1}{2}}{\FiveStar\FiveStar\FiveStarOpen\FiveStarOpen\FiveStarOpen}{}
+  \ifthenelse{\equal{#1}{3}}{\FiveStar\FiveStar\FiveStar\FiveStarOpen\FiveStarOpen}{}
+  \ifthenelse{\equal{#1}{4}}{\FiveStar\FiveStar\FiveStar\FiveStar\FiveStarOpen}{}
+  \ifthenelse{\equal{#1}{5}}{\FiveStar\FiveStar\FiveStar\FiveStar\FiveStar}{}
+}
+
+\newcommand{\ingredient}[1][]{\ifthenelse{\equal{#1}{}}{\item }{\vspace{1ex}\hrule\vspace{1ex}\item[\textcurrency]\textbf{#1}}}
+
+\newcommand{\etape}[1][]{\ifthenelse{\equal{#1}{}}{\item }{\item[\textbf{#1}]}}
+
+% Environnement qui crée une nouvelle recette. Ingrédients, étape, cuisson etc doivent être contenus dans un environnement recette.
+\newenvironment{recette}[4]{\newpage \nomRecette{#1}\statistiqueTopSep\note{#2}\ifthenelse{\equal{#4}{}}%
+{\hfill\includegraphics[width=1em]{figures/logo_minuterie.pdf} \; \begin{itshape}\textbf{Préparation \& Cuisson :} #3\end{itshape}}%if none
+{\hfill\includegraphics[width=1em]{figures/logo_minuterie.pdf} \; \begin{itshape}\textbf{Préparation :} #3 \hfill \includegraphics[width=1em]{figures/logo_minuterie.pdf} \;\textbf{Cuisson :} #4\end{itshape}}}{}
+
+% Environnement pour la mise en page des ingrédients. Un argument optionnel de l'environnement permet de spécifier pour combien de personnes sont les doses. Les entrées de cet environnement doivent être ``\ingredient nom de l'ingrédient''. Si on veut séparer les ingrédients, pour dénoter deux sortes de choses, ingrédient pour une sauce et une pâte par exemple, il faut faire une ligne du style \ingredient[pour la sauce] afin de séparer.
+\newenvironment{ingredients}[1][]{\ingredientsTopSep{\partStyle Ingrédients\ifthenelse{\equal{#1}{}}{}{ (#1)}}\begin{multicols}{2}\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}}{\end{itemize}\end{multicols}}
+
+% Environnement pour mettre en page la préparation du plat. Les entrées sont de la forme ``\etape texte de l'étape``. Si on veut séparer les étapes, pour dénoter un groupement d'étape par exemple, il faut faire une ligne du style \etape[pour la sauce] afin de séparer.
+\newenvironment{preparation}{\preparationTopSep{\partStyle Préparation }\vspace{0.5em}\begin{enumerate}}{\end{enumerate}}
+
+% À utiliser si on souhaite faire une mise en page un peu plus évoluée, avec deux listes par exemples.
+\newenvironment{preparation*}{\preparationTopSep{\partStyle Préparation }\vspace{0.5em}\par}{}
+
+% Environnement pour mettre en page la cuisson du plat
+\newenvironment{cuisson}{\bigskip{\bfseries \large Cuisson }\par}{}
+\makeatother
+
+%TODO Faire une commande pour que dans l'index on voit la liste des recettes en fonction de la note qu'elles ont. 
+
+\pdfsuppresswarningpagegroup=1
+
+\title{Petit livre de (G)astronomie}
+\author{Autiwa}
+\makeindex
+\begin{document}
+\begin{titlepage}
+\begin{center}
+~
+\vfill
+% Upper part of the page
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.15\textwidth]{figures/logo-autiwa.pdf}
+\end{figure}
+
+% Title
+\HRule \\[0.4cm]
+{ \huge \bfseries \makeatletter\@title\makeatother}\\[0.4cm]
+
+\HRule \\[0.75cm]
+{\large \today}\\[0.75cm]
+\makeatletter
+\@author
+\makeatother
+\vfill
+\begin{center}
+\includegraphics[width=0.65\textwidth]{figures/couverture.pdf}
+\end{center}
+\vfill
+~
+% Bottom of the page
+
+
+\end{center}
+\end{titlepage}
+
+\cleardoublepage
+\null
+\vfill
+\noindent
+Crédits : Le titre ainsi que l'illustration de la première page, je le dois à Claire, Fanny, Marianne, Clément, Romuald, David 
+et Axel. La pluri-disciplinarité, entre cuisine et astronomie, que je représente modestement ne pourra jamais être aussi bien 
+illustrée que par ce titre et ce dessin et je vous remercie une fois de plus ici pour cela.
+\hfill
+\cleardoublepage
+
+\dominitoc
+\tableofcontents
+\cleardoublepage
+\chapter{Plat Principal}
+\minitoc
+
+\input{chapitres/01_plat_principal}
+
+\chapter{Recettes à tester}
+\minitoc
+
+\input{chapitres/01b_a_tester}
+
+% https://www.temps-de-cuisson.info/cuisson/
+\chapter{Viandes (cuisson)}
+\minitoc
+
+% Beginning of group where section is deactivated
+% This is only to get the good structure of the document 
+% since ``section'' is in fact embedded in the 'recette' environment.
+% This group allow us to deactivate sections ONLY in the given file and 
+% not for the entire document.
+{\renewcommand{\section}[1]{}
+
+
+\section{Canard entier au four}
+\begin{recette}{Canard entier au four}{4}{20 minutes}{1h30}\index{canard au four}\index{canard}
+\begin{ingredients}
+\ingredient un canard entier
+\ingredient pain dur
+\ingredient sel, poivre du moulin
+\end{ingredients}
+
+\begin{preparation}
+\etape Enlevez ce que vous pouvez de l'intérieur du canard. Si l'estomac est explosé, vous pouvez passer un peu d'eau pour 
+éliminer les morceaux.
+\etape Garnissez de pain l'intérieur du canard, puis fermez avec la peau qui dépasse peut-être, en la coinçant avec des piques 
+en bois.
+\etape Salez et poivrez le canard.
+\end{preparation}
+
+\begin{cuisson}
+Faites cuire à 220°C pendant 1h30 environ (20 minutes par 500g)
+
+Dans mon cas, j'ai fait avec un canard gras de 3.3kg, comme il avait beaucoup de gras, j'ai diminué un peu le poids du canard 
+pour le calcul du temps de cuisson, puisque ce gras fond rapidement. In fine, il a cuit 1h30 à peu près.
+\end{cuisson}
+\end{recette}
+
+
+\section{Cote de boeuf au four}
+\begin{recette}{Cote de boeuf au four}{4}{2h}{30 min}\index{cote de boeuf}
+\begin{ingredients}
+\ingredient 1 cote de boeuf (elle était épaisse de 3cm dans mon cas)
+\end{ingredients}
+
+\begin{preparation}
+\etape Sortez la viande 2h avant cuisson pour qu'elle soit à température ambiante
+\etape Juste avant cuisson, badigeonnez les deux faces d'huile et salez (il faut saler avant pour que le sel pénètre dans la viande mais il faut saler au dernier moment pour que la viande ne s'assèche pas
+\begin{remarque}
+Ne piquez surtout pas la viande avant ou pendant la cuisson
+\end{remarque}
+\etape Préchauffez le four à 200°C
+\etape Saisissez la viande à feu très vif 1min30s de chaque coté (réaction de maillard). 
+\etape Faites cuire au four. L'idéal est d'avoir une sonde de température (cf tableau des températures en fin de livre). Comptez 50°C à coeur pour une viande saignante, ou 45°C pour une viande bleue (environ 10 minutes)
+\etape Une fois cuite, recouvrez de papier aluminium et laisser reposer 10 minutes avant de manger. (la viande continue de cuire dans le papier alu, raison pour laquelle il ne faut pas encore être à température avant) 
+\end{preparation}
+\end{recette}
+
+\section{Cuisse de dinde au four}
+\begin{recette}{Cuisse de dinde au four}{3}{20min+12h}{1h30}\index{dinde}
+\begin{ingredients}
+\ingredient Une cuisse de dinde ($\sim$ 2kg)
+\ingredient sel caraïbe ou sel normal
+\ingredient 2-5 gousses d'ail
+\ingredient 2 oignons
+\ingredient 20cl d'eau
+\end{ingredients}
+
+\begin{preparation}
+\etape Piquer la viande (faut y aller franchement)
+\etape Saler abondamment la viande. Laissez mariner une nuit
+\etape Le lendemain, mixer ail et oignon et mettre dans l'eau
+\end{preparation}
+
+\begin{cuisson}
+Badigeonnez la dinde d'une couche de marinade (ne pas tout mettre) puis enfournez la (sans le papier aluminium) à 200°C, sans préchauffage. 
+
+Le temps de cuisson total est 1h30. 45 minutes avant la fin, grattez la marinade de la cuisse pour la faire tomber dans le plat, ajoutez le reste de marinade dedans, puis couvrez de papier aluminium pour la fin de cuisson.
+\end{cuisson}
+\end{recette}
+
+% https://www.temps-de-cuisson.info/cuisson/viandes/gigot-dagneau-au-four/
+\section{Gigot d'agneau}
+\begin{recette}{Gigot d'agneau}{3}{1 nuit}{2h}\index{gigot}\index{agneau}
+\begin{ingredients}
+\ingredient 1 gigot d'agneau
+\ingredient 8 gousses d'ail (facultatif)
+\ingredient huile
+\ingredient épices (thym, romarin, origan, poivre)
+\end{ingredients}
+
+
+\begin{preparation}
+\etape Mettez le gigot dans un plat allant au four.
+\etape Badigeonnez le gigot d'huile, puis mettez les épices. 
+\etape Laissez mariner au moins une nuit
+
+\end{preparation}
+
+\begin{cuisson}
+Comptez 15 minutes de cuisson par 450g à 180°C pour une cuisson rosée (déduisez les 15 premières minutes à 240°C du total). 
+
+\begin{remarque}
+En résumé, pour un gigot de 2.230kg, faites cuire à 240°C pendant 15 minutes et à 180°C pendant 59 minutes (74-15).
+\end{remarque}
+
+\begin{enumerate}
+ \item Faites préchauffer le four 10 minutes à 240°C
+ \item Faites cuire 15 minutes à 240°C pour saisir le gigot
+ \item Faites cuire à 180°C 15 minutes/450g (soit environ 65 minutes pour un gigot de 2kg)
+ \begin{remarque}
+  40 minutes avant la fin de la cuisson, mettez les gousses d'ail en chemise dans le plat.
+ \end{remarque}
+\etape Laissez reposer la viande 20 minutes en dehors du four, couvert de papier aluminium, un torchon par dessus, pour garder la chaleur
+\end{enumerate}
+
+\end{cuisson}
+\end{recette}
+
+\section{Magret de canard à la poele}
+\begin{recette}{Magret de canard à la poele}{4}{20 min}{1h}\index{poulet}
+\begin{ingredients}
+\ingredient Magret de canard
+\ingredient gros sel
+\end{ingredients}
+
+\begin{preparation}
+\etape Sortez le magret du frigo 1h avant. Coupez en deux dans la longueur, perpendiculairement au gras
+\etape Coté gras, entaillez dans la longueur sur la moitié de l'épaisseur à peu près, sans traverser
+\etape Entaillez le gras du magret (quadrillez) puis frottez au gros sel des deux cotés
+\end{preparation}
+
+\begin{cuisson}
+\begin{itemize}
+\item Faites chauffer la poele à feu vif (7/9)
+\item Faites cuire le magret coté peau à feu vif (6/9) 2 minutes de chaque coté (en général, s'il est joli, c'est qu'il est cuit)
+\item Laissez alors le magret reposer enveloppé dans du papier aluminium pendant 5 minutes
+\end{itemize}
+\end{cuisson}
+\end{recette}
+
+\section{Pilons de poulet marinés au four}
+\begin{recette}{Pilons de poulet marinés au four}{4}{20 min}{1h}\index{poulet}
+\begin{ingredients}
+\ingredient 1 kg de pilon
+\ingredient 2 oignons
+\ingredient 2 gousses d'ail
+\ingredient une cuillère à café de piment végétarien
+\ingredient 2 cuillères à soupe d'épice pour poulet (surtout pas de sel supplémentaire parce que c'est déjà salé)
+\ingredient 5cl de citron
+\ingredient 20cl d'eau
+\end{ingredients}
+
+\begin{preparation}
+\etape Mixez ail et oignon, mélangez avec le reste de la marinade
+\etape Piquez le poulet un peu partout pour que la marinade pénètre bien
+\etape Laissez le poulet mariner au frais pendant une nuit environ.
+\end{preparation}
+
+\begin{cuisson}
+Faites préchauffer le four à 200°C environ 10 minutes
+
+Séparez le poulet de la marinade et réservez cette dernière. Enfournez le poulet seul pendant 40 minutes à 200°C
+
+Puis rajoutez la marinade et faites cuire 10 minutes à 180°C
+
+\end{cuisson}
+\end{recette}
+
+\section{Pintade entière au four}
+\begin{recette}{Pintade entière au four}{4}{15 min}{2h}\index{pintade}
+\begin{ingredients}
+\ingredient 1 pintade
+\ingredient un peu de beurre
+\ingredient du pain
+\ingredient ail
+\end{ingredients}
+
+\begin{preparation}
+\etape Préchauffez le four à 180°C pendant 10 à 15 minutes
+\etape Badigeonnez la pintade d'un peu de beurre (ou huile à défaut).
+\etape ajoutez de l'ail, du pain dans la pintade jusqu'à remplir
+\etape disposez la pintade à l'envers sur le plat, pour que les blancs soient vers le bas et les protéger afin qu'ils ne sèchent pas.
+\end{preparation}
+
+\begin{cuisson}
+Comptez 25 min. / 500g à 180°C (donc 1h40 pour une pintade de 2kg). 40 minutes avant la fin de cuisson, j'ai rajouté environ 10cl de bouillon de volaille et 20 minutes avant la fin, prendre directement du jus de cuisson et en remettre sur la pintade pour ne pas qu'elle seche. 
+
+\end{cuisson}
+\end{recette}
+
+\section{Poulet entier}
+\begin{recette}{Poulet entier}{4}{15 min}{2h}\index{poulet}
+\begin{ingredients}
+\ingredient 1 poulet
+\end{ingredients}
+
+\begin{preparation}
+\etape Préchauffez le four à 180°C pendant 10 à 15 minutes
+\etape Badigeonnez le poulet d'un peu d'huile. Salez, poivrez
+\etape ajoutez de l'ail, du pain (olive selon votre goût), puis fermez la peau du ventre avec une pique ou deux pour maintenir en place
+\end{preparation}
+
+\begin{cuisson}
+Comptez 25 min. / 500g à 180°C (donc 1h15 pour un poulet de 1.5kg). On peut faire les 10 dernières minutes à 200°C pour faire dorer la peau
+
+% source : https://www.papillesetpupilles.fr/2019/10/comment-cuire-un-poulet-au-four.html/
+% Enfournez à four chaud : C’est la façon classique que je pratiquais avant. Enfournez dans un four préchauffé à 180°C / 190°C et pour le temps de cuisson, comptez 25 minutes par 500 g. Pour 1 poulet d’1,5 Kg cela fait donc 1h15 (C’est la règle mais perso j’ai tendance à cuire moins :p ).
+% Enfournez à four froid : Mettez votre poulet dans le four et allumez-le à 150°C. Pour le temps de cuisson, comptez 1 heure par kilo de poulet. Les 10 dernières minutes, montez le four à 200°C pour, cela fera croustiller la peau. Le fait de cuire doucement permet d’éviter que les graisses du poulet ne fondent et s’échappent de la volaille. Elles restent à l’intérieur et gardent le poulet moelleux. Là aussi c’est la règle et je cuis en général un peu moins.
+
+Laissez reposer la viande couvert de papier aluminium et d'un torchon pendant 20 à 30 minutes.
+
+\end{cuisson}
+\end{recette}
+
+\section{Saucisse de toulouse au four}
+\begin{recette}{Saucisse de toulouse au four}{4}{15 min}{30 min}\index{saucisse}
+\begin{ingredients}
+\ingredient Saucisse de toulouse
+\end{ingredients}
+
+\begin{preparation}
+\etape Préchauffez le four à 200°C chaleur tournante
+\etape Ne piquez pas la saucisse, ne la sortez pas du frigo à l'avance non plus
+\end{preparation}
+
+\begin{cuisson}
+Sortez la saucisse du frigo et enfournez immédiatement. 
+
+\begin{attention}
+La cuisson n'est pas satisfaisante jusqu'à présent. Il faut faire cuire à feu très vif et pendant pas trop longtemps pour que ce soit bon je pense. 
+
+20 minutes à 220°C, c'était trop pour de la grosse saucisse la dernière fois. Peut-être 10-15 minutes. Je fais à la poele ou au barbecue maintenant, et ça n'interfère pas avec les pommes de terre au four comme ça.
+\end{attention}
+
+\begin{itemize}
+ \item Pour de la saucisse fine: ? minutes à ?°C
+ \item Pour de la grosse saucisse: ? minutes à ?°C (29 minutes à 180°C c'était pas mal mais il faut plus chaud et moins longtemps je pense)
+\end{itemize}
+
+% Avec la grosse saucisse, voici les essais:
+% 30 minutes à 180°C (pas mal mais un chouillat cuit)
+% 20 minutes à 220°C (pas bon mais difficile a savoir si trop cuit ou pas)
+% 25 minutes à 220°C (pas bon mais difficile a savoir si trop cuit ou pas)
+% au barbecue, pas percé, c'était hyper bon mais il faut pas trop cuire. Donc je dirais qu'il faut feu très vif, et pas trop longtemps. la saucisse n'était pas bien grillée et c'était de la grosse
+
+Je n'ouvre même pas la porte pour les tourner à mi cuisson. 
+\end{cuisson}
+\end{recette}
+
+\section{Saucisse de toulouse à la poele}
+\begin{recette}{Saucisse de toulouse à la poele}{4}{15 min}{30 min}\index{saucisse}
+\begin{ingredients}
+\ingredient Saucisse de toulouse
+\end{ingredients}
+
+\begin{preparation}
+\etape Préchauffez la poele a feu moyen/vif (6/9)
+\etape Faites cuire la grosse saucisse 5 minutes de chaque coté, avec le couvercle pour que ça cuise aussi à coeur.
+\end{preparation}
+
+\begin{cuisson}
+Préchauffez la poele a feu moyen/vif (6/9).
+
+Faites cuire la grosse saucisse 5 minutes de chaque coté, avec le couvercle pour que ça cuise aussi à coeur.
+
+Enveloppez la saucisse dans du papier aluminium et laissez reposer 5 minutes.
+\end{cuisson}
+\end{recette}
+
+\section{Travers de porc au four}
+\begin{recette}{Travers de porc au four}{5}{15 min+24h}{5h+12h+1h}\index{travers de porc}
+\begin{ingredients}[2 pers.]
+\ingredient 1kg de travers de porc (Comptez 500g par personne et 250g par enfant)
+\end{ingredients}
+
+\begin{preparation}
+\etape Faites mariner les travers de porc pendant 24 à 48h. Je conseille la marinade \refsec{sec:travers_texane}. Idéalement, faites mariner dans le plat qui ira au four (et recouvrez de papier aluminium)
+\etape Le lendemain, mettez le plat au four (avec toute la marinade), recouvert de papier aluminium. 
+\end{preparation}
+
+\begin{cuisson}
+\begin{itemize}
+\item Faites cuire à couvert (laissez le papier aluminium mis la veille) pendant 4h (5h si vous doublez les doses) à 130°C (Cette étape peut être faite la veille et la dernière cuisson le lendemain). La viande doit se rétracter de l'os, si ce n'est pas le cas, remettez encore un peu.
+\item Sortez le plat du four et videz le jus dans un saladier pour le réserver.
+\item Remettez alors les travers à cuire pendant 1h à 180°C. Surveillez la cuisson. rajoutez du jus de temps en temps si ça sèche trop (je le fais une seule fois à mi cuisson).
+\end{itemize}
+
+% initialement, j'ai fait cuire 4h à 110°C, puis 1h à 180°C, mais c'était trop. 
+% 4h a 135 degres, c'etait moins bon, pas assez cuit.
+
+\end{cuisson}
+\end{recette}
+
+}
+
+\chapter{Grillades}
+\minitoc
+
+\input{chapitres/02_grillades}
+
+\chapter{Accompagnements}\label{sec:accompagnement}
+\minitoc
+
+\input{chapitres/03_accompagnements}
+
+\chapter{Sauces}
+\minitoc
+
+% Beginning of group where section is deactivated
+% This is only to get the good structure of the document 
+% since ``section'' is in fact embedded in the 'recette' environment.
+% This group allow us to deactivate sections ONLY in the given file and 
+% not for the entire document.
+{\renewcommand{\section}[1]{}
+
+\section{Beurre de morue}
+\begin{recette}{Beurre de morue}{3}{10 min}{}\index{beurre de morue}
+\begin{ingredients}
+\ingredient 200g de miettes de morue dessalée
+\ingredient 1/2 oignon
+\ingredient 2 gousses d'ail
+\ingredient un peu de jus de citron
+\ingredient huile de tournesol
+\ingredient idée épices: persil, échalotte, piment végétarien, piment
+\end{ingredients}
+
+
+\begin{preparation}
+\etape Mixer la morue et l'oignon séparément
+\etape Dans le mixer, mettre un peu de morue, d'oignon et d'huile et de jus de citron et l'ail, puis mixer de nouveau
+\etape Rajouter de la morue et de l'huile au fur et à mesure. 
+\etape ajouter du citron et des épices
+\begin{remarque}
+Le principe est sensiblement le même que pour la mayonnaise, raison pour laquelle il faut ajouter un peu d'huile quand on rajoute la morue
+\end{remarque}
+
+\end{preparation}
+\end{recette}
+
+\section{Guacamole}
+\begin{recette}{Guacamole}{3}{10 min}{1h}\index{guacamole}
+\begin{ingredients}
+\ingredient 1 avocat
+\ingredient 1 citron
+\ingredient 1 gousse d'ail
+\ingredient 2 cuillères à café de mélange d'épice pour Guacamole (voir \refsec{sec:epice_guacamole})
+\end{ingredients}
+
+\begin{preparation}
+\etape Coupez l'avocat en morceaux et citronnez légèrement
+\etape Ajoutez dans le bol du mixer l'ail et le mélange d'épice. 
+\etape Réservez au frais 1h
+\end{preparation}
+\end{recette}
+
+\section{Mayonnaise}
+\begin{recette}{Mayonnaise}{3}{10 min}{}\label{sec:mayonnaise}\index{mayonnaise}
+\begin{ingredients}
+\ingredient 1 jaune d'oeuf
+\ingredient 25 cl d'huile de tournesol
+\ingredient 1 cuillère à café de moutarde
+\ingredient quelques gouttes de vinaigre
+\ingredient sel
+\end{ingredients}
+
+\begin{remarque}
+\begin{itemize}
+\item Si la mayonnaise ne monte pas, c'est très certainement parce qu'il y a trop d'huile. Afin de la récupérer, prenez un nouveau récipient, mettez une petite partie de la mayonnaise ratée et ajoutez une cuillère à soupe d'eau bouillante. Mixez le tout puis rajouter petit à petit la mayonnaise ratée. 
+\item le jaune d'oeuf doit être de préférence à température ambiante ;
+\item il faut fouetter sans cesse pour que l'émulsion ne retombe pas ;
+\item enfin les \og agréments\fg s'ajoutent toujours à la fin.
+\item Pour la conserver : couvrir d'un film alimentaire \og au contact\fg, il doit toucher la surface de la mayonnaise. La mayonnaise maison se conserve 1 à 2 jours maximum.
+\end{itemize}
+\end{remarque}
+
+\begin{preparation}
+\etape Mélanger le jaune d'oeuf et la moutarde, sel et poivre. 
+\etape Mettez le robot en vitesse 4 avec le fouet. Mettez l'huile goutte par goutte, en attendant pour que l'émulsion se fasse
+\etape Augmentez ensuite à vitesse 6 et en petit filet.  Il ne faut pas ajouter l'huile trop vite et en trop grande quantité 
+sous peine de noyer la mayonnaise et de casser l'émulsion. 
+\etape Enfin incorporer le vinaigre, l'ail mixé et ajuster l'assaisonnement.
+\end{preparation}
+\end{recette}
+
+\section{Sauce maison}
+\begin{recette}{Sauce maison}{2}{}{}\index{floc de gascogne}\index{sauce}
+\begin{ingredients}
+\ingredient 150g de champignons de Paris
+\ingredient 100g de lardons
+\ingredient 2 oignons
+\ingredient 25cl de bouillon de volaille
+\ingredient 20cl de floc de gascogne
+\ingredient 1 cuillère à soupe de farine
+\ingredient sel, poivre, herbes de provence
+\end{ingredients}
+
+\begin{preparation}
+\etape Faites revenir les lardons
+\etape Réservez-les puis faites revenir les lardons
+\etape Réservez l'oignon et faites revenir les champignons en rajoutant de l'huile au besoin.
+\begin{remarque}
+Ne couvrez pas pendant la cuisson des champignons afin d'éviter qu'il y ait trop de jus dans la sauteuse
+\end{remarque}
+\etape Rajoutez les oignons et lardons, réchauffez un peu la mixture et ajoutez la farine en saupoudrant. Mélangez bien le tout avant de rajouter le floc puis le bouillon de volaille.
+\etape Mélangez bien le tout, couvrez et laissez cuire à feu doux jusqu'à ce que la sauce soit bien liée. Typiquement, c'était bon au bout de 5 à 10 minutes pour moi, mais ça dépend de la quantité de sauce que vous voulez. Si vous faites cuire longtemps, vous risquez de devoir mélanger de temps en temps pour ne pas que ça accroche.
+\end{preparation}
+\end{recette}
+
+\section{Sauce makis}
+\begin{recette}{Sauce makis}{2}{}{}\index{makis}\index{sauce}\index{sauce soja}\index{vinaigre de riz}
+% sauce soja sucrée: Pour 100mL, 57g de sucre, 10g de sel.
+\begin{ingredients}
+\ingredient 80g de sauce soja
+\ingredient 34g de vinaigre de riz
+\ingredient 20g d'eau
+% dans la recette originale c'était 125g de soja pour 40g de sucre
+\ingredient 80g de sucre 
+\ingredient 5g de farine (1 cuillère à café)
+\end{ingredients}
+
+\begin{preparation}
+\etape Mélangez les ingrédients pour diluer la farine et faites cuire à feu moyen (3/9) pendant 6 minutes
+\end{preparation}
+\end{recette}
+
+\section{Sauce marchand de vin}
+\begin{recette}{Sauce marchand de vin}{3}{1h}{}\index{sauce marchand de vin}\index{marchand de vin}\index{vin}
+\begin{ingredients}
+\ingredient 4 échalottes
+\ingredient 25 cl de vin rouge
+\ingredient 50g de beurre
+\ingredient 1 cuillère à soupe de farine
+\ingredient 12.5 cl de bouillon (ou fond de viande)
+\ingredient sel, poivre
+\end{ingredients}
+
+\begin{preparation}
+\etape Pelez les échalottes et ciselez-les finement
+\etape Faites les blondir dans une petite sauteuse ou une casserole avec un peu de beurre et d'huile, juste le temps qu'elles deviennent translucide
+\etape Une fois raisonnablement dorées, saupoudrez la farine et incorporez la aux échalottes.
+\etape Ajoutez le vin rouge, mélangez jusqu'à ce que la préparation soit homogène et faites réduire de moitié environ (il faut que la majeure partie du vin et de l'alcool soit évaporée) ce qui prendra environ 15 à 20 minutes à feux doux/moyen. 
+\etape Ajoutez alors le beurre, par noisettes, et mélangez bien, sur feux doux. 
+\etape Versez enfin le fond de viande, poivrez et laissez mijoter 10 minutes environ, sur feux doux et à couvert. 
+\end{preparation}
+
+\begin{remarque}
+Vers la fin, faites cuire une viande, pourquoi pas au barbecue, une pièce de bœuf, entrecote de préférence, et mangez ça avec des pommes de terre rissolées ou sarladaises. En tout fin de cuisson il est possible de rajouter un peu de persil haché.
+\end{remarque}
+\end{recette}
+
+\section{Sauce aux cèpes}
+\begin{recette}{Sauce aux cèpes}{3}{30 min}{}\index{cepes}
+\begin{ingredients}
+\ingredient 300g de cèpes
+\ingredient 2 échalottes
+\ingredient 20cl de crème fraiche (ou liquide)
+\ingredient 1 cuillère à soupe de cognac
+\end{ingredients}
+
+
+\begin{preparation}
+\etape Nettoyez les cèpes, détachez les têtes des queues. Coupez les têtes en tranches d'1cm environ
+\etape Émincez les échalottes et les queues de cèpes finement
+\etape Faites chauffer de l'huile dans une poêle. Mettez-y les tranches de cèpes et faites les rissoler sur feu vif (7/9) en les retournant. Continuez la cuisson sur feu moins vif (5/9) 5 ou 6 minutes puis terminez à feu ardent pour raffermir les tranches.
+\etape Égouttez à fond l'huile, assaisonnez de sel et poivre et réservez dans une casserole couverte.
+\etape Remettez un peu d'huile et le beurre. Dès qu'ils fument ajoutez le hachis de cèpes et d'échalote, sautez sur feu vif jusqu'à rissolage. Versez alors dans la casserole
+\etape Déglacez la poële avec un peu d'eau pour récupérer les sucs puis versez dans la casserole
+\etape Ajoutez alors la crème dans la casserole et 1 cuillère à soupe de cognac. Couvrez et faites cuire 5 à 6 minutes à feu moyen (4/9)
+\end{preparation}
+\end{recette}
+
+\section{Tapenade}
+\begin{recette}{Tapenade}{4}{20 min.}{}\index{Tapenade}
+\begin{ingredients}
+\ingredient 160g olive noire
+\ingredient 5 filets d'anchois
+\ingredient 5-8 câpres
+\ingredient 1 gousse d'ail
+\ingredient 10cl d'huile d'olive
+\end{ingredients}
+
+\begin{preparation}
+\etape Mixez le tout
+\end{preparation}
+\end{recette}
+
+\section{Vinaigrette classique}
+\begin{recette}{Vinaigrette classique}{3}{5 min}{}\label{sec:vinaigrette}\index{vinaigrette}
+\begin{ingredients}
+\ingredient 60g (4 cas) d'huile
+\ingredient 30g (2 cas) de vinaigre balsamique (ou de xeres)
+\ingredient 2.5g (0.5 cac) de sel
+\ingredient une bonne pincée de poivre (ou 2 ou 3 tours de moulin)
+\ingredient Éventuellement des herbes
+\end{ingredients}
+
+\begin{remarque}
+Avec un ratio de 3 cas d'huile et d'1 cas de vinaigre balsamique, les proportions sont idéales pour que l'émulsion soit 
+``solide'', mais maintenant je met moins d'huile
+\end{remarque}
+
+
+\begin{preparation}
+\etape Dans un pot en verre (à confiture par ex) ou un petit tupperware, mettez le sel et le poivre. Ajoutez-y le vinaigre et secouez jusqu'à ce que le sel soit dissous.
+\etape Ajoutez alors les herbes de provence et tous les condiments que vous souhaitez ajouter. 
+\etape Incorporez l'huile ensuite puis secouez jusqu'à ce que la vinaigrette soit homogène.
+\end{preparation}
+
+\begin{remarque}
+On peut faire une vinaigrette à l'ail en mettant une gousse d'ail avec le sel et le poivre.
+
+On peut remplacer le vinaigre par du jus de citron.
+\end{remarque}
+\end{recette}
+
+\section{Vinaigrette à la moutarde}
+\begin{recette}{Vinaigrette à la moutarde}{3}{5 min}{}\label{sec:vinaigrette-moutarde}\index{vinaigrette}\index{moutarde}
+\begin{ingredients}
+\ingredient 6 cuillères à soupe d'huile
+\ingredient 2 cuillères à soupe de vinaigre balsamique
+\ingredient 1 demi-cuillère à café de moutarde
+\ingredient 1 demi-cuillère à café rase de sel
+\end{ingredients}
+
+\begin{preparation}
+\etape Dans un pot en verre (à confiture par ex) ou un petit tupperware, mettez le sel et le poivre. Ajoutez-y le vinaigre et secouez jusqu'à ce que le sel soit dissous.
+\etape Ajoutez alors la moutarde, les herbes de provence et tous les condiments que vous souhaitez ajouter. 
+\etape Ajoutez ensuite l'huile puis secouez jusqu'à ce que la moutarde soit diluée et que la vinaigrette soit homogène.
+\end{preparation}
+\end{recette}
+
+
+\section{Vinaigrette à l'ail}
+\begin{recette}{Vinaigrette à l'ail}{3}{5 min}{}\label{sec:vinaigrette-ail}\index{vinaigrette}\index{ail}
+\begin{ingredients}
+\ingredient 6 gousses d'ail
+\ingredient 270 mL d'huile de tournesol
+\ingredient 180 mL de vinaigre de citron
+\ingredient 1 cuillère à soupe bombée de moutarde
+\ingredient 1 cuillère à café rase de sel
+\begin{remarque}
+Les doses ne sont pas bonnes parce que Jacqueline a ensuite rajouté des trucs un peu au pif, mais ça donne une base. Les doses d'huile et de vinaigre doivent être beaucoup plus importantes que ça je pense
+\end{remarque}
+\end{ingredients}
+
+\begin{preparation}
+\etape Mettez tout dans le bol d'un mixeur, puis mixez le tout jusqu'à ce que ce soit homogène et que l'ail soit bien mixé.
+\etape A conserver au frais ensuite.
+\end{preparation}
+\end{recette}
+
+\section{Vinaigrette au soja}
+\begin{recette}{Vinaigrette au soja}{3}{5 min}{}\index{vinaigrette}\index{sauce soja}
+% J'ai fait cette vinaigrette à partie de la vinaigrette huile de sésame et sauce soja de Maille. 
+% J'ai considéré que le sel venait exclusivement de la sauce soja, raison pour laquelle j'ai réduit la quantité. J'ai déduit l'apport de sucre par la sauce et j'ai complété par du sucre en poudre. J'ai considéré, en me basant sur la recette, que les doses originales de la vinaigrette, c'était 75% huile et 25% de vinaigre. J'ai complété par de l'eau pour faire 100mL. 
+% Les pourcentages ont été fait en millilitres et donnent:
+% Oil: 41 mL 35of oil and 6 ml of sesame oil
+% Soy: 12 mL
+% Vinegar: 25 mL
+% Water: 22 mL
+% , puis converti en poids à partir des densité suivantes :
+% Oil: 0.9 g/mL
+% Soy: 1.12 g/mL
+% Vinegar: 1.01 g/mL
+% Water: 1 g/mL
+% Et enfin, les masses suivantes:
+% Oil: 36.9 g
+% Soy: 13.440000000000001 g
+% Vinegar: 25.25 g
+% Water: 22.0 g
+\begin{ingredients}[40mL de vinaigrette]
+\ingredient 148g d'huile de tournesol
+\ingredient 52g de sauce soja
+\ingredient 100g de vinaigre de vin
+\ingredient 88g d'eau
+\ingredient 20g de sucre
+\ingredient 10g de graines de sésame torréfiées
+\end{ingredients}
+
+\begin{preparation}
+\etape Pesez et mélangez la totalité des ingrédients
+\end{preparation}
+\end{recette}
+
+}% End of the ``group'' where section is deactivated
+
+\chapter{Mélange d'épices}
+\minitoc
+
+% Beginning of group where section is deactivated
+% This is only to get the good structure of the document 
+% since ``section'' is in fact embedded in the 'recette' environment.
+% This group allow us to deactivate sections ONLY in the given file and 
+% not for the entire document.
+{\renewcommand{\section}[1]{}
+
+\section{Garam Masala}
+\begin{recette}{Garam Masala}{3}{15 min}{}\label{sec:garam_masala}\index{garam masala}
+\begin{ingredients}
+\ingredient 5g de cumin
+\ingredient 2.5g de coriandre
+\ingredient 7.5g de cardamone
+\ingredient 7.5g de poivre noir
+\ingredient 5g de canelle
+\ingredient 2.5g de clous de girofle
+\ingredient 2.5g de muscade
+\end{ingredients}
+
+\begin{preparation}
+\etape Pesez tout et mixez dans un moulin à café. Dans mon cas, j'ai mixé la muscade, le poivre, les graines de coriandre et la 
+muscade
+\end{preparation}
+\end{recette}
+
+\section{Sel Caraïbe}
+\begin{recette}{Sel Caraïbe}{}{15 min}{}
+\begin{ingredients}
+\ingredient 200g de sel
+\ingredient 6g de paprika
+\ingredient 2g celeri
+\ingredient 2g curcuma
+\ingredient 4g d'ail en poudre
+\ingredient 8g poudre d'oignon
+\ingredient 4g de sucre
+\end{ingredients}
+
+\begin{preparation}
+\etape Pesez tout et mélangez
+\end{preparation}
+\end{recette}
+
+\section{Épices pour Guacamole}
+\begin{recette}{Épices pour Guacamole}{3}{15 min}{}\label{sec:epice_guacamole}\index{guacamole}
+\begin{ingredients}
+\ingredient 5g de paprika
+\ingredient 5g de coriandre sèche
+\ingredient 5g de persil séché
+\ingredient 5g de muscade
+\ingredient 5g de cumin
+\ingredient 2.5g de sel
+
+\end{ingredients}
+
+\begin{preparation}
+\etape Pesez tout et mixez dans un moulin à café. 
+\etape Comptez 1 à 2 cuillères à café de ce mélange avec un avocat (et une gousse d'ail mixée)
+\end{preparation}
+\end{recette}
+
+\section{Piment confit}
+\begin{recette}{Piment confit}{3}{15 min}{}\index{piment fort}
+\begin{ingredients}
+\ingredient 5 piments forts
+\ingredient un petit oignon
+\ingredient une petite carotte
+\ingredient 2 clous de girofles
+\end{ingredients}
+
+\begin{preparation}
+\etape Emincez finement l'oignon et coupez la carotte en petits dés
+\etape En prenant vos précautions (gant latex notamment), lavez les piments à l'eau froide, enlevez la tige et les pépins puis émincez finement
+\etape Mélangez alors le tout et ajouter de l'huile de tournesol
+\etape Utilisez l'huile pour pimenter vos préparations. A conserver au frais.
+\end{preparation}
+\end{recette}
+
+\section{Purée de piment fort}
+\begin{recette}{Purée de piment fort}{3}{15 min}{}\index{piment fort}
+\begin{ingredients}
+\ingredient 100g de piment fort Guadeloupéen
+\ingredient 2 oignons
+\ingredient 10cl d'huile
+\ingredient 2 cuillères à soupe de vinaigre
+\ingredient 1 cuillère à soupe de moutarde
+\end{ingredients}
+
+\begin{preparation}
+\etape Enlevez la queue des piments
+\begin{remarque}
+Manipulez le piment avec précaution, utilisez des gants en latex si nécessaire et ne vous grattez pas (en particulier les yeux)
+\end{remarque}
+\etape Mixez ça avec les oignons et le reste. 
+\etape A conserver au frais. Cela se garde pendant un an sans problème. Utilisez une pointe de couteau de purée de piment par assiette au maximum, c'est extrêmement fort.
+\end{preparation}
+\end{recette}
+
+}% End of the ``group'' where section is deactivated
+\chapter{Entrée}
+\minitoc
+
+% Beginning of group where section is deactivated
+% This is only to get the good structure of the document 
+% since ``section'' is in fact embedded in the 'recette' environment.
+% This group allow us to deactivate sections ONLY in the given file and 
+% not for the entire document.
+{\renewcommand{\section}[1]{}
+
+\section{Œufs mimosa}
+\begin{recette}{Œufs mimosa}{3}{1h}{20 min}\index{œufs}\index{mimosa}
+\begin{ingredients}
+\ingredient 6 œufs
+\ingredient une boite de thon
+\ingredient mayonnaise (maison \refsec{sec:mayonnaise} ou pas)
+\ingredient un peu de vinaigre
+\end{ingredients}
+
+\begin{preparation}
+\etape Portez de l'eau à ébullition dans une casserole
+\etape Ajoutez un peu de vinaigre (pour que le blanc coagule si jamais il y a une coquille qui se casse) puis posez délicatement au fond de la casserole les œufs, un par un, à l'aide d'une cuillère à soupe (ou équivalent)
+\etape Laissez cuire les œufs pendant 10 minutes dans l'eau bouillante
+\etape sortez les œufs et passez les sous l'eau froide (ça permet de décoller la pellicule sous la coquille plus facilement
+\etape Mélangez la mayonnaise et le thon dans un bol. 
+\etape Pelez les œufs durs et enlevez le jaune
+\etape Écrasez les jaunes à la fourchette, mettez en la moitié avec la mayonnaise après avoir préalablement salé et poivré. Puis garnissez le blanc avec le mélange thon/mayonnaise
+\etape saupoudrez le jaune d'œuf sur les œufs ainsi préparés (à l'aide d'une rape par exemple).
+\end{preparation}
+\end{recette}
+
+\section{Maki californiens}
+\begin{recette}{Maki californiens}{4}{1h}{}\index{maki}\index{saumon}\index{avocat}
+\begin{ingredients}[2 personnes]
+\ingredient 1 avocat
+\ingredient 4 feuilles de nori
+\ingredient 100g saumon frais (ou fumé)
+\ingredient 300g de Riz (collant)
+\ingredient Vinaigre de riz (ou vinaigre normal)
+\ingredient 2 cuillères à soupe de sucre
+\ingredient Sauce soja (pour la dégustation)
+\end{ingredients}
+
+\begin{preparation}
+\etape Rincez le riz jusqu'à ce que l'eau de rinçage ne soit plus trouble
+\etape Faites dissoudre le sucre dans une petite tasse de vinaigre.
+\etape Plongez le riz dans 1.5 fois son volume d'eau, puis laissez cuire 15 minutes à partir de l'ebullition
+\etape Laissez refroidir le riz quelques instants et incorporez-y le vinaigre. 
+\etape Coupez en lamelle le saumon et les avocats
+\etape Etalez un papier célophane (ou mieux, une natte de bambou si vous avez. Préparez un bol d'eau froide pour vous 
+rincer les mains
+\etape Posez la feuille d'algue dans le sens de la largeur. Recouvrez-la d'une couche de riz. Laissez un ou deux centimètres 
+(pas moins !) non recouvert sur la largeur supérieure afin de pouvoir ensuite refermer aisément le rouleau.
+\etape Placez dans le sens de la largueur une bande de saumon et d'avocat, aux 2/3 de la longueur par rapport à la bande de 
+libre que vous avez réservés. 
+\etape Enroulez l'algue en vous servant du célophane ou du rouleau de bambou en partant de la largeur NON libre. Humidifiez la 
+bande laissée libre pour une fermeture plus facile. Placez au frais.
+\etape Faites de même pour les autres rouleaux. 
+\etape Avant de servir, découpez les rouleaux en lamelles de 2 à 3 cm, sans appuyer, et avec un couteau très tranchant.
+\etape Dégustez enfin en trempant les tranches dans de la sauce soja si vous en avez. 
+\end{preparation}
+\end{recette}
+
+
+\section{Patés à la viande}
+\begin{recette}{Patés à la viande}{4}{20 min.}{30 min.}\index{chair à saucisse}
+\begin{ingredients}[~14 patés par pâte]
+\ingredient 2 pâtes feuilletés
+\ingredient 300g de chair à saucisse
+\ingredient 1 oignon
+\ingredient cives
+\ingredient 2 gousses d'ail
+\ingredient sel, poivre
+\end{ingredients}
+
+\begin{preparation}
+\etape Mélanger chair à saucisse avec oignon, ail et cive mixés. Salez et poivrez
+\etape Faites revenir la farce à la poêle.
+\etape Couper des cercles de pâte feuilletée. Pincer les côté, remplir de farce puis sceller en demi lune. 
+\begin{remarque}
+Une fois découpé les ronds sur une pâte, mettez là en boule, farinez là, et étalez là au rouleau pour refaire des ronds. Une fois fait, réservez les chutes de pâtes au frigo et refaite la même chose une fois que vous aurez écoulé toutes les pâtes. Si vous faites des boules trop grosses vous n'arriverez pas à faire une pâte fine au final.
+\end{remarque}
+\end{preparation}
+
+\begin{cuisson}
+Enfourner à 200 degrés pendant 13-15 minutes
+\end{cuisson}
+\end{recette}
+
+
+\section{Roulés au Roquefort}
+\begin{recette}{Roulés au Roquefort}{3}{20 min. + 1h + 5min. + 3h}{20 min.}\index{bleu}\index{roquefort}\index{roulés au roquefort}
+\begin{ingredients}[15 petits roulés]
+\ingredient Une pâte feuilleté (ne pas la sortir à l'avance)
+\ingredient 100g de Roquefort
+\ingredient 12.5cl de crème fraîche épaisse
+\end{ingredients}
+
+\begin{preparation}
+\etape Mélangez les ingrédients dans une casserole jusqu'à obtention d'une préparation homogène et pas trop liquide.
+\etape Laissez refroidir 1h puis étalez la préparation sur la pâte feuilletée.
+\etape Roulez la pâte assez serrée pour obtenir un rouleau de 5cm de diamètre.
+\etape Placez le rouleau au congélateur, au moins deux heures (sans le papier autour pour qu'il ne colle pas à la pâte). Il faut que ce soit bien congelé, afin que ça ne s'écrase pas quand vous coupez(je l'ai laissée une nuit).
+\etape Une fois sorti du congélateur (laissez réchauffer quelques minutes pour que ça ne casse pas au besoin), coupez des rondelles d'un peu moins d'1cm d'épaisseur. Placez-les sur une plaque en les espaçant un peu (si les tranches sont fines, ça ne gonfle pas énormément).
+\end{preparation}
+
+\begin{cuisson}
+Sortez le rouleau de pâte du congélateur puis coupez des tranches comprises entre 5mm et 1cm (plutôt 5mm). Si c'est bien congelé, et le couteau bien aiguisé, ça doit se couper sans trop d'effort et surtout sans s'écraser, pour laisser des tranches parfaites.
+
+Cuire dans un four préchauffé à 220°C pendant 15 à 20 minutes
+\end{cuisson}
+\end{recette}
+
+\section{Tarte aux champignons}
+\begin{recette}{Tarte aux champignons}{4}{20 min.}{30 min.}\index{champignons}
+\begin{ingredients}
+\ingredient Une pâte feuilleté
+\ingredient 250g de champignons
+\ingredient 20cl de crème fraîche épaisse
+\ingredient 200g de lardons
+\ingredient 100g de fromage rapé
+\end{ingredients}
+
+\begin{preparation}
+\etape Préchauffez le four à 200°C
+\etape Faites revenir les lardons puis les champignons. 
+\etape Hors du feu, ajoutez la crème fraiche
+\etape étalez la préparation sur la pâte feuilletée.
+\etape Ajoutez du fromage rapé par dessus
+\end{preparation}
+
+\begin{cuisson}
+Faites cuire 30 minutes à 200°C
+\end{cuisson}
+\end{recette}
+
+\section{Tarte aux poireaux}
+\begin{recette}{Tarte aux poireaux}{4}{20 min.}{30 min.}\index{poireaux}
+\begin{ingredients}
+\ingredient Une pâte feuilleté
+\ingredient 500g de poireaux
+\ingredient 20cl de crème fraîche épaisse
+\ingredient 100g de fromage rapé
+\end{ingredients}
+
+\begin{preparation}
+\etape Préchauffez le four à 200°C
+\etape émincez les poireaux
+\etape Faites fondre 20g de beurre puis faites revenir les poireaux 2/3 minutes environ
+\etape laissez cuire à feu doux (4/9) pendant 25 minutes
+\etape Rajoutez la crème fraiche épaisse, le citron et le sel.
+\etape étalez la préparation sur la pâte feuilletée.
+\etape Ajoutez du fromage rapé par dessus
+\end{preparation}
+
+\begin{cuisson}
+Faites cuire 30 minutes à 200°C
+\end{cuisson}
+\end{recette}
+
+}% End of the ``group'' where section is deactivated
+\chapter{Charcuterie}
+\minitoc
+
+% Beginning of group where section is deactivated
+% This is only to get the good structure of the document 
+% since ``section'' is in fact embedded in the 'recette' environment.
+% This group allow us to deactivate sections ONLY in the given file and 
+% not for the entire document.
+{\renewcommand{\section}[1]{}
+
+\section{Jarret demi sel}
+\begin{recette}{Jarret demi sel}{}{20 min}{3 jours}\index{porc}
+\begin{ingredients}
+\ingredient 1 jarret de porc frais
+\ingredient Gros sel de guérande (500g pour un jarret?)
+\end{ingredients}
+
+\begin{preparation}
+\etape Salez copieusement le jarret, disposez un lit de sel dans un plat, le magret coté chair, puis recouvrez de sel jusqu'à hauteur de graisse incluse. 
+\etape Recouvrez d'un torchon et placez le 3 jours au réfrigérateur
+\etape Au bout de 3 jours, sortez le sel, rincez, puis cuisinez rapidement (pour des lentilles par exemple).
+\end{preparation}
+\end{recette}
+
+\section{Magret séché}
+\begin{recette}{Magret séché}{4}{24h}{7 jours}\index{magret}\index{canard}\index{magret séché}
+\begin{ingredients}
+\ingredient 1 magret frais de canard
+\ingredient 300g de gros sel de guérande
+\ingredient 8g de sucre
+\ingredient [optionnel] 10g cas de thé fumé (pour donner un gout de fumé) % Au depart j'ai mis le thé dans le sel et c'etait tres bon mais tres subtil.  Je vais essayer de le mettre apres pour voir.
+\end{ingredients}
+
+\begin{preparation}
+\etape Salez copieusement le magret sur les deux faces , disposez un lit de sel dans un plat, le magret coté chair, puis recouvrez de sel jusqu'à hauteur de graisse incluse. 
+\etape Recouvrez d'un torchon et placez le 24h au réfrigérateur
+\etape Le lendemain, sortir tout le sel de la surface du magret. 
+\etape Rincez sous l'eau fraiche puis épongez avec du papier absorbant.
+\etape Poivrez le magret, mettez du thé fumé si vous le souhaitez, et enveloppez-le dans un torchon propre et placez le au réfrigérateur pendant 3 semaines environ.
+\etape Vous pouvez ensuite servir ce magret séché comme de la charcuterie, en tranche très fine.
+\end{preparation}
+\end{recette}
+
+\section{Saumon fumé}
+\begin{recette}{Saumon fumé}{4}{24h}{7 jours}\index{saumon}\index{saumon fumé}
+\begin{ingredients}
+\ingredient 1 filet de saumon frais (300-500g)
+\ingredient 25cl de Gros sel de guérande
+\ingredient 12cl de sucre
+\ingredient 5 cuillères à soupe de thé fumé grand lapsang souchong
+\end{ingredients}
+
+\begin{important}
+ Ne pas laisser dans le sel plus de 24h et ne pas enlever la peau AVANT de saler, sinon le saumon fumé sera trop salé. 
+\end{important}
+
+
+\begin{preparation}
+\etape Lavez et essuyez avec soin le filet de saumon
+\etape Posez le filet dans une boite plate (tupperware). Placez la peau contre la plaque. 
+\etape Mélangez le sucre, le sel et le thé. Répartir le mélange sur la face du saumon de manière homogène. 
+\etape Couvrir d'un film étirable avant de poser le couvercle. 
+\etape Gardez 24h au réfrigérateur. 
+\etape Rincez le filet sous l'eau fraiche pour enlever les traces de sel et de thé. 
+\etape Vous pouvez ensuite enlever la peau à l'aide d'un couteau, exactement comme vous enlèveriez le gras d'un magret. 
+\etape À consommer ensuite dans les 15 jours.
+\end{preparation}
+\end{recette}
+
+}% End of the ``group'' where section is deactivated
+
+\chapter{Dessert}
+\minitoc
+
+\input{chapitres/05_desserts}
+
+\chapter{Pâtes levées}
+\minitoc
+
+\newpage
+\section{Techniques du pain}
+\subsection{Levures}
+\subsubsection{Principe}
+La croissance des levures se décompose en 3 phases :
+\begin{enumerate}
+\item lag phase : C'est la première phase lors de l'introduction des levures dans un nouveau milieu. Dans cette phase, les levures sont actives mais ne se dupliquent pas. la durée de cette phase dépend de la population initiale de levures et des conditions environnementales (température, pH, alcool, oxygène, concentration de sel, nutriments,\dots)
+\item La phase exponentielle : cette phase de croissance rapide est caractérisée par le temps de doublage (Generation Time)
+\item La phase stationaire : la croissance rapide s'arrête, généralement à cause d'une haute densité de cellules
+\end{enumerate}
+
+La levure a deux modes de réplication. La respiration d'une part, très efficace qui consomme peu de glucides. Par fermentation 
+alcoolique (pas besoin d'oxygène). Beaucoup moins efficace elle consomme beaucoup plus de glucides. 
+
+La respiration permet une 
+duplication efficace des levures. C'est la raison pour laquelle on introduit de l'air dans la pâte (rabattage). On crée ainsi 
+des bulles d'air qui constitueront des bulles de levures qui vont ensuite croître exponentiellement lors de la cuisson. 
+
+La fermentation alcoolique quant à elle donne du goût à la pâte. Il ne faut donc pas la négliger. 
+
+
+\subsubsection{Formule}
+La levure de boulanger fait partie de la famille \emph{saccharomyces cerevisiae}.
+
+La formule générale est de la forme :
+\begin{align}
+\log(\mathrm{GT}) &= a + bT + cT^2
+\end{align}
+où GT, Generation Time est le temps pour doubler les levures.
+
+Pour la souche AB1, la formule est :
+\begin{align}
+a&= 2.747 & b&= -0.1865 & c&= 0.00413
+\end{align}
+
+Ces données sont extraites de "Growth of Saccharomyces cerevisiae and Saccharomyces uvarum in a temperature gradient incubator" (R. M. Walsh et P. A. Martin, 11 octobre 1976, Journal of the Institute of Brewing). La souche AB140 a été écartée car c'est une autre famille. Ceci dit, je ne sais pas si les mesures effectuées sont parfaitement identiques pour les souches de levures de boulanger, et de quel ordre de grandeur sont les barres d'erreur compte tenu de l'incertitude des souches (il y a plusieurs sous variétés dans cette famille là).
+
+L'évolution des levures dans la phase exponentielle s'écrit :
+\begin{align}
+N(t) &= N_0 e^{\left(\frac{t\ln(2)}{\mathrm{GT}}\right)}
+\end{align}
+
+\subsection{Types de farine}
+
+\begin{center}
+\begin{tabular}{|l|l|}\hline
+Dénomination française & Dénomination italienne\\\hline
+T45      &  Type 00   \\\hline
+T55      &  Type 0       \\\hline
+T65      &  Type 1      \\\hline
+T110     &  Type 2           \\\hline
+T150     &  Type Integral         \\\hline
+\end{tabular}
+\end{center}
+
+Source: \url{http://www.boulangerie.net/forums/bnweb/dt/conversion/te.php}
+
+\subsection{Temps de cuisson}
+\begin{center}
+\begin{tabular}{|l|l|l|l|}\hline
+Catégorie de pain & Poids cru (base) & Poids cuit     &  Temps de cuisson \\\hline
+Petit pain        & 70 gr            & 52.5 gr env    &  10 à 12 mn       \\\hline
+Ficelle           & 175 gr           & 131.25 gr env  &  15 mn            \\\hline
+Baguette          & 350 gr           & 262.5 gr env   &  18 à 20 mn       \\\hline
+Pain              & 550 gr           & 400 gr env.    &  25 à 30 mn       \\\hline
+Boule             & 1 kg             & 750 gr env     &  45 à 1H          \\\hline
+\end{tabular}\end{center}
+
+\subsection{Température de cuisson}
+\begin{center}
+\begin{tabular}{|l|l|}\hline
+Catégorie de pain & Température de cuisson \\\hline
+Petits pains de 50 à 120g & 270-280°C \\\hline
+pains de 250 à 400g & 250-260°C \\\hline
+Pains de plus de 600g & 230-240°C \\\hline
+\end{tabular}\end{center}
+
+\subsection{Problème et solution}
+\begin{itemize}
+\item Si la pâte a des bulles en surface à la fin de la cuisson, c'est qu'elle a subit un choc thermique, le four était trop 
+chaud. 
+\item Si la pâte n'est pas assez dorée à la fin du temps, c'est que le four n'était pas assez chaud (ou pas assez d'humidité)
+\item si la pâte n'est pas assez montée, c'est soit un problème de levure, soit que la pâte était trop sèche (pas assez d'eau). 
+La pâte doit rester souple (et l'élasticité provient des premières 20 minutes avant la toute première levée (autolyse)
+\item Si la pâte colle vraiment trop aux doigts pendant le façonnage des patons, c'est qu'elle est trop liquide, il manque de 
+la farine. Notez que lors du façonnage, il faut des mouvements vifs des doigts qui ne doivent pas rester trop en contact, sinon 
+même la pâte correcte vous collera aux doigts. Un bon moyen de vérifier ça est de tapoter le dessus de la pâte avec le bout des 
+doigts (comme la calebote de benny hill). En faisant ça, la pâte ne doit pas coller. 
+\end{itemize}
+
+\begin{itemize}
+\item Afin d'être bien aérée, la pâte doit être relativement liquide. Trop compacte et le pain ne gonflera pas bien à la 
+cuisson. Ça peut être déroutant au début, mais la pâte DOIT être liquide. Elle réépaissit via le sel, l'autolyse, et le 
+rabattage qui est extrêmement important pour la tenue de la pâte. 
+\item Il ne faut surtout pas trop faire monter votre pâte. Trop montée et il n'y aura quasiment pas de montée à la cuisson 
+alors qu'elle doit bien gonfler à cette étape là 
+\item La grigne peut être compliquée à faire avec la pâte liquide. Mettez la farine avant de grigner pour que ça colle moins, 
+faites des mouvements vifs du couteau qui entaillent mieux et n'ont pas le temps de coller. Une grigne complètement 
+longitudinale peut aussi être plus facile à faire
+\item La couleur se fait lors de la cuisson grâce à un peu d'eau jetée dans le four au début. Pour cela, il suffit de mettre un 
+lèche frite pendant le préchauffage. Une fois le pain enfourné, et juste avant de refermer la porte du four, jetez un tiers de 
+verre d'eau très chaude. Il n'en faut pas trop sinon le pain va coller à la plaque et sera difficile à décoller. 
+\item Cuisez à chaleur tournante parce qu'à cause du lèche frite, la chaleur ne va pas bien se diffuser en dessous si la 
+chaleur tournante n'est pas activée, vous aurez donc un pain bien cuit sur le dessus, mais pas assez cuit en dessous. 
+\item Rabattage : C'est une étape essentielle pour avoir un pain bien aéré et qui se tient. Il donne de la force à la pâte 
+(elle est plus ferme), et ajoute de l'air dans la mie. En effet, il y a deux sortes de bulles dans la mie, les fines dues à la 
+levure, et les plus grosses qui elles sont dues au rabattage. Pour les pâtes relativement liquide, il faut plusieurs rabattage 
+(j'en fait 3)
+\end{itemize}
+
+Rabattage : Prenez la pâte, farinez la table, vos mains et le dessus de la pâte. Étirez jusqu'à avoir une plaque de pâte 
+d'environ 50cm par 50cm. Plus c'est étiré (sans se déchirer) mieux c'est. Une fois étiré au maximum, rabattez les coins sur le 
+milieu et faites partir le surplus de farine qui est resté collé (super important). Recommencez alors le rabattage des coins 
+jusqu'à ne plus pouvoir. Retournez, faites tomber encore le surplus de farine, puis avec le bout des doigts, appuyez légèrement 
+sur la boule par le dessous (là où se trouvent les jointures), jusqu'à avoir une belle boule que vous déposerez pour continuer 
+la montée. Et ainsi de suite, un rabattage toutes les 20 minutes jusqu'à avoir la consistance voulue. 
+
+Je n'ai pas trouvé d'impact significatif à faire ou ne pas faire les choses suivantes : 
+\begin{itemize}
+\item Je fais deux tas d'ingrédients, d'un coté farine et sel, mélangés dès le début. De l'autre, l'eau et la levure. Je fais 
+un puit du premier et jette le liquide devant, que je recouvre des bords de farine pour que le mélange se fasse plus vite. Je 
+n'ai pas noté de différence essentielle à ajouter le sel dès le début. Par contre, jamais le sel dans l'eau. 
+\item Je ne fais pas partir l'air, à aucun moment. Je fais une montée au frigo, puis une 2e à l'air libre après avoir fait les 
+rabattages, et enfin une montée rapide des pâtons. C'est tout. Et je ne martirise pas la pâte entre temps. 
+\item Je ne fais pas plusieurs cuissons à plusieurs températures, une seule température (j'en faisais 2 au début, j'ai pas vu 
+de différences au niveau du gout ou de la texture
+\item J'ai essayé avec levain, levure fraiche ou de boulanger, je n'ai pas vu de différences. Le levain est beaucoup plus 
+compliqué à gérer. On peut faire du polish pour s'en rapprocher. La levure fraiche exige de s'en servir assez souvent. Seule 
+chose, diviser par deux les quantités de levure si on prend de la levure sèche par rapport à la levure fraiche. 
+\item La levure se comporte très bien si on fait une montée au frigo, et l'autre avantage est qu'une pâte liquide se manipulera 
+plus facilement si elle est à basse température, les rabattages seront alors plus faciles à faire.
+\end{itemize}
+
+
+\begin{center}
+\begin{tabular}{|l|p{10cm}|}
+\hline Défaut & Origine\\\hline
+\multirow{4}*{croûte cloquée} & eau trop froide\\
+ & manque de pointage (1\iere levée)\\
+ & pain retombé à la mise au four\\
+ & qualité de la farine\\\hline
+\multirow{3}*{manque de volume} & manque d'apprêt (2\ieme levée)\\
+ & pâte trop ferme\\
+ & pâte trop froide\\\hline
+\multirow{3}*{pain plat} & apprêt trop long\\
+ & trop d'eau\\
+ & pâton maltraité à l'enfournement\\\hline
+\multirow{3}*{pain déchiré} & manque de buée\\
+ & manque de pointage\\
+ & coup de lâme trop rapprochés\\\hline
+\multirow{2}*{pain trop acide} & réduire les temps de levée\\
+ & changer de levain\\\hline
+\multirow{4}*{manque d'acidité, de goût} & allonger les temps de levée\\
+ & incorporer des farines plus complètes (T80, T120,\dots)\\
+ & Utiliser de l'eau minérale si celle du robinet est trop chlorée (en dernier recours, le chlore limite l'activité du 
+levain)\\
+ & augmenter la proportion de levain\\\hline
+\end{tabular}
+\end{center}
+
+% Beginning of group where section is deactivated
+% This is only to get the good structure of the document 
+% since ``section'' is in fact embedded in the 'recette' environment.
+% This group allow us to deactivate sections ONLY in the given file and 
+% not for the entire document.
+{\renewcommand{\section}[1]{}
+
+\section{Brioche}
+\begin{recette}{Brioche}{3}{15h+8h}{35 min}\index{brioche}
+%source: https://www.gourmandiseries.fr/brioche-maison-mie-filante-recette/
+\begin{ingredients}
+\ingredient 250g de farine T55
+\ingredient 150g d'œufs ($\sim 3$ œufs) frais (il faut qu'ils soient bien frais, la pâte sera trop liquide sinon)
+\ingredient le reste d'oeuf pour la dorure
+\ingredient 5g de sel
+\ingredient 10g de levure fraiche (ou 5g de levure sèche)
+\ingredient 10g d'eau
+\ingredient 20g de sucre
+\ingredient 125g de beurre mou
+\ingredient 14g de fleur d'oranger (1 cas)
+\end{ingredients}
+
+
+\begin{preparation}
+\etape mélangez les 3 oeufs, puis pesez 150g et réservez le surplus dans un sac congélation au frigo pour la dorure le lendemain
+\etape Mettez la levure avec l'eau, saupoudrez un peu de farine et de sucre puis mélangez. (ne pas mettre trop de farine sinon c'est trop épais)
+\etape Mélangez dans le bol du robot la farine, le sel, le sucre et faites un puit. Ajoutez alors le mélange œufs/levure ainsi 
+que les aromes si vous le souhaitez
+\etape Mélangez grossièrement à la spatule (si vous pouvez mettre le liquide sous la farine au début c'est aussi mieux pour éviter un bloc de farine en dessous), Pétrissez jusqu'à homogénéiser
+\etape Pétrissez alors 6 minutes à vitesse 2 (voire 4). Il faut que la pâte s'étire.
+\etape Ajoutez le beurre mou (extrêmement mou) et pétrissez de nouveau 4 minutes à vitesse 2
+\etape Laissez monter 1h à température ambiante et à couvert
+\etape Dégazez la pâte, puis mettez à lever au frigo pendant 1h
+\etape Dégazez de nouveau la pâte puis mettez au frigo jusqu'au lendemain
+\etape Appuyez au centre de la boule jusqu'à faire un trou. Façonnez ensuite la couronne et disposez la dans un plat à tarte 
+fariné.
+\etape Dorez au jaune d'œuf
+\etape Laissez lever pendant 1h30 de nouveau
+\etape Avant d'enfourner, dorez de nouveau puis saupoudrez du sucre de canne (ou du sucre grain) sur le dessus
+\end{preparation}
+
+
+\begin{cuisson}
+Préchauffez à 180°C avec un lèche frite en bas. Entaillez le dessus au couteau juste avant d'enfourner.
+
+Versez 1/4 de verre au moment d'enfourner.
+
+Enfournez pendant 2 minutes à 180°C à four ventilé. Puis faites cuire 28 minutes à 160°C
+
+Pour tester la cuisson de la brioche, n’hésitez à la piquer avec un couteau, il doit ressortir sec sans trace de pâte.
+
+Faites refroidir votre brioche sur une grille.
+\end{cuisson}
+\end{recette}
+
+\section{Korvapuusti (Brioche roulée à la Cannelle)}% brioche finlandaise à la cannelle
+\begin{recette}{Korvapuusti (Brioche roulée à la Cannelle)}{3}{3h}{}\index{brioche}
+\begin{ingredients}
+\ingredient[Brioche]
+\ingredient 460g de farine (moitié T45, moitié T55)
+\ingredient 221g d'eau
+\ingredient 9g de sel
+\ingredient 10g de levure sèche
+\ingredient 64g de sucre
+\ingredient 23g d'œufs (à peu près la moitié d'un oeuf. Mélanger blanc et jaune puis peser)
+\ingredient 55g de beurre mou
+\ingredient[Farce]
+\ingredient 10g de cannelle
+\ingredient 50g de sucre
+\ingredient 50g de beurre mou
+\end{ingredients}
+
+
+\begin{preparation}
+\etape Pesez et disposez la farine dans un bol de robot
+\etape Diluez la levure dans l'eau légèrement tiède. Ajoutez une cuillère à soupe de farine et un peu de sel puis laissez reposer 15 minutes
+\etape Mélangez le sel et le sucre dans la farine, puis creusez un puit et versez l'oeuf (gardez le reste pour dorer tout à l'heure). 
+\etape Préparez les ingrédients pour la farce (sucre, beurre) pour que ça ramolisse.
+\etape Pétrissez farine, sel, sucre, oeuf et levure dans l'eau pendant 5 minutes à vitesse 1
+\etape Ajoutez le beurre et pétrissez à vitesse 2 pendant 10 minutes
+\etape Transvasez dans un saladier couvert et laissez reposer pendant 30 minutes
+\etape Dans le bol maintenant récupéré, utilisez la feuille et mélangez sucre, beurre et cannelle pour la farce. Le beurre doit être mou mais pas fondu. Laissez bien mélanger.
+\etape Au bout des 30 minutes, étalez la pâte en un rectangle de 25-30cm de large à peu près. Comptez 4mm d'épaisseur. 
+\etape Étalez la farce sur toute la pâte puis roulez dans le sens de la largeur (les 30 cm donc). 
+\etape Ensuite, coupez des trapèzes de 5cm de long à peu près, dans un sens puis dans l'autre, sur toute la longueur du rouleau (\verb|/_\_/_\...|)
+\etape Avec le plat d'une cuillère en bois, appuyez sur l'axe du trapèze pour l'aplatir sur le milieu et joindre les couches sans couper
+\etape Disposez les sur une feuille de papier cuisson, sur une plaque allant au four. Couvrez et laisser reposer 1h environ à l'abris des courants d'air
+\end{preparation}
+
+
+\begin{cuisson}
+Préchauffez le four 10 minutes à 200°C. 
+Avant d'enfourner, vous pouvez dorer les brioches avec le reste d'œuf du début de recette. Je n'ai pas fait car la recette pro disait de ne pas le faire, mais les brioches sont moches et ternes. (ou alors jetez de l'eau chaude au fond du four au moment d'enfourner)
+Enfournez environ 10 minutes à 200°C (dans mon cas j'ai dû faire 15 minutes mais mon four est en fin de vie je pense). 
+\end{cuisson}
+\end{recette}
+
+\section{Gaufres Liégeoises}% recette céline
+\begin{recette}{Gaufres Liégeoises}{3}{2h}{40 min}\index{Gauffres}
+\begin{ingredients}[12 gaufres]
+\ingredient 10 cl de lait tiède
+\ingredient 5g de levure de boulanger déshydratée
+\ingredient 40 g de cassonade
+\ingredient 1/2 gousse de vanille
+\ingredient 250 g de farine
+\ingredient 100 g de beurre mou
+\ingredient 1 oeuf
+\ingredient 1 pincée de sel
+\ingredient 70 g de sucre perlé
+\end{ingredients}
+
+
+\begin{preparation}
+\etape Mettre dans le bol d'un robot : le lait, la levure, la cassonade,
+les grains de vanille, la farine, l'oeuf et le sel. Pétrir pendant 5
+minutes (on peut le faire à la main également). 
+\etape Ajouter le beurre coupé en morceaux et pétrir à nouveau 5 minutes. Laisser lever dans un
+endroit tiède pendant 1 heure environ.
+
+\etape Ajouter le sucre perlé à la pâte et bien mélanger. Diviser la pâte
+en une douzaine de boules de même taille et laisser reposer 20
+minutes.
+
+\end{preparation}
+
+
+\begin{cuisson}
+Huiler les plaques d'un gaufrier. Déposer une boule de pâte sur
+chaque empreinte, et cuire 2 à 3 minutes de chaque côté (selon la
+puissance de votre gaufrier). Les gaufres doivent être bien dorées.
+\end{cuisson}
+\end{recette}
+
+% AUTRE RECETTE À TESTER
+% http://cuisine.journaldesfemmes.com/recette/1001410-baguettes-maison-et-sans-map
+% Ingrédients / pour 8 personnes
+% 
+%     500 g de farine boulangère
+%     300 g d’eau
+%     1 cuillère à soupe de sel
+%     1 sachet de levure boulangère (déshydratée)
+% 
+% Réalisation
+% 
+%     Difficulté
+%     Préparation
+%     Cuisson
+%     Repos
+%     Temps Total
+% 
+%     Facile
+%     20 mn
+%     30 mn
+%     1 h
+%     1 h 50 mn
+% 
+% Préparation Baguettes maison et sans MAP
+% 1
+% Baguettes maison et sans MAP : Etape 1
+% Mettez la farine, l’eau et le sel dans la cuve de votre robot (vous pouvez également faire le tout à la main), et pétrissez (crochet) pendant 3 minutes, jusqu’à ce que vous obteniez une boule. Couvrez votre cuve et laissez reposer 30 minutes.
+% 2
+% Baguettes maison et sans MAP : Etape 2
+% Ajoutez la levure déshydratée, et pétrissez à nouveau à faible vitesse d’abord, puis à moyenne jusqu’à que la boule se réforme à nouveau. Huilez et farinez légèrement un bol et déposez-y votre boule de pâte. Laissez reposer pendant 2 a 3 heures dans un endroit sec (l’idéal pour moi est votre four), la pâte va doubler de volume. Une fois le temps de pousse écoulé, faites deux pâtons de pâte, et sur un plan de travail fariné, dégazez (travailler la pâte avec la paume de la main pour enlever l’air) et façonnez vos baguettes. Disposez-les sur une plaque, faites des petites entailles sur le dessus et laissez reposer de nouveau 15 a 20 minutes le temps de préchauffer le four.
+% Pour finir
+% Baguettes maison et sans MAP : Etape 3
+% La cuisson est une étape importante… Pour avoir un beau résultat et un croquant/craquant, préchauffez votre four à 200° en pensant à mettre de l’eau dans votre lèchefrite. Une fois le préchauffage effectué, remettez de l’eau dans le lèche frite, et enfournez vos baguettes à mi hauteur pendant 25 a 30 minutes.
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% Recettes d'olivia
+% 
+% Hier j'ai mis 500g de farine (dont 50g de complète, le reste de la 55)
+% Un sachet de levure , 8g de sel et 315g d'eau
+% 
+% J'ai fais 5 min de frasage avec presque toute l'eau et toute la farine, 
+% Autolyse de 20 min, pendant ce temps j'ai mis la levure dans le reste d'eau. 
+% Pétrissage 10min vitesse 2 avec la levure. Sur la fin j'ai rajouté le sel.
+% 1ère levée 1h
+% Rabat
+% 2eme levée 2h30
+% Division en 3 patons, repos de 20 min
+% Façonnage en baguettes
+% Levée 1h
+% Cuisson comme je t'ai dit hier !
+
+\section{Pain rapide}
+\begin{recette}{Pain rapide}{3}{45min+10h+3h}{30 min}\index{pain}\index{levure de boulanger}
+\begin{ingredients}[2 baguettes]
+\ingredient 375g de farine de blé T55
+\ingredient 300mL d'eau 
+\ingredient 12g de levure fraiche (6g de seche) avec temperature ambiante de 20°C
+\ingredient 8g de sel 
+\end{ingredients}
+
+
+\begin{preparation}
+\etape Dans un saladier, diluer la levure dans l'eau.
+\etape Dans le bol du robot, mettre la farine et l'eau+levure
+\etape Mélangez à la cuillère grossièrement puis pétrissez pendant 5 minutes jusqu'à enlever les grumeaux (c'est tellement liquide qu'il ne faut pas en attendre grand chose)
+\etape Laissez la pâte lever à couvert pendant 1h30 
+\etape Séparez votre pâte en deux puis versez dans un moule à baguette sans chercher à donner une forme
+\end{preparation}
+
+
+\begin{cuisson}
+Préchauffez le four pendant 10 minutes à 240°C avec un lèche frite en bas.
+
+Saupoudrez un peu de farine. Puis à l'aide d'un couteau tranchant, entaillez 
+le pain en diagonale à plusieurs endroits, pas besoin de tailler trop profond. Des mouvements vifs du couteau permettent 
+d'entailler plus 
+facilement.
+
+Juste après avoir mis les patons, mais avant de fermer la porte du four, versez un tiers (entre 1/3 et 1/2) de verre d'eau 
+chaude sur le lèche 
+frite.
+
+Mettez alors le four à 240°C pendant 25 minutes à chaleur tournante.
+
+Surveillez le pain et sortez-le du four quand la cuisson vous convient.
+
+
+\end{cuisson}
+\end{recette}
+
+%recette de la campaillette grand siècle
+\section{Pain (frigo/nuit) 1 fournée}
+\begin{recette}{Pain (frigo/nuit) 1 fournée}{3}{45min+12h+2h}{30 min}\index{pain}\index{levure de boulanger}
+\begin{ingredients}[4 baguettes]
+\ingredient 500g de farine de blé T55
+\ingredient 350g d'eau (30-35°C)
+\ingredient 15g d'eau de bassinage
+\ingredient 3.5g de levure sèche
+\ingredient 9g de sel 
+\end{ingredients}
+
+
+\begin{preparation}
+\etape La veille au soir, la farine et le sel dans un bol de robot.
+\etape Dans un bol, délayez la levure dans l'eau tiède
+\etape Versez alors l'eau dans la farine sans faire de puit
+\etape \textbf{Frasage} Pétrissez pendant 5 minutes à vitesse 1
+\etape \textbf{Autolyse} Laissez reposer 1h
+\etape Ajoutez le sel, et pétrissez pendant 10 minutes à vitesse 1
+\etape \textbf{Bassinage} Ajoutez l'eau de bassinage en filet et pétrissez pendant 2 minutes à vitesse 2
+\etape \textbf{Pointage} laissez la pâte reposer pendant 1h (je met une plaque de verre sur le bol du robot)
+\etape \textbf{Rabatage} Rabattez la pâte
+\etape \textbf{Blocage} Mettez au frigo, couvert, pendant 12 à 14h à 4°C
+\etape \textbf{Détente} Le lendemain, à l'aide d'une spatule silicone, décollez la pâte et versez la sur un plan de travail fariné. Découpez 4 
+morceaux égaux en volume. Laissez-les reposer 1h
+\etape \textbf{Façonnage} Déposez une couche de farine sur le moule à baguette à l'aide d'une passoire fine. L'eau de bassinage rend la pâte 
+beaucoup plus 
+collante, il faut donc une petite couche. 
+\etape Formez un boudin grossièrement sans trop le manipuler, puis saisissez une extrémité dans chaque main. Faites des 
+mouvements de haut en bas pour que la pâte s'étire jusqu'à la longueur voulue, en prenant garde que la section reste à peu 
+près constante partout
+\etape \textbf{Apprêt} Disposez-les sur le moule fariné. 
+Couvrez avec un torchon sec afin que ça ne sèche pas et que ça soit à l'abris de l'air. Laissez monter 30-45 minutes environ
+\end{preparation}
+
+
+\begin{cuisson}
+Préchauffez le four pendant 10 minutes à 240°C avec un lèche frite en bas.
+
+Saupoudrez un peu de farine. Puis à l'aide d'un couteau tranchant, entaillez 
+le pain en diagonale à plusieurs endroits, pas besoin de tailler trop profond. Des mouvements vifs du couteau permettent 
+d'entailler plus 
+facilement.
+
+Juste après avoir mis les patons, mais avant de fermer la porte du four, versez un tiers (entre 1/3 et 1/2) de verre d'eau 
+chaude sur le lèche 
+frite.
+
+Mettez alors le four à 240°C pendant 16 minutes à chaleur tournante.
+% j'avais mis 17 minutes à 250°C et le dessous ne me semblait pas assez cuit, mais j'avais mis trop de buée je pense, ce qui a peut-être ramolli par le dessous.
+
+Surveillez le pain et sortez-le du four quand la cuisson vous convient.
+
+\textbf{Ressuage} Laissez le pain refroidir sur une grille pendant 30 minutes pour bien évacuer l'humidité.
+
+
+\end{cuisson}
+\end{recette}
+
+\section{Pain (frigo/nuit) 2 fournées}
+\begin{recette}{Pain (frigo/nuit) 2 fournées}{3}{45min+10h+3h}{30 min}\index{pain}\index{levure de boulanger}
+\begin{ingredients}[4 baguettes]
+\ingredient 1kg de farine de blé T55
+\ingredient 700mL d'eau tiède (30-35°C)
+\ingredient 15 mL d'eau de bassinage (encore en train d'optimiser la valeur. En mettre améliore la tenue, mais trop et c'est très difficile à manipuler)
+\ingredient 7g de levure sèche
+\ingredient 16g de sel 
+\end{ingredients}
+
+
+\begin{preparation}
+\etape La veille au soir, Pesez la farine dans un bol de robot.
+\etape Dans un bol, délayez la levure dans l'eau tiède, ajoutez deux cuillères à soupe de la farine pesée et laissez reposer 20 minutes jusqu'à que ça fasse de la mousse en surface (il faudra peut-être plus longtemps si la levure sèche n'est plus trop active, une pincée de sucre pourra alors aider). 
+\etape Pendant ce temps, pesez le sel et mélangez le à la farine. Puis faites un puit. 
+\etape Versez l'eau dans le puit puis effondrez les bords du puits dans l'eau (sinon ça met trop de temps à se mélanger)
+\etape Pétrissez 3 minutes à vitesse 1 (ou à défaut, arrêtez quand il n'y a plus de farine sur le coté du récipient.
+\etape Laissez alors reposer 20 minutes
+\etape Pétrissez 8 minutes à vitesse 1
+\etape Pétrissez 4 minutes à vitesse 2 tout en versant l'eau de bassinage en un mince filet. Stoppez le filet quand ça ruisselle et reprenez quand l'eau est incorporée (il ne faut pas que ça dénature la pâte)
+\etape Disposez la pâte dans un récipient hermétique (de préférence avec un couvercle transparent) et mettez au frigo toute la 
+nuit (10h environ) 
+\etape Le lendemain matin, démarrez un chrono de 2h30. Rabattez la pâte, attendez 20 minutes à température ambiante, rabattez à 
+nouveau, 20 minutes de plus et rabattez une 3e et dernière fois
+\etape Couvrez puis attendez la fin du décompte, $\sim$ (total - 1h) si vous avez oublié de regarder le temps total depuis la 
+sortie du frigo.
+ 
+\etape Toujours à l'aide d'une spatule silicone, décollez la pâte et versez la sur un plan de travail fariné (utilisez une passoire fine) . Découpez 8 
+morceaux égaux en volume. 
+\etape Déposez une couche de farine sur le moule à baguette à l'aide d'une passoire fine. L'eau de bassinage rend la pâte 
+beaucoup plus 
+collante, il faut donc une petite couche. 
+\etape Formez un boudin grossièrement sans trop le manipuler, puis saisissez une extrémité dans chaque main. Faites des 
+mouvements de haut en bas pour que la pâte s'étire jusqu'à la longueur voulue, en prenant garde que la section reste à peu 
+près constante partout
+\etape Disposez-les sur le moule fariné. 
+Couvrez avec un torchon sec afin que ça ne sèche pas et que ça soit à l'abris de l'air. Laissez monter 1h environ
+\end{preparation}
+
+
+\begin{cuisson}
+Préchauffez le four pendant 20 minutes à 240°C avec un lèche frite en bas. (Notez que les 20 minutes de préchauffe sont comprises dans le temps de la dernière montée. Au bout de l'heure, le four doit déjà être chaud)
+
+Saupoudrez un peu de farine. Puis à l'aide d'un couteau tranchant, entaillez 
+le pain en diagonale à plusieurs endroits, pas besoin de tailler trop profond. Des mouvements vifs du couteau permettent 
+d'entailler plus 
+facilement.
+
+Juste après avoir mis les patons, mais avant de fermer la porte du four, versez un tiers (entre 1/3 et 1/2) de verre d'eau 
+chaude sur le lèche 
+frite.
+
+Mettez alors le four à 240°C pendant 16 minutes à chaleur tournante.
+
+Surveillez le pain et sortez-le du four quand la cuisson vous convient.
+
+Faites de même avec la 2e fournée dans la foulée, 16 minutes à chaleur tournante. 
+
+\end{cuisson}
+\end{recette}
+
+\section{Pain à hamburger}
+\begin{recette}{Pain à hamburger}{3}{30 min+24h}{15 min}\index{Pain à hamburger}
+\begin{ingredients}[10 pains à hamburger]
+\ingredient 500g de farine T55
+\ingredient 16g de levure boulangère sèche
+\ingredient 10g de sel
+\ingredient 25g de sucre
+\ingredient 20cl d'eau tiède
+\ingredient 8cl de lait tiède
+\ingredient 1 oeuf
+\ingredient 30g de beurre ramolli (pommade)
+\end{ingredients}
+
+\begin{preparation}
+\etape Pesez la farine dans un bol de robot.
+\etape Dans un bol, délayez la levure dans l'eau et le lait tiède, ajoutez deux cuillères à soupe de la farine pesée et laissez reposer 10 minutes. 
+\etape Pendant ce temps, pesez le sel et le sucre et mélangez le à la farine. Puis faites un puit. 
+\etape Versez l'eau dans le puit puis effondrez les bords du puits dans l'eau (sinon ça met trop de temps à se mélanger)
+\etape Ajoutez dans la foulée l'oeuf entier préalablement battu
+\etape Une fois l'oeuf bien incorporé ajoutez le beurre pommade
+\etape Battez la pâte à vitesse 2 pendant 5 minutes (la pâte doit alors se détacher des parois de la cuve)
+\etape Couvrez avec du film alimentaire et laissez poussez 2h à température ambiante
+\etape Faites les pâtons (environ 90g par pâton)
+\etape Disposez-les sur du papier cuisson et appuyez légèrement sur chaque boule pour en faire un disque de 1cm d'épais environ. 
+\etape Laissez reposer 1h
+\end{preparation}
+
+\begin{cuisson}
+Faites préchauffer le four à 200°C pendant 10 minutes avec un lèche frite tout en bas
+
+Au moment d'enfourner (vous devrez sans doute faire 2 fournées de 5 pains), jetez 1/3 de verre d'eau chaude (la plus chaude du robinet) sur le lèche frite juste après avoir mis les patons au four et juste avant de fermer la porte. 
+
+Faites cuire 10 minutes à 200°C (moi je fais avec chaleur tournante).
+\end{cuisson}
+\end{recette}
+
+\section{Pâte brisée}\label{sec:pate_brisee}
+\begin{recette}{Pâte brisée}{3}{30 min+24h}{15 min}\index{pâte brisée}
+\begin{ingredients}[1 pâte normale]
+\ingredient 250 g de farine de blé
+\ingredient 125g de beurre
+\ingredient 50g d'eau
+\ingredient 1 pincée de sel
+\ingredient 1 jaune d'œuf
+\end{ingredients}
+
+\begin{preparation}
+\etape 30 minutes avant, sortez le beurre du frigo afin qu'il ramolisse. 
+\etape Dans le bol du robot, mettez la farine, la pincée de sel, le beurre en dés et le jaune d'œuf. 
+\etape Pétrissez à vitesse 1 avec la feuille (pas le crochet, l'autre). 
+\etape Quand ça ne semble plus se mélanger, rajoutez l'eau. 
+\etape Laisser reposer au frais 30 minutes minimum avant de l'abaisser. Pour cette étape, je met dans un sac congélation. Il 
+est possible à ce moment là d'un congeler une partie pour avoir une pâte brisée toute prête plus tard. 
+\end{preparation}
+\end{recette}
+
+\label{sec:pate_lasagne}
+\section{Pâtes à Lasagnes}
+\begin{recette}{Pâtes à Lasagnes}{4}{20min.+20min.}{}\index{lasagne}\index{pâte à lasagne}
+\begin{ingredients}
+\ingredient 400g de farine T55
+\ingredient 4 œufs
+\ingredient 2 cuillères à soupe d'huile d'olive
+\ingredient 10g de sel
+\end{ingredients}
+
+\begin{preparation}
+\etape Faites un puit avec la farine et le sel. Ajoutez les œufs et l'huile d'olive. 
+\etape Faites effondrer les bords puis pétrissez jusqu'à ce que le mélange devienne homogène.
+\etape Formez une boule et mettez-la dans un sac congélation. Laissez reposer 20 minutes.
+\etape Etalez au maximum cette boule, puis coupez en lamelle quand votre plan de travail devient trop petit. 
+\etape Arrêtez quand la pâte fait entre 1-2mm d'épaisseur. 
+\end{preparation}
+\end{recette}
+
+\section{Pâte à Pizza}
+\begin{recette}{Pâte à Pizza}{3}{30 min+48h}{15 min}\index{pizza}\index{pâte à pizza}
+\begin{ingredients}[Pour deux petites pizza]
+\ingredient 340 g de farine T55
+\ingredient 10 g de farine complète % 3% de farine complete (dans la recette de l'atelier, c'est 15%)
+\ingredient 210ml d'eau
+\ingredient 1 cuillère à soupe d'huile d'olive
+\ingredient 2g de levure sèche (de boulanger donc)
+\ingredient 7g de sel
+\end{ingredients}
+
+\begin{preparation}
+\etape Dans le bol du batteur, pesez la farine
+\etape Mettez la levure dans l'eau puis ajoutez 2 cuillères à soupe de la farine précédemment pesée. Laissez reposer jusqu'à ce que ça fasse de la mousse en surface (pour une levure active, 10-20 minutes suffiront, sinon, 1 ou 2h pourraient être nécessaire)
+\etape ajoutez alors le sel et la cuillère d'huile dans la farine restante
+\etape Quand la levure est prête, versez le tout dans le bol, puis pétrissez 4 minutes à vitesse 1 (la bouillasse du centre va petit à petit incorporer la farine des cotés, d'abord très lentement, puis très rapidement à la fin. Faites manuellement une boule à la fin s'il reste de la chapelure sur les cotés à la fin du temps).
+\etape Laissez alors reposer 20 minutes (autolyse)
+\etape Pétrissez 10 minutes à vitesse 2. 
+\etape Faites alors deux boules individuelles (de 280g normalement).
+\etape sur un plan de travail propre et sans farine, effectuez des rabattages pour chacune des deux pâtes et mettez les dans un tupperware individuel.
+\etape Laissez alors la pâte lever tranquillement au frigo pendant 48h.
+
+\etape Sortez la pâte 30 minutes à 3 heures avant (en fonction de la saison).
+\etape Faites préchauffer le four à 280°C (le four des pros est à plus de 500°C, moi c'est limité à 280).
+\etape Je n'arrive pas à la faire à la main comme les pizzaiolo, elle se déchire, donc je l'étale au rouleau à patisserie.
+%\etape Laissez reposer la pâte étalée une vingtaine de minutes avant de garnir afin que la pâte lève un peu, elle sera ainsi 
+%plus aérée. (j'étalais un peu la pate, à peu près la moitié du diamètre voulu, je laisse reposer, puis je fini le travail après)
+
+\etape Garnissez la pizza selon votre goût (évitez absolument tout les liquides, y compris le coulis de tomate et la mozarella imbibée sinon la pâte n'est pas bien) et enfournez à 280°C. 
+\end{preparation}
+
+\begin{cuisson}
+Faites cuire la pizza environ 10 minutes à 280\degres C au four, chaleur tournante si vous avez. À ces températures, surveillez 
+la cuisson, si le four est bien chaud ça peut être fait en 5 minutes à peine.
+
+La pizza sera meilleure si vous faites cuire la pizza sur une pierre, chauffée au préalable. Utilisez une spatule à crêpe pour 
+faire glisser la pâte depuis la pelle à pizza vers la pierre que vous aurez enlevé du four le temps d'y mettre la pizza. 
+
+\begin{attention}
+Ne faites pas cuire avec le four en mode grill !
+\end{attention}
+
+\end{cuisson}
+\end{recette}
+
+
+
+}% End of the ``group'' where section is deactivated
+
+
+\chapter{Confitures}
+\minitoc
+
+% Beginning of group where section is deactivated
+% This is only to get the good structure of the document 
+% since ``section'' is in fact embedded in the 'recette' environment.
+% This group allow us to deactivate sections ONLY in the given file and 
+% not for the entire document.
+{\renewcommand{\section}[1]{}
+
+\section{Confiture de Fraise}
+\begin{recette}{Confiture de Fraise}{0}{}{}\index{fraise}\index{confiture}
+\begin{ingredients}
+\ingredient 1 kg de fraises
+\ingredient 1kg de sucre (1kg7 pour 2kg de fraises)
+\end{ingredients}
+
+\begin{preparation}
+\etape Laver, équeuter et couper les fraises en morceaux
+\etape Dans un chaudron assez grand pour contenir tous les ingredients, mettez les fraises puis versez le sucre dessus.
+\etape Laissez mariner à couvert pendant 12h
+\end{preparation}
+
+
+\begin{cuisson}
+\begin{enumerate}
+\item Mixez les fraises
+\item Lavez et stérilisez les pots et couvercles, puis retourner les pots sur un torchon propre (sans les essuyer, et surtout pas l'intérieur).
+\item Chauffez sur feu moyen-vif le chaudron jusqu'à ce que le mélange entre en ébullition
+
+\item Poursuivre la cuisson pendant 20 min environ en écumant la mousse rougeâtre qui se forme.
+\item La confiture est cuite quand elle atteint 105°C (ou technique de la perle sur la cuillère, mais la température est beaucoup plus simple)
+\item Verser dans des pots stérilisés (mettez beaucoup de confiture, fermez puis retournez les pots).
+\end{enumerate}
+\end{cuisson}
+\end{recette}
+
+
+\section{Confiture mangue/passion}
+\begin{recette}{Confiture mangue/passion}{0}{}{}\index{fraise}\index{confiture}
+\begin{ingredients}
+\ingredient 2kg de mangue (juste la pulpe, sans peau ni noyau)
+\ingredient 250ml de pulpe de fruit de la passion
+\ingredient 1kg de sucre
+\ingredient 1 citron vert (son jus)
+\end{ingredients}
+
+\begin{preparation}
+\etape Vous pouvez nettoyer et peler les mangue trop mure sur plusieurs semaines, et les congeler au fur et à mesure, puis décongeler quand vous voulez faire la confiture
+\etape Dans un chaudron assez grand pour contenir tous les ingredients, mettez les mangue puis versez le sucre dessus.
+\etape Laissez mariner à couvert pendant au moins 1h
+\end{preparation}
+
+
+\begin{cuisson}
+\begin{enumerate}
+\item Ajoutez la pulpe de fruit de la passion et le citron dans les mangues
+\item Lavez et stérilisez les pots et couvercles, puis retourner les pots sur un torchon propre (sans les essuyer, et surtout pas l'intérieur).
+\item Chauffez sur feu moyen-vif le chaudron jusqu'à ce que le mélange entre en ébullition
+
+\item Poursuivre la cuisson en écumant la mousse qui se forme (j'ai dû faire recuire donc je n'ai pas de temps de cuisson précis. Au moins une heure je dirais).
+\begin{remarque}
+J'ai filtré la confiture pour enlever les fibres de mangues qui sont désagréables en bouche (ce qui filtre les pépins aussi).
+\end{remarque}
+\item La confiture est cuite quand elle atteint 105°C (ou technique de la perle sur la cuillère, mais la température est beaucoup plus simple)
+\item Verser dans des pots stérilisés (mettez beaucoup de confiture, fermez puis retournez les pots).
+\end{enumerate}
+\end{cuisson}
+\end{recette}
+
+\section{Confiture de pomme au citron}
+\begin{recette}{Confiture de pomme au citron}{5}{}{}\index{confiture}\index{pommes}
+\begin{ingredients}
+\ingredient $3\unit{kg}$ de pommes vertes
+\ingredient $3\unit{kg}$ de sucre
+\ingredient $1\unit{L}$ d'eau
+\ingredient $4$ citrons (zeste et jus)
+\end{ingredients}
+
+\begin{preparation}
+\etape Épluchez et sortez les trognons des pommes. Mettez les épluchures et les trognons dans un sac de mousseline.
+\etape Coupez les pommes et mettez les dans une casserole avec l'eau, le sac de mousseline, le zeste rapé et le jus du citron.
+\etape Faire cuire jusqu'à ce que les pommes soient tendres.
+\etape Laissez refroidir un peu, puis sortez le sac et tordez le pour extraire le jus et le rajouter dans la casserole.
+\etape Ajoutez le sucre et remuez. 
+\etape La confiture est cuite quand elle atteint 105°C (ou technique de la perle sur la cuillère, mais la température est beaucoup plus simple)
+\end{preparation}
+\end{recette}
+
+\section{Confiture de poire}
+\begin{recette}{Confiture de poire}{5}{}{}\index{confiture}\index{pommes}
+\begin{ingredients}
+\ingredient $2.5\unit{kg}$ de poires (pelées et épépinées
+\ingredient $1.5\unit{kg}$ de sucre
+\ingredient jus de 1 citron
+\end{ingredients}
+
+\begin{preparation}
+\etape Pelez et épépinez les poires puis calculez la quantité de sucre à partir du poids de la chair restante.
+\etape Mettez le sucre, le citron et les fruits à macérer quelques heures avant de cuire (pensez à mélanger)
+\etape Faire cuire dans une marmite non couverte
+\etape La confiture est cuite quand elle atteint 105°C (ou technique de la perle sur la cuillère, mais la température est beaucoup plus simple)
+\end{preparation}
+\end{recette}
+
+\section{Marmelade d'orange à la moi}
+\begin{recette}{Marmelade d'orange à la moi}{5}{}{}\index{confiture}\index{orange}
+\begin{ingredients}[2 pots]
+\ingredient \~ 500mL de sirop restant après fruits confits (voir \refsec{orange_confite})
+\ingredient zeste d'un citron
+\end{ingredients}
+
+\begin{preparation}
+\etape Faites chauffer le sirop et le jus de citron
+\etape La confiture est cuite quand elle atteint 105°C (ou technique de la perle sur la cuillère, mais la température est beaucoup plus simple)
+\etape Mettez dans les pots, fermez et retournez les pour qu'ils refroidissent.
+\end{preparation}
+\end{recette}
+
+}% End of the ``group'' where section is deactivated
+
+\chapter{Divers}
+\minitoc
+
+% Beginning of group where section is deactivated
+% This is only to get the good structure of the document 
+% since ``section'' is in fact embedded in the 'recette' environment.
+% This group allow us to deactivate sections ONLY in the given file and 
+% not for the entire document.
+{\renewcommand{\section}[1]{}
+
+\section{Chocolat chaud}
+\begin{recette}{Chocolat chaud}{3}{20 min.}{}\index{chocolat chaud}
+\begin{ingredients}[1 personne]
+\ingredient 250mL de lait (ou 10cl crème liquide et le reste de lait)
+\ingredient 15g de chocolat pur
+\ingredient 24g de sucre
+\end{ingredients}
+
+\begin{preparation}
+\etape Dans une casserole, mettez le lait et le chocolat à dessert en petits morceaux. Faites chauffer jusqu'à obtenir une 
+préparation homogène, sans toutefois faire bouillir. 
+\end{preparation}
+
+\end{recette}
+
+
+}% End of the ``group'' where section is deactivated
+
+
+\chapter{Confiseries}
+\minitoc
+
+% Beginning of group where section is deactivated
+% This is only to get the good structure of the document 
+% since ``section'' is in fact embedded in the 'recette' environment.
+% This group allow us to deactivate sections ONLY in the given file and 
+% not for the entire document.
+{\renewcommand{\section}[1]{}
+
+\section{Calisson à la moi}
+\begin{recette}{Calisson à la moi}{3}{2h30}{}\index{calisson}
+\begin{ingredients}
+\ingredient[orange confite]
+\ingredient 2 orange
+\ingredient 400g de sucre
+\ingredient 500ml d'eau
+\ingredient[calisson]
+\ingredient 300g d'amande en poudre
+\ingredient 180g de sucre glace
+\ingredient 2 à 3 cuillères à soupe de fleur d'oranger
+\ingredient 280g d'orange confite (ou moins)
+\ingredient[glaçage]
+\ingredient 150g de sucre glace
+\ingredient 3 cuillère à soupe d'eau tiède. 
+\end{ingredients}
+
+\begin{preparation}
+\etape Faites chauffer le sirop (eau + sucre) pour l'orange confite
+\etape Peler et couper l'orange en tranches. 
+\etape Une fois à ébullition, faites cuire les tranches d'orange à feu moyen (juste pour ébullition) pendant 1h environ (il faut que le sirop soit toujours liquide et l'orange pas trop dure, sinon impossible à mixer)
+\etape Mixer le sucre au moulin à café et verser avec la fleur d'oranger dans la casserole. Faire chauffer un peu
+\etape Mixer l'amande au moulin à café et rajouter dans la casserole quand le sucre et le liquide sont homogènes. Cuire à feu doux environ 8 minutes jusqu'à l'obtention d'une pâte qui ne colle plus aux doigts.B
+\begin{remarque}
+Rajouter un peu d'eau si la fleur d'oranger ne suffit pas
+\end{remarque}
+\etape Mixer l'orange confite
+\etape Mélanger alors les deux (chauffer un peu si nécessaire), puis étaler sur un papier cuisson
+\etape Mixez le sucre glace avec un peu d'eau tiède jusqu'à l'obtention d'une pâte lisse et homogène. 
+\end{preparation}
+
+\begin{cuisson}
+
+\end{cuisson}
+\end{recette}
+
+\section{Crème de marron}
+\begin{recette}{Crème de marron}{4}{2h}{}\index{chataîgne}\index{crème de marron}\index{marron}
+\begin{ingredients}
+\ingredient 500g de marron cuits à l'eau
+\ingredient $400$ g de sucre
+\ingredient 50cl d'eau
+\end{ingredients}
+
+\begin{preparation}
+\etape Faites cuire les marrons à l'eau, puis pelez les.
+\etape Préparez le sirop avec le sucre et l'eau et portez à ébullition
+\etape Plongez les marrons dans le sirop, et faites frémir pendant 1h30 environ (sans couvrir).
+\etape À l'issue de la cuisson, rajoutez de l'eau si c'est trop épais, puis mixez le tout
+\end{preparation}
+\end{recette}
+
+
+
+\section{Ladoo à la noix de coco}
+\begin{recette}{Ladoo à la noix de coco}{4}{30min.+1 nuit}{30min.}\index{ladoo}\index{noix de coco}
+\begin{ingredients}[$\sim$ 20 boules]
+\ingredient 120g (474mL) de noix de coco rapée + du rab' pour rouler les boules dedans
+\ingredient 320g (avant 240) de lait concentré
+\ingredient 1 cac d'essence de vanille (ou parfum divers, e.g. fruit de la passion)
+\ingredient 1/2 cac de cardamome
+\end{ingredients}
+% J'ai fait avec poudre d'amande (230g) pour 240g de lait concentré. J'ai ensuite emrobé de sucre glace, poudre de cacao ou sucre en poudre (je sais pas encore lequel est le mieux). j'ai mis une cuillere a soupe d'alcool d'orange
+
+\begin{remarque}
+Ne pas faire ça avec de la noix de coco que vous rapez vous même. Ce sera trop humide et gras, et les boules se font soit très mal, soit pas du tout.
+\end{remarque}
+
+
+
+\begin{preparation}
+\etape Mélangez tous les ingrédients dans le bol. 
+\begin{remarque}
+ Pour le lait concentré, commencez avec 120mL et ajoutez en plus si la consistance ne permet pas de faire des boules
+\end{remarque}
+\etape Préparez un bol d'eau (pour mouiller les mains et que ça n'accroche pas. En plus, ça permet aux ladoo d'être moins sec) et un bol de noix de coco rapée.
+\etape Faites de boules de la taille qui vous convient, puis roulez-les dans la noix de coco râpée.
+\end{preparation}
+\end{recette}
+
+\section{Meringues au chocolat}
+\begin{recette}{Meringues au chocolat}{3}{20 min.}{1h}\label{sec:meringues}\index{meringues}
+\begin{ingredients}
+\ingredient 5 blancs d'œufs
+\ingredient 250g de sucre
+\ingredient une pincée de sel
+\ingredient 600g de chocolat à dessert
+\end{ingredients}
+
+\begin{preparation}
+\etape Dans un saladier, ajoutez les blancs d'œufs le sucre et le sel. Battez le tout à vitesse relativement importante jusqu'à ce que ce soit prêt
+\etape Sur une plaque de cuisson, disposez du papier sulfurisé et préparez vos meringues à l'aide de deux cuillères à café. La préparation doit normalement se tenir. 
+\end{preparation}
+
+\begin{cuisson}
+Le temps de cuisson est très variable. Comptez 1h30 à 120°C pour des meringues bien cuites. Moins si vous les 
+souhaitez moelleuses.
+
+Une fois cuit. Laissez reposer une à deux heures. Faites fondre le chocolat (sans ajouter d'eau ou quoi que ce soit)
+
+Afin d'enrober les meringues, déposez les dans le chocolat fondu pour recouvrir le dessous, puis recouvrez la meringue de chocolat à l'aide d'une spatule. Sortez là du chocolat à l'aide de la spatule et d'une cuillère pour la faire glisser sur le papier sulfurisé, puis recommencez pour toutes les meringues. Il vous manquera du chocolat pour 4 ou 5 meringues normalement. Posez les ensuite sur un papier cuisson pour laisser refroidir. 
+\end{cuisson}
+\end{recette}
+
+\section{Pruneaux à l'eau de vie}
+\begin{recette}{Pruneaux à l'eau de vie}{3}{20 min.}{1h}
+\begin{ingredients}
+\ingredient 300g de pruneaux assez gros et bien moelleux
+\ingredient 50cl d'eau de vie à 40°
+\ingredient 1 clou de girofle ou un morceau de cannelle
+\ingredient du thé fort (environ 1L et 4 sachets de thé)
+\ingredient 200g de sucre cristallisé
+\end{ingredients}
+
+\begin{preparation}
+\etape Faire une infusion de thé assez forte en y ajoutant le clou de girofle  qui peut être remplacé par un petit morceau d'écorce de cannelle si l'on en préfère le goût.
+\etape Lorsque le thé est prêt, enlever le clou de girofle et verser l'infusion chaude mais non bouillante sur les pruneaux. Ils doivent être complètement recouverts de thé. Laisser tremper jusqu'au lendemain.
+\etape Egoutter les pruneaux qui doivent être bien gonflés.
+\etape Placer le sucre cristallisé dans une assiette creuse et y rouler les pruneaux qui en seront complètement enrobés; les laisser sécher à plat sans qu'ils se touchent quelques heures.
+\etape Les piquer de quelques coups d'une grosse aiguille afin de faciliter la pénétration de l'alcool.
+\etape Les placer avec précaution dans un bocal fermant bien. Les couvrir d'eau de vie. Boucher hermétiquement et laisser macérer au minimum 3 mois. 
+\end{preparation}
+
+\end{recette}
+
+\section{Rose des Sables au chocolat}
+\begin{recette}{Rose des Sables au chocolat}{0}{}{}\index{rose des sables}\index{chocolat}
+\begin{ingredients}[6 pers.]
+\ingredient 250g de chocolat patissier
+\ingredient 250g de margarine
+\ingredient 200g de sucre glace
+\ingredient 500g de pétales de maïs soufflé (corn flakes)
+\end{ingredients}
+
+\begin{preparation}
+\etape Faites fondre le chocolat et la margarine
+\etape Incorporez le sucre glace hors du feu
+\etape Mettez le tout dans un grand saladier et versez-y une bonne quantité de pétale de maïs
+\etape Mélangez bien. Rajoutez-en s'il y a encore trop de chocolat liquide au fond du saladier
+\etape Disposez en petits tas sur une feuille de papier aluminion et placez-les au frigo une demi-heure.
+\end{preparation}
+
+Les roses des sables se gardent 2 ou 3 jours dans une boite au réfrigérateur.
+\end{recette}
+
+
+\section{Tranches d'oranges confites}
+\begin{recette}{Tranches d'oranges confites}{4}{}{}\index{orange confites}\index{oranges}\index{fruits confits}\label{orange_confite}
+\begin{ingredients}
+\ingredient 4 oranges
+\ingredient $400$ g de sucre
+\ingredient 35cl d'eau
+\end{ingredients}
+
+\begin{remarque}
+Ceci est une recette à ma façon, qui ne nécessite pas d'avoir des oranges bios et qui plaira à ceux qui n'aiment pas le zeste. On doit pouvoir mettre plus de tranches d'oranges que je ne l'ai fait mais pas beaucoup. J'avais 12 tranches quand j'ai fait cuire dans la casserole.
+\end{remarque}
+
+
+\begin{preparation}
+\etape Pelez les oranges sans les ouvrir en deux.
+\begin{remarque}
+Lors de la découpe de la tête de l'orange, tranchez le pourtour, décollez délicatement le tour avec le dos du couteau puis soulevez le couvercle. En faisant ainsi vous enlèverez une bonne partie de la tige blanche de l'intérieur de l'orange.
+\end{remarque}
+\etape Coupez les oranges en tranches assez épaisse, environ 5mm (trop fin et les tranches ne résisteront pas à la cuisson. Elles seront bonnes mais en lambeaux).
+\etape Préparez le sirop avec le sucre et l'eau et portez à ébullition
+\etape Plongez les tranches dans le sirop, et faites frémir (3/9), à couvert pendant 1h30 environ.
+\etape À l'issue de la cuisson, sortez délicatement les tranches à l'aide d'une spatule (ça permet de ne pas les abîmer et de les égoutter en même temps) puis déposez-les sur du papier sulfurisé afin de les laisser sécher et refroidir
+\begin{remarque}
+Vous pouvez les passer légèrement sous l'eau pour enlever la couche de caramel collant si vous voulez les enrober plus tard (mais pas trop sinon elles sont délavées)
+\end{remarque}
+\end{preparation}
+
+\begin{remarque}
+\begin{itemize}
+\item On peut enrober les tranches d'orange de chocolat. Il faut alors les laisser sécher sur une grille 20 minutes au four à 180°C puis laisser sécher dehors pendant 4 heures avant de les enrober.
+\item Une fois les tranches cuites, on peut récupérer le sirop et le transformer en caramel pour ne pas le gâcher. Vous obtiendrez alors un caramel parfumé à l'orange. Ce caramel sera par contre peut-être un peu mou.
+\end{itemize}
+\end{remarque}
+\end{recette}
+
+
+\section{Truffes au chocolat}
+\begin{recette}{Truffes au chocolat}{0}{20 min.}{2h}\index{truffes}\index{chocolat}
+
+\begin{ingredients}[6 pers.]
+\ingredient 200 g de chocolat à croquer
+\ingredient 100 g de beurre
+\ingredient 80 g de sucre
+\ingredient 4cl de crème fraiche liquide
+\ingredient 2 jaunes d'œufs
+\ingredient 30g cacao en poudre
+\end{ingredients}
+
+\begin{preparation}
+\etape Cassez le chocolat en petits morceaux et faites fondre dans un saladier au dessus d'une casserole d'eau, au bain marie. Ajoutez au chocolat le beurre et une cuillère à soupe de crème fraiche.
+\etape Faites fondre le sucre avec la crème fraiche liquide dans une autre casserole, puis incorporez au chocolat quand les grains de sucre sont dissous. 
+\etape Remuer soigneusement jusqu'à ce que ce soit homogène.
+\etape Placez le saladier 2 heures au réfrigérateur.
+\etape Faire des boules à l'aide de deux cuillères à café? Puis entourez de poudre de cacao, et roulez la truffe dans la paume de la main. Secouer les truffes pour les débarrasser du surplus et les remettre au frigo.
+\end{preparation}
+\end{recette}
+
+}% End of the ``group'' where section is deactivated
+
+
+\chapter{Chocolat}
+\minitoc
+
+\newpage
+\section{Techniques du chocolat}
+Le chocolat, en particulier le beurre de cacao, possède 6 formes de cristallisations différentes résumées dans \reffig{fig:cristallisation_chocolat}.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.6\linewidth]{figures/cristallisation_chocolat.pdf}
+\caption{Différentes formes de cristallisation du chocolat. Seules les formes V et VI nous intéressent car elles sont plus compacte, le chocolat devient alors craquant et brillant.}\label{fig:cristallisation_chocolat}
+\end{figure}
+
+Le tempérage ou pré-cristallisation est une technique de travail du chocolat afin de sélectionner ses formes de cristallisation. Ceci va permettre d'obtenir un chocolat brillant et craquant.
+
+\begin{enumerate}
+ \item Faire fondre le chocolat à 45°C: On fait fondre et on prépare le chocolat
+ \item Abaisser la température à 27°C: On commence la cristallisation
+ \item Remonter la température à 30-31°C: On fait fondre tous les cristaux autre que les formes V et VI. 
+ \begin{attention}
+Notez le gap entre la forme IV qui fond à 28°C et la forme V qui ne fond qu'à partir de 32°C, vous avez donc un peu de marge mais il ne faut surtout pas faire fondre la forme V sous peine de devoir recommencer tout le cycle.
+ \end{attention}
+
+\end{enumerate}
+
+\section{Tempérage par ensemencement}
+%source: https://blog.cerfdellier.com/temperage-du-chocolat-avec-la-technique-de-lensemencement/
+
+\begin{itemize}
+\item Faites fondre 3/4 de votre paquet de chocolat noir de couverture à 50 / 55°C.
+\item La technique de l'ensemencement consiste à incorporer le dernier quart des pistoles dans le chocolat fondu. Mélangez le chocolat jusqu'à une fonte complète des pistoles.
+\item Une fois fondues, les pistoles auront refroidi le chocolat, qui atteindra une température de 32°C et mettra au point votre chocolat.
+\end{itemize}
+
+\begin{remarque}
+\begin{itemize}
+\item Si le chocolat a blanchi, c’est que vous êtes descendu en dessous des 28°C, ce qui cause une sur-cristallisation.
+\item Si le chocolat ne se démoule pas, c'est qu'il y a sous-cristallisation, vous n'êtes pas descendu à 28°C.
+\end{itemize}
+\end{remarque}
+
+\section{Tempérage chocolat avec tempéreuse Stadter}\label{sec:tempereuse}
+% source: https://www.mercotte.fr/2008/04/18/et-si-on-parlait-chocolat-le-temperage-pourquoi-et-comment/
+
+\begin{attention}
+Ajoutez un peu d'eau entre le récipient plastique et celui en inox afin de mieux conduire la chaleur. Je n'ai pas encore testé et peut-être que la température sera plus proche de la valeur attendue (au lieu des 7 degrés de différences en moyenne)
+\end{attention}
+
+
+Coupez le chocolat en petit morceaux. Il existe normalement une règle des 2/3 pour l'ensemencement mais ça n'a pas fonctionné du tout pour moi donc je fais tout fondre à la tempéreuse.
+\begin{remarque}
+\begin{itemize}
+\item J'utilise le chocolat lidl. Pour le noir, ne pas prendre le noir intense, mais le chocolat noir de base à 3.45 euros/kg. et pour le lait, les tablettes à emballage bleu.
+\item Ne rien mettre dans le chocolat en train de fondre sinon ça perturbe un peu tout. il vaut mieux mélanger à la fin.
+\item J'utilise une tempéreuse Stadter et j'ai dû calibrer les températures pour avoir la correspondance entre température du thermostat et température réelle.
+\end{itemize}
+\end{remarque}
+
+\begin{table}[hb]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline 
+Etape & Chocolat au lait & Chocolat noir \\\hline
+Faire fondre au bain marie chaud & th 35°C (vrai 42°C)   & th 36°C (vrai 45°C) \\\hline
+Refroidir                        & th 19°C (vrai 26°C)   & th 20°C (vrai 27°C)   \\\hline
+Réchauffer au bain marie chaud   & th 23°C (vrai 30°C)   & th 24°C (vrai 31°C)   \\\hline
+\end{tabular} 
+\caption{Réglages thermostat pour la tempéreuse Stadter. Ces valeurs ne sont pas la température du chocolat mais juste le réglage de la machine. Les véritables températures attendues sont en parenthèse.}
+\end{table}
+
+% Correspondances mesurées:
+% Th ; vrai T°C
+% 40 ; 47.9
+% 38 ; ~46
+% 37 ; 45?
+% 24 ; 31 (Chocolat solidifié)
+% 25 ; ?
+
+% \begin{tabular}{|c|c|c|}
+% \hline 
+% Etape & Chocolat au lait & Chocolat noir \\\hline
+% Faire fondre au bain marie chaud & 42°C   & 45°C \\\hline
+% Refroidir                        & 26°C   & 27°C   \\\hline
+% Réchauffer au bain marie chaud   & 30°C   & 32°C   \\\hline
+% \end{tabular} 
+% \end{preparation}
+% \end{recette}
+
+
+% Beginning of group where section is deactivated
+% This is only to get the good structure of the document 
+% since ``section'' is in fact embedded in the 'recette' environment.
+% This group allow us to deactivate sections ONLY in the given file and 
+% not for the entire document.
+{\renewcommand{\section}[1]{}
+
+\section{Ganache}
+\begin{recette}{Ganache}{4}{1h}{}\index{chocolat}
+\begin{ingredients}
+\ingredient 90g de chocolat noir
+\ingredient 100g de crème liquide entière
+\ingredient 9g de miel
+\ingredient 25g de beurre
+\end{ingredients}
+
+\begin{preparation}
+\etape Pesez et faites fondre le chocolat
+\etape Faites bouillir la crème et le miel, puis versez progressivement le mélange sur le chocolat fondu
+\etape Mélangez au fouet (vertical pour ne pas faire rentrer d'air) jusqu'à l'obtention d'une texture crémeuse et lisse
+\etape Ajoutez le beurre en petits morceaux et mélangez délicatement pour faire fondre le beurre petit à petit
+\etape Laissez tempérer un peu si c'est trop chaud avant de remplir vos chocolats avec.
+\end{preparation}
+\end{recette}
+
+\section{Praliné}
+\begin{recette}{Praliné}{4}{1h}{}\index{chocolat}
+\begin{ingredients}
+\ingredient 200g de poudre de noisettes
+\ingredient 75g de sucre glace
+\ingredient 125g de chocolat au lait
+\ingredient 45g de beurre de cacao
+\end{ingredients}
+
+\begin{preparation}
+\etape Torréfiez les fruits secs au four à 165°C pendant 20 minutes en mélangeant à mi-cuisson. Laissez ensuite refroidir
+\etape Mixez les noisettes et le sucre glace afin d'obtenir une pâte onctueuse
+\etape Mixez le chocolat fondu et le beurre de cacao
+\etape Laissez tempérer un peu si c'est trop chaud avant de remplir vos chocolats avec.
+\end{preparation}
+\end{recette}
+
+\section{Chocolat fourrés}
+% Notes prises lors de l'atelier chocolat
+%Pour la tempéreuse il faut pas faire la descente de température avec ça. Soit ensemencement, soit dehors, sans bain marie d'eau car humidité, et remuer sans arrêt mais pas trop fort
+%
+%Dans la tempéreuse, il faut aussi remuer. Elle met à 32 degrés.
+%
+%Pour les chocolats. Il faut mettre la première couche horizontale pour que l'épaisseur soit la même partout. Ensuite racler puis retourner
+%
+%La ganache il faut remuer au fouet, verticalement pour ne pas faire rentrer de bulles
+%
+%Pour mélanger le chocolat dans le lait, il faut pas verser tout le lait d'un coup mais en deux ou trois fois si beaucoup. 
+%On peut faire infuser des trucs dans le lait, notamment du laurier sauce mais ensuite il faut passer au tamis et peser de nouveau. 
+%
+%Le praliné c'est sucre glace, noisette mixé (ou amande. Mais les noix sont plus grasses donc il faut faire attention), du beurre de cacao et du chocolat
+%
+%Il faut remettre au frais entre chaque couche. Pour la liaison, il faut faire fondre au décapeur thermique pour que la partie superficielle de la coque soit brillante. Puis verser une bonne couche sur la moitié la plus proche de nous. Pris repousser le chocolat avec la spatule à 45 degrés vers l'avant (pas vers nous)
+%
+%Pour le tempérage, il faut abaisser à 28 puis dès que c'est à 28 remonter sans attendre. Et ensuite remuer de temps en temps à 32 degrés. Toutes les 5 10 minutes. 
+%Faut vraiment faire attention à l'humidité. Utiliser des gants pour la partie en contact avec le chocolat car nos mains sont humides. 
+%
+%Les doses de ganache de la recette sont pour 4 plaques je pense
+\begin{recette}{Chocolat fourrés}{4}{3h}{}\index{chocolat}
+\begin{ingredients}
+\ingredient 200g de chocolat fondu (fondu, puis refroidi et enfin réchauffé)
+\ingredient ganache ou praliné
+\end{ingredients}
+
+\begin{preparation}
+\etape Moulez les coquilles du moule avec du chocolat noir et laisser refroidir à l'envers
+\begin{itemize}
+\item Avec un sopalin, essuyez chacun des moules (le creux) pour être sûr que c'est parfaitement propre et lisse
+\item avec le moule bien à l'horizontale, Mettez une bonne couche de chocolat, puis renversez le moule pour vider le surplus
+\item avec une spatule, raclez le surplus (toujours avec le moule à l'envers)
+\item Déposez le moule sur un papier cuisson, à l'envers, pour le laisser solidifier un peu
+\end{itemize}
+\etape Remettre à l'endroit puis au frigo pendant que vous préparez la garniture
+\etape Remplir les moules avec votre garniture à l'aide d'une poche à douille, en laissant un espace d'1 à 2mm sur le dessus
+\begin{itemize}
+\item Ne pas y aller trop doucement sinon ça fige sans avoir eu le temps de se mettre bien plat
+\item enlever les bavures pour que ce soit bien net (sinon ça soude pas bien)
+\end{itemize}
+\etape Laissez refroidir pendant 10 minutes au frigo
+\etape Déposez une fine couche de chocolat noir sur le moule pour fermer les coquilles
+\begin{itemize}
+\item Avec un décapeur thermique ou un sèche cheveux, faites fondre la partie superficielle de la coque jusqu'à ce qu'elle redevienne brillante (afin d'avoir une meilleure soudure)
+\item Mettre une bonne couche de chocolat sur la moitié la plus proche de vous
+\item Avec la spatule, repoussez le chocolat vers le fond, la spatule orientée de 45° vers l'avant
+\item Si ce n'est pas parfaitement refermé et que c'est encore brillant, vous pouvez souder avec le dos d'une cuillère délicatement
+\end{itemize}
+\end{preparation}
+\end{recette}
+
+\section{Chocolat aux fruits secs}
+% source: https://www.mercotte.fr/2008/04/18/et-si-on-parlait-chocolat-le-temperage-pourquoi-et-comment/
+\begin{recette}{Chocolat aux fruits secs}{4}{1h}{}\index{chocolat}\index{raisin secs}\index{amandes entières}
+\begin{ingredients}
+\ingredient 300g de chocolat (noir ou au lait) ; C'est le minimum pour le tempérage, plus, c'est encore mieux
+\ingredient 65g d'amande (ou noisette, ou autre)
+\ingredient 55g de raisin (ou cranberries, ou autre)
+\end{ingredients}
+
+\begin{preparation}
+\etape Pesez les fruits secs à l'avance
+\etape Préparez le chocolat (tempéré) (voir \refsec{sec:tempereuse})
+\etape Prendre un peu de chocolat et l'étaler dans le moule pour bien appuyer et imprimer sur le motif
+\etape Ajoutez alors la garnitude dans le chocolat restant ou dans le moule selon préférence et versez
+\begin{remarque}
+Faute de mieux, utilisez du papier cuisson ou une plaque silicone, étalez alors une petite couche à la spatule de la même manière.
+\end{remarque}
+\end{preparation}
+\end{recette}
+
+
+\section{Crunch maison}
+\begin{recette}{Crunch maison}{4}{10 min.}{}\index{crunch}\index{chocolat}
+\begin{ingredients}
+\ingredient 400g de chocolat au lait
+\ingredient 70g de riz soufflé (à faire vous même ou achetez des céréales "rice crispies")
+\end{ingredients}
+
+\begin{preparation}
+\etape Faites fondre le chocolat (voir \refsec{sec:tempereuse})
+\etape Si vous utilisez un moule, étalez alors un peu de chocolat directement pour bien remplir les motifs du moule avant de mélanger le riz soufflé.
+\etape Ajoutez le riz soufflé, puis étalez dans des moules à chocolat ou sur une plaque en silicone (ou papier sulfurisé).
+\end{preparation}
+\end{recette}
+
+}% End of the ``group'' where section is deactivated
+
+
+\chapter{Cocktails}
+\minitoc
+
+\newpage
+\section{Vieillir alcool}
+\subsection{Vieillir}
+L'idée est de profiter de la torréfaction des tonneaux existant et de les récupérer au tarif le plus bas possible. Pour l'instant, je me tourne vers les copeaux de tonneaux de whisky vendus pour le barbecue ou le fumage pour donner du goût. Ces copeaux ont déjà perdu la plupart de leurs tanins et ça va nous éviter à ce que nos alcools aient un gout de bois. 
+
+\begin{remarque}
+Ne tentez pas de torréfier vous même du chêne, ça sera trop fort. A moins de savoir exactement ce que vous faites, cette méthode est plus sûre
+\end{remarque}
+
+La concentration de copeaux est une affaire de goût. Pour l'instant, j'ai fait 24g/L et au bout de deux ans ce n'était toujours pas top. J'ai donc augmenté la dose et je fais maintenant 37g/L (+50\%)
+
+\bigskip
+
+Comptez 37g de copeaux de tonneaux de whisky par litre. 
+Mettez les copeaux dans l'alcool, notez la concentration, la date de début et la concentration en alcool. Je conseille de faire vieillir directement à 40\% vol pour pouvoir gouter au fur et à mesure. Pour l'avoir testé avec des alcools à 60\% vol, la dilution complique les choses et dilue le goût je trouve. 
+
+
+\begin{tabular}{|c|c|c|p{7cm}|}
+\hline 
+Copeaux & Durée & Alcool & Résultat \\ 
+\hline 
+24g/L & 2 an & 62.5\% vol. & Manque de goût une fois dilué, mais prometteur \\ 
+\hline 
+37g/L & ? & 43\% vol. & TODO \\ 
+\hline 
+\end{tabular} 
+
+\subsection{Dilution}
+Pour diluer, achetez de l'eau minérale la moins minérale possible (regardez les résidus). 
+
+source: Daniel HAESINGER et \\
+\url{http://mapassionduverger.fr/transformation/la-reduction-des-eaux-de-vie/}
+
+
+\begin{itemize}
+\item Choisissez une eau minérale avec une dureté inférieure à 7\% en évitant le calcium et le magnésium qu'elle peut contenir, par exemple \textbf{Mont Roucous}
+\begin{remarque}
+1\% de dureté équivaut environ à 17.8mg/L de résidu. Il faut donc une eau avec moins de 125mg/L de résidus pour la dilution.
+\end{remarque}
+L'eau minérale que j'utilise a les caractéristiques suivantes (en mg/L):
+\begin{itemize}
+\item[\textbf{Calcium}] :  4.7
+\item[\textbf{Magnésium}] :  1.8
+\item[\textbf{Sodium}] : 5.9
+\item[\textbf{Potassium}] : 2.8
+\item[\textbf{Hydrogénocarbonates}] : 40.3
+\item[\textbf{Chlorures}] : 1.2
+\item[\textbf{Sulfates}] : 0.2
+\item[\textbf{Nitrates}] : 0.5
+\item[\textbf{Résidu sec à 180°C}] : 74
+\item[\textbf{pH}] : 7.5
+\end{itemize}
+\item Faites bouillir l'eau, puis laissez refroidir. La porter à ébullition enlève l'oxygène et dépose un peu de calcaire sur la casserole (j'ai lu ça mais je n'en suis pas totalement convaincu).
+\item Laissez refroidir au maximum, puis diluer en ajoutant l'eau, doucement, dans l'alcool (jamais l'inverse pour éviter qu'elle se trouble). % source: http://mapassionduverger.fr/transformation/la-reduction-des-eaux-de-vie/ et Daniel HAESINGER
+\end{itemize}
+
+Faites ensuite votre calcul de dilution. Gardez à l'esprit que la dilution sera fausse ; la table de Gay-Lussac donne les vraies propotions. Ceci est dû au fait que les molécules d'eau et d'alcool vont se lier légèrement et prendre moins de place que séparément. Dans la pratique, cette erreur représente quelques millilitres par litre, donc une erreur inférieur à 0.5\%. Personnellement, je néglige cette erreur.
+
+% Beginning of group where section is deactivated
+% This is only to get the good structure of the document 
+% since ``section'' is in fact embedded in the 'recette' environment.
+% This group allow us to deactivate sections ONLY in the given file and 
+% not for the entire document.
+{\renewcommand{\section}[1]{}
+
+\section{Confiture de vieux garçon}
+\begin{recette}{Confiture de vieux garçon}{0}{20 min.}{}
+
+\begin{ingredients}[$\gtrsim$2L de liqueur]
+\ingredient 1L de rhum blanc à 50\% vol (ou autre alcool équivalent)
+\ingredient 250mL d'eau (dilue le rhum à 40\% vol)
+\ingredient 300g de sucre de canne
+\ingredient fruits divers: pêche, abricot, fraise, framboise, poire, cerises, raisins, reine claude.
+\end{ingredients}
+
+\begin{preparation}
+\etape Ajoutez les fruits  et le sucre au rhum pur et à l'eau et laissez mariner 3 mois environ
+\etape Si vous n'avez pas de problème de place, vous pouvez rajouter l'eau dedans aussi. Sinon, ajoutez l'eau plus tard
+\end{preparation}
+\end{recette}
+
+\section{Limoncello}
+\begin{recette}{Limoncello}{0}{20 min.}{}\index{limoncello}
+
+\begin{ingredients}
+\ingredient 4L d'alcool de fruit à 40°
+\ingredient 20 citrons non traités
+\ingredient[sirop]
+\ingredient 2kg de sucre en poudre
+\ingredient 2L d'eau
+\end{ingredients}
+
+\begin{preparation}
+\etape Ne prendre que les zestes des citrons, les mettre dans l'alcool et laisser macérer une vingtaine de jours. Filtrez
+\etape Filtrer
+\etape Mélangez le sucre avec 2L d'eau
+\etape Portez à ébullition, laissez frémir 10 minutes
+\etape Lorsqu'il est froid, mélangez avec l'alcool. 
+\etape Attendre 2 à 3 jours avant de mettre en bouteille
+\end{preparation}
+\end{recette}
+
+\section{Mojito}
+\begin{recette}{Mojito}{0}{20 min.}{}\index{mojito}
+
+\begin{ingredients}
+\ingredient 1/2 citron coupé en quatre
+\ingredient 2 cc de sucre de canne
+\ingredient 5 feuilles de menthe
+\ingredient 6cl de rhum (blanc)
+\ingredient glace pilée
+\ingredient 6cl d'eau pétillante
+\end{ingredients}
+
+\begin{preparation}
+\etape Ecraser au pilon le citron, le sucre et la menthe
+\etape Rajouter le rhum
+\etape Ajouter de la glace pilée et un peu d'eau pétillante
+\end{preparation}
+\end{recette}
+
+\section{Planteur}
+\begin{recette}{Planteur}{0}{20 min.}{}\index{Rhum}\index{planteur}
+
+\begin{ingredients}[$\gtrsim$2L de rhum arrangé]
+\ingredient 90cl de rhum blanc à 40\% vol (ou 70cl de rhum à 50\% vol)
+\ingredient 1L de jus d'orange
+\ingredient 1L de jus d'ananas
+\ingredient 1L de jus de goyave
+\ingredient 1L de jus de fruit de la passion
+\ingredient gousse de vanille ou 2cas d'extrait de vanille maison
+\ingredient 150g de sucre de canne
+\ingredient bâton de cannelle
+\ingredient 2 citron verts (entier si non traité, sinon juste le jus)
+\end{ingredients}
+
+\begin{preparation}
+\etape Mélangez tous les ingrédients et laissez macérer 2 à 4 jours avant de déguster frais.
+\end{preparation}
+\end{recette}
+
+\section{Punch à la moi}
+\begin{recette}{Punch à la moi}{0}{20 min.}{}\index{Rhum arrangé}\index{Punch}
+
+\begin{ingredients}[$\gtrsim$2L de rhum arrangé]
+\ingredient 1L de rhum blanc à 50\% vol
+\ingredient 250mL d'eau (dilue le rhum à 40\% vol)
+\ingredient 300g de sucre de canne
+\ingredient 5g de citron
+\ingredient 3 fruits de la passion
+\ingredient 1 ananas victoria
+\ingredient 1 mangue
+\ingredient 1 gousse de vanille (ou une 1/2 si dose doublées)
+\end{ingredients}
+
+\begin{preparation}
+\etape Ajoutez les fruits  et le sucre au rhum pur et laissez mariner 1 mois environ
+\etape Si vous n'avez pas de problème de place, vous pouvez rajouter l'eau dedans aussi. Sinon, ajoutez l'eau plus tard
+\end{preparation}
+\end{recette}
+
+\section{Punch coco}
+\begin{recette}{Punch coco}{0}{20 min.}{}\index{Punch coco}
+
+\begin{ingredients}[$\sim$ 3L]
+\ingredient 80cl de crème de coco 
+\ingredient 30cl de rhum 50\% 
+\ingredient 60cL de lait de coco
+\ingredient 500g de lait concentré sucré
+\ingredient 1 gousse de vanille
+\ingredient zeste d'un citron vert
+\end{ingredients}
+
+\begin{preparation}
+\etape Mélanger tous les ingrédients sauf le rhum. 
+\etape Ajoutez la moitié du rhum, goutez, et ajoutez du rhum à votre convenance. Il faut viser environ 18° d'alcool
+\end{preparation}
+\end{recette}
+
+\section{Rhum à la mûre}
+\begin{recette}{Rhum à la mûre}{0}{20 min.}{}\index{Rhum à la mûre}
+
+\begin{ingredients}
+\ingredient 160g de mûre
+\ingredient 200g de rhum à 50\% vol
+\ingredient 150g de sucre
+\ingredient 5g de citron
+\end{ingredients}
+
+\begin{preparation}
+\etape Ecraser les mûres
+\etape Rajouter le rhum, le sucre et le citron
+\etape Une semaine plus tard, filtrez pour enlever les pépins
+\end{preparation}
+\end{recette}
+
+\section{Sangria}
+\begin{recette}{Sangria}{4}{20 min.+ 24h}{}\index{Sangria}
+% Pour alvaro, c'était: 3 bouteilles de 1.5L de vin, 1 bouteille de jus d'orange, pas toute la bouteille de limonade. du triple sec pour compenser je sais plus quoi. orange, citron et mangue car pas de peche. Pas de cannelle. 
+
+\begin{ingredients}[2L]
+\ingredient 75cl de vin rouge
+\ingredient 25cl de limonade
+\ingredient 20cl de jus d'orange
+\ingredient 10cl de cointreau
+\ingredient 2 oranges
+\ingredient 1/2 citron jaune
+\ingredient 2 peches
+\ingredient 50g de sucre en poudre
+\end{ingredients}
+
+\begin{preparation}
+\etape Lavez les fruits. Coupez les en morceaux
+\etape Versez le vin rouge, le cointreau et le jus d'orange dans un grand récipient
+\etape Ajoutez la cannelle, le sucre en poudre et les fruits
+\etape Laissez macérer 24h au frais
+\etape Au moment de servir, ajoutez la limonade fraiche et éventuellement des glaçons
+\end{preparation}
+\end{recette}
+
+\section{Schrubb}
+\begin{recette}{Schrubb}{4}{20 min.+ 6 jours}{45 min.}\index{Schrubb}\index{orange}
+
+\begin{ingredients}[2L]
+\ingredient[Rhum]
+\ingredient 25g d'écorce d'oranges sèches non traitées (3 oranges sans le blanc)
+\ingredient 1L de rhum blanc à 50°
+\ingredient 253 ml d'eau minérale
+\ingredient[Sirop]
+\ingredient 670g de sucre
+\ingredient 670ml d'eau
+\ingredient Vanille, Cannelle, zeste de citron
+\end{ingredients}
+
+\begin{preparation}
+\etape Pelez les oranges (si possible sans économe qui racle l'écorce et enlève le zeste) pour avoir les peaux les plus fines possibles (avec le moins de blanc possible --- Le blanc est amer).
+\etape Faites les sécher pendant 3 jours environ. 
+\etape Mettez à macérer les peaux d'oranges dans du rhum blanc pendant 3 jours au soleil (pas trop sinon l'amerture apparaitra). 
+\etape Faites bouillir le sucre de canne avec l'eau, de la cannelle, de la vanille et des zestes de citron. 
+\etape Faites cuire environ 45min à feu moyen. 
+\etape Mélangez le sirop avec le rhum, puis complétez si besoin avec de l'eau pour que ça fasse 2L.
+\begin{remarque}
+En fonction de l'évaporation lors du sirop, il y aura plus ou moins de liquide, ça permet de rééquilibrer
+\end{remarque}
+\end{preparation}
+\end{recette}
+
+\section{Soupe de champagne}
+\begin{recette}{Soupe de champagne}{4}{}{}\index{champagne}
+
+\begin{ingredients}[6 personnes;33cl de préparation par bouteille]
+\ingredient 75cl de mousseux
+\ingredient 8cl de cointreau
+\ingredient 2 citrons vert pressés (9cl)
+\ingredient[16cl de Sirop]
+\ingredient 135g de sucre de canne
+\ingredient 135g d'eau
+\end{ingredients}
+
+\begin{preparation}
+\etape Préparez le sirop de canne. 
+\etape Rajoutez le cointreau et les deux citrons vert. En tout, vous devez avoir 33cl de préparation, rajoutez de l'eau au besoin
+\etape Mettez au frais le mousseux et la préparation
+\etape Au moment de servir, ouvrez le champagne et versez dans la préparation.
+\end{preparation}
+\end{recette}
+
+\section{Vin chaud}
+\begin{recette}{Vin chaud}{5}{20 min.}{}\index{Vin chaud}\index{orange}
+\begin{ingredients}
+\ingredient 75cl de vin
+\ingredient 125 g de sucre
+\ingredient 15cl de jus d'orange (jus d'une orange)
+\ingredient 1/2 zeste d'orange
+\ingredient 1/2 zeste de citron
+\ingredient 2 bâton de cannelle
+\ingredient 1 petit morceau de gingembre 
+\ingredient 1 clou de girofle
+\ingredient 1 Etoile d'anis (badiane)
+\end{ingredients}
+
+\begin{preparation}
+\etape Mettez tout dans le vin
+\etape Faites chauffer  la préparation à feu moyen jusqu'à frémissement, puis laissez frémir 5 minutes
+\end{preparation}
+\end{recette}
+
+\section{Vin d'orange}
+\begin{recette}{Vin d'orange}{4}{3 semaines}{}\index{apéritif}\index{orange}
+\begin{ingredients}
+\ingredient 5 bouteilles de vin blanc doux
+\ingredient 1L d'eau de vie à 40°
+\ingredient 3 ou 4 oranges non traitées
+\ingredient 1kg de sucre en poudre
+\end{ingredients}
+
+\begin{preparation}
+\etape Préparer une bouteille plastique d'eau minérale de 5 litres.
+
+\etape Prendre les écorces de 3 ou 4 oranges non traitées et les introduire dans la bouteille pour les faire macérer dans 1 litre d'eau de vie.
+
+\etape Laisser macérer pendant trois semaines, en agitant le mélange à peu près une fois par jour.
+
+\etape Au bout de trois semaines ajouter à la préparation 5 bouteilles de 75 cl de vin blanc doux (12° de préférence) et du sucre en poudre (on peut aller jusqu'à 1 kg si ça rentre dans la bouteille).
+
+\etape Il faut bien mélanger pour que le sucre soit bien absorbé par le liquide.
+
+\etape Il ne reste plus qu'à transvaser la préparation dans les bouteilles de vin blanc. 
+\end{preparation}
+\end{recette}
+
+}% End of the ``group'' where section is deactivated
+
+\chapter{Techniques culinaires}
+\minitoc
+\newpage
+
+\section{Astuces}
+\subsection{Faire cuire de la viande}\index{viande!faire cuire}
+\begin{itemize}
+\item La poële doit être bien chaude avant de mettre la viande
+\item Ne pas piquer la viande en cours de cuisson, ça laisse échapper le sang et ça fait durcir la viande
+\item Ne jamais couvrir.
+\end{itemize}
+
+\subsection{Faire revenir des morceaux de viandes}\index{viande!faire revenir}
+Quand on les fait revenir, c'est juste pour faire dorer l'extérieur, pas besoin que l'intérieur soit cuit, ça sera fait quand la sauce mijotera.
+
+\subsection{Peler des tomates}\label{sec:peler_tomate}\index{tomate}
+Il suffit de faire bouillir de l'eau dans une marmite. Préparez un récipient d'eau froide à coté.
+Entaillez le bas de la tomate (pas le coté où il y a la tige verte) en faisant une croix au couteau (ça permet à la peau de commencer à se décoller par là. 
+
+En mettant les tomates par deux ou trois, plongez les dans l'eau bouillante une dizaine de seconde, sortez les avec une écumoire et plongez les dans l'eau froide. 
+
+\begin{remarque}
+Comme les tomates restent très peu de temps dans l'eau bouillante, elle ne sont pas chaude une fois sorties du récipient d'eau froide, et la peau se décolle très facilement. Il ne faut donc pas les laisser trop longtemps dans l'eau bouillante, de sorte que vous ne vous bruliez pas en les pelant immédiatement après.
+\end{remarque}
+
+\subsection{Préparer du confit}
+\begin{enumerate}
+ \item Placer les conserves au bain marie pour faire fondre la graisse et pouvoir en extraire délicatement les cuisses
+ \item Placer les cuisses dans une poële pour enlever le surplus de graisse et faire un peu dorer la peau, environ 5 minutes à feu vif
+ \item Mettre les cuisses de confit dans un plat, coté peau vers le haut, au four pendant 10 minutes à 200°C
+\end{enumerate}
+
+
+
+\subsection{Épaissir une sauce}\index{sauce!épaissir}\index{épaissir}
+Il suffit \emph{avant} de rajouter du liquide, de rajouter une cuillère à soupe rase de farine que vous mélangez avec les ingrédients (oignons, champignons, lardon, ou autre). Puis vous rajoutez le liquide en suivant la recette normale. Ça a le double avantage de permettre d'avoir plus de sauce et de l'épaissir (sinon, avoir plus de sauce implique qu'elle soit très liquide ce qui n'est pas forcément agréable).
+
+\subsection{Ne pas rater les oignons}\index{oignon!faire revenir}
+Le but est de chasser l'eau de l'oignon cru. Il faut donc faire revenir sans le couvercle. Il faut regarder les émanations de vapeurs pour avoir une idée du temps restant. Il ne faut pas que le feu soit trop fort par rapport au rythme avec lequel vous remuez les oignons, sinon ça crame. 
+
+Si malgré tout vous avez un peu cramé les oignons, vous pouvez récupérer un peu en ajoutant un peu d'eau qui va un peu homogénéiser le tout. Mais si vous les avez complètement cramés, ça aura quand même le goût.
+
+\subsection{Rétroengineering des recettes}
+Exemple, vous avez une tablette de nougat et vous voulez en déduire les doses des ingrédients individuels à partir de la liste des ingrédients au dos de la boite et les informations nutritionnelles. 
+
+Le site \url{https://informationsnutritionnelles.fr/amande} permet d'avoir les informations nutritionnelles des ingrédients individuels.
+
+\begin{remarque}
+Ne pas oublier que sans matière grasse, les oignons vont cramer de toute façon.
+\end{remarque}
+
+\section{Choisir les ingrédients}
+\subsection{Noix de coco}
+Les noix de coco fraiches (crémeux dedans) se distinguent des noix de coco sèches en regardant la coque de fibre. Si c'est bien lisse, l'intérieur sera crémeux, si c'est ondulé, alors ça a commencé à sécher.
+
+\section{Les saveurs}
+\subsection{Températures et saveurs}
+En fonction des saveurs, voici à quelle température maximale elles peuvent être soumise sans perdre leurs qualités:
+
+\begin{tabular}{|r|c|p{7cm}|}
+\hline 
+Cuisson & Température & Saveurs \\\hline 
+On peut chauffer & >250°C & vanille, épices, thym, laurier \\\hline 
+Pas trop (ne pas faire bouillir) & < 80°C & poireau, céleri \\\hline 
+\multirow{2}*{On peut pas (fin de cuisson)} & < 45°C & Herbes aromatiques (coriandre, , aneth, estragon, ciboulette, basilic, cerfeuil) \\\cline{2-3} 
+ & <48°C & Citron \\\hline 
+\end{tabular} 
+
+\subsection{Mariage des saveurs: Foodpairing}
+
+\section{L'autocuiseur}\index{autocuiseur}
+\begin{attention}
+\begin{itemize}
+\item Ne jamais utiliser l'autocuiseur avec une quantité de liquide inférieure à 25cl (un grand verre).
+\item Ne jamais remplir l'autocuiseur au delà des $\sfrac{2}{3}$ de sa capacité.
+\end{itemize}
+\end{attention}
+
+\reftab{tab:cuisson_autocuiseur} regroupe les temps de cuissons indicatifs de quelques aliments. Attention cependant. Pour les pommes de terre en particulier, c'est extrêmement dépendant de leur taille. Pensez à les faire cuire un peu plus longtemps (ou à les couper en morceaux plus petits) si elles sont grosses.
+
+\begin{enumerate}
+\item Introduire les aliments avec la quantité d'eau nécessaire à la cuisson et fermer l'autocuiseur
+\item Placez sur feu vif jusqu'à l'apparition d'un échappement de vapeur par le régulateur.
+\item Diminuez la puissance du feu de manière à ne maintenir qu'un léger échappement de vapeur par le régulateur 
+\begin{remarque}
+Le régulateur peut alors également ne fonctionner que par intermittence.
+
+En plus d'économiser de l'énergie, ça permet de ne pas perdre l'eau trop rapidement, et donc de risquer l'évaporation totale du liquide.
+\end{remarque}
+\item Commencez alors à décompter le temps de cuisson.
+\end{enumerate}
+
+\begin{remarque}
+Si vous utilisez du seul pour votre recette, faites le dissoudre immédiatement en remuant l'eau avec une cuillère en bois. Vous éviterez ainsi l'apparition de \og piqûres\fg qui pourraient altérer le fond de votre autocuiseur. La dissolution du sel est également plus facile et plus rapide en utilisant du seul fin et en salant l'eau chaude.
+\end{remarque}
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{|l|r||l|r|}
+\hline
+\multicolumn{4}{|c|}{\textbf{LÉGUMES}}\\\hline
+Artichauds & 12 min & Haricots secs & 20 min\\\hline
+Asperges & 5 min & Haricots verts & 10 min\\\hline
+Carottes & 15 min & Lentilles & 15 min\\\hline
+Choux & 10 min & Petits-pois & 15 min\\\hline
+Choux-fleurs & 4 min & Poireaux & 8 min\\\hline
+Endives & 10 min & Pommes de terre & 16 min\\\hline
+Épinards & 20 min & Salade & 20 min\\\hline
+Haricots frais & 8 min & Salsifis & 25 min\\\hline
+\end{tabular}
+
+\bigskip
+
+\begin{tabular}{|l|r||l|r|}
+\hline
+\multicolumn{4}{|c|}{\textbf{VIANDES}}\\\hline
+\multicolumn{2}{|c||}{\textsc{Boeuf}} & \multicolumn{2}{c|}{\textsc{Porc}}\\\hline
+Bourguignon & 40 min & Gras double & 35 min\\\hline
+Pot au feu & 50 min & Potée & 40 min\\\hline
+Rôti (1kg) & 10 min & Rôti (1kg) & 30 min\\\hline
+\multicolumn{2}{|c||}{\textsc{Mouton}} & \multicolumn{2}{c|}{\textsc{Veau}}\\\hline
+Blanquette & 20 min & Blanquette & 20 min\\\hline
+Pieds & 20 min & Marengo & 20 min\\\hline
+Ragoût & 25 min & Rôti (1kg) & 25 min\\\hline
+\end{tabular}
+
+\caption{Différents temps de cuisson pour les aliments dans un autocuiseur. Décomptez le temps dès que l'autocuiseur a atteint sa pression de fonctionnement (début de l'échappement de vapeur par le régulateur).}\label{tab:cuisson_autocuiseur}
+\end{table}
+
+\section{Kitchenaid Artisan}
+Certaines sections sont valables quel que soit le robot, d'autres sont adaptés au Kitchenaid Artisan. Pour donner un ordre 
+d'idée, les vitesses vont de 1 à 10.
+
+Utilisez la vitesse 1 jusqu'à ce que les ingrédients soient correctement mélangés. Augmentez ensuite progressivement la vitesse 
+jusqu'à la position désirée. Ajoutez les ingrédients aussi près des parois que possible et non pas directement sur la zone du 
+batteur plat en mouvement. 
+
+\subsection{Batteur}
+\subsubsection{Pâtes levées}
+Utiliser le crochet pétrisseur et la vitesse 2 (pas plus). 
+
+\subsubsection{Mélanges liquides}
+Elles doivent être mélangées à basse vitesse afin d'éviter les éclaboussures. N'augmenter la vitesse qu'une fois le mélange 
+épaissi. 
+
+\subsubsection{Ajout de noix, raisins secs ou fruits confits}
+Doit être ajouté au cours des dernières secondes, à la vitesse 1. La pâte doit être suffisamment épaisse pouré viter que les 
+fruits ne tombent au fond du moule durant la cuisson. Les fruits collants doivent être saupoudrés de farine pour une meilleure 
+répartition dans la pâte.
+
+\subsubsection{Blanc d'œufs et crème fouettée}
+Graduellement jusqu'à une vitesse de 10 à 8 en fonction de la quantité (plus vous en mettez, moins vous avez besoin d'aller à 
+fond).
+
+\subsection{Hachage de la viande}
+Il faut utiliser la vitesse 4. 
+
+Ne pas hésiter à utiliser de la viande très froide ou partiellement surgelée (ça marche mieux). Il faut faire des petits cubes, 
+idéalement 1cm$^3$ ou des lanières longues mais très fines (un carré de 0.5cm$^2$ de section).
+Il faut hacher une première fois avec la grosse grille, puis si on le souhaite, utiliser la grille plus fine. La viande grasse 
+ne doit être hachée qu'une seule fois.
+
+\subsection{Passoire à fruits et légumes}
+Coupez les fruits et légumes en morceaux adaptés aux dimensions de la trémie. 
+
+Retirez les peaux dures et épaisses (peau d'orange), les noyaux (pêches, cerises), les queues (fraises, raisin, cerises).
+
+Cuisez tous les fruits et légumes fermes ou durs avant de les passer à la machine (pommes).
+
+\section{Couteaux de cuisine}
+Il existe beaucoup de couteaux différents, avec chacun une fonction précise. Voici un récapitulatif de certains d'entre eux.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.6\linewidth]{figures/couteaux.pdf}
+\caption{Nom et forme de quelques couteaux de cuisine. À noter que le couteau de chef est un couteau multi-usage aussi.}
+\end{figure}
+
+\begin{remarque}
+Pour une utilisation optimale, il convient d'aiguiser le couteau avant chaque utilisation à l'aide d'un fusil. Pas besoin d'y passer des heures, quelques mouvements suffisent.
+
+Il faut poser le couteau (près de la garde) sur le fusil, avec une inclinaison d'environ 30\degre, le coté tranchant vers l'avant. Poussez ainsi la lame pour que le fusil rencontre la totalité du fil du couteau. Le mouvement doit être régulier afin de ne pas changer l'angle. Faites ensuite de même en passant sur le dessous du fusil pour l'autre coté du couteau.
+
+Il est important de faire un mouvement pour chaque tranchant du couteau à chaque fois afin que l'affûtage soit homogène.
+\end{remarque}
+
+% Pour ma pierre à aiguiser 1000 3000, le coté beige est le coté à 3000, et le coté rouge le coté à 1000. En gros, le coté gros grain est le coté le plus épais.
+
+\section{Herbes aromatiques}
+\begin{itemize}
+\item Aneth : Son goût anisé est très utilisé pour les recettes à base de poissons et d'œufs. On l'utilise en petite quantité pour agrémenter le plat et on ne soumet pas l'aneth à une cuisson trop forte, pour ne pas en perdre les qualités gustatives.
+
+\item Basilic : Riche en arômes s'accommode parfaitement avec les plats ensoleillés. Avec des légumes, des pâtes ou en salade, le basilic relève vos recettes d'un parfum à la fois doux et intense. On retiendra qu'il est l'élément principal de la fameuse sauce pistou.
+
+\item Ciboulette : les feuilles de ciboulette sont souvent utilisées ciselées dans les sauces et les salades pour les agrémenter d'un goût proche de l'oignon doux. On l'appréciera notamment dans une sauce à la crème fraîche (légère de préférence !) et au poivre pour accompagner une pomme de terre au four.
+
+\item Cumin : Sa saveur chaude et piquante accompagne les fromages, le pain, les carottes et l'agneau.
+
+\item Estragon : les feuilles d'estragon, qu'elles soient utilisées fraîches, séchées ou en poudre s'accommodent particulièrement avec les viandes blanches, le poisson et les œufs.
+
+\item Laurier : originaire d'Europe, la feuille de laurier entre dans la composition des potages, marinades, et civets. Elle accompagne également la composition des bouquets garnis.
+
+\item Marjolaine : autrement nommée \og grand origan\fg, cette plante condimentaire relativement méconnue peut être incorporée à vos ragoûts ou accompagner vos tomates. Son goût étant assez prononcé, il est conseillé d'éviter de la cuire trop longtemps ou de la mélanger à d'autres herbes.
+
+\item Menthe : herbe aromatique phare des cuisines méditerranéennes, la menthe accompagne de nombreuses préparations traditionnelles, avec sa saveur douce et fraîche. Dans le thé ou le taboulé, avec des nems ou dans des desserts, la menthe apporte cette petite touche de vitalité à vos plats.
+
+\item Origan : indispensable sur la pizza napolitaine, très apprécié dans la sauce tomate, l'origan est reconnu pour son goût prononcé et ses vertus médicinales. Souvent confondu avec la marjolaine, dont le goût est plus délicat, les deux plantes ont cependant les mêmes usages.
+
+\item Oseille : avec sa saveur piquante et acidulée, l'oseille qui se cuisine comme les épinards, relève les œufs et les poissons.
+
+\item Persil : riches en vitamines A et C, les feuilles de persil sont utilisées dans les préparations de légumes, avec de la viande ou du poisson. Qu'elles soient plates ou frisées, leur odeur et leur goût sont prononcés.
+
+\item Romarin : son nom signifie en latin rosée de mer, et il pousse à l'état sauvage sur le pourtour méditerranéen. Son odeur camphrée accompagne viandes rôties, pommes de terre ainsi que le vinaigre.
+
+\item Thym : poussant en milieu aride et rocailleux, le thym possède une force olfactive méditerranéenne de caractère. Sa fraîcheur et sa profondeur parfument bouquets garnis, marinades, potages et grillades.
+\end{itemize}
+
+
+
+\section{Temps de cuisson au four/grill}\index{temps de cuisson}
+\begin{table}[htb]
+\centering
+\begin{tabular}{|c|c|}\hline
+Préparation & Temps de cuisson\\\hline\hline
+\multicolumn{2}{|c|}{\bsc{Viandes}}\\\hline
+B\oe uf & $15\unit{min}/500\unit{g}$\\\hline
+Mouton (épaule, gigot) & $15$ à $20\unit{min}/500\unit{g}$\\\hline
+Porc,veau & $30$ à $35\unit{min}/500\unit{g}$\\\hline\hline
+\multicolumn{2}{|c|}{\bsc{Volailles}}\\\hline
+Poulet & $25$ à $30\unit{min}/500\unit{g}$\\\hline
+Caille & $20$ à $25\unit{min}$\\\hline
+\end{tabular}
+\caption{Cuisson Grill/rotissoire (Garder la porte entrouverte)}
+\end{table}
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{|c|c|c|c|c|}\hline
+Température à coeur & bleu & saignant & à point & bien cuit\\\hline
+\multicolumn{5}{|c|}{\bsc{Bœuf}}\\\hline
+Filet & 49 - 52 °C & 53 - 57 °C & 58 - 63 °C & + 65 °C\\\hline
+rôti(rumsteak, faux-filet, tende) & 49 - 52 °C & 53 - 57 °C & 58 - 63 °C & + 65 °C\\\hline
+côte & 49 - 52 °C & 53 - 57 °C & 58 - 63 °C & + 65 °C\\\hline
+paleron basse température(60 à 75°C d'enceinte) & - & - & - & 58 - 63 °C\\\hline
+paupiettes & - & - & - & 65 - 68 °C\\\hline\hline
+\multicolumn{5}{|c|}{\bsc{agneau}}\\\hline
+carré & - & - & 60 - 63 °C & -\\\hline
+selle & - & 58 - 63 °C & 60 - 63 °C & -\\\hline
+Gigot & - & 58 - 63 °C & 60 - 63 °C & 65 - 68 °C\\\hline
+épaule & - & - & 60 - 62 °C & 65 - 68 °C\\\hline\hline
+\multicolumn{5}{|c|}{\bsc{canard}}\\\hline
+magret et filet & - & - & 58 - 60 °C & -\\\hline
+cuisse & - & - & - & 70 - 72 °C\\\hline
+cuisse confite & - & - & - & 78 - 80 °C\\\hline\hline
+\multicolumn{5}{|c|}{\bsc{porc}}\\\hline
+Filet mignon & - & - & 60 - 62 °C & -\\\hline
+carré & - & - & - & 68 - 72 °C\\\hline
+rôti (échine) & - & - & - & 68 - 72 °C\\\hline
+Jambon & - & - & - & 68 - 72 °C\\\hline\hline
+\multicolumn{5}{|c|}{\bsc{veau}}\\\hline
+Filet mignon & - & 58 - 61 °C & 62 - 64 °C & -\\\hline
+Quasi ou noix & - & - & 60 - 63 °C & -\\\hline
+carré & - & 53 - 57 °C & 62 - 64 °C & 65 - 68 °C\\\hline
+épaule & - & - & 62 - 64 °C & 65 - 68 °C\\\hline
+paupiettes & - & - & - & 65 - 68 °C\\\hline\hline
+\multicolumn{5}{|c|}{\bsc{poule \& dinde}}\\\hline
+Filet blanc & - & - & - & 68 -70 °C\\\hline
+cuisse & - & - & - & 70 - 72 °C\\\hline
+Volaille farcie & - & - & 68 - 70 °C & 72 - 75 °C\\\hline
+Volaille entière & - & - & 65 - 68 °C & 70 - 72 °C\\\hline\hline
+\multicolumn{5}{|c|}{\bsc{pintade}}\\\hline
+suprême & - & - & - & 69 - 72 °C\\\hline
+cuisse & - & - & - & 73 - 75 °C\\\hline\hline
+\multicolumn{5}{|c|}{\bsc{lapin}}\\\hline
+ & - & - & - & 66 - 68 °C\\\hline\hline
+\multicolumn{5}{|c|}{\bsc{gibier}}\\\hline
+Noix de cerf/chevreuil & - & 58 - 63 °C & 60 - 63 °C & 70 - 72 °C\\\hline
+cuisse de sanglier & - & - & 70 - 72 °C & 76 - 78 °C\\\hline\hline
+\multicolumn{5}{|c|}{\bsc{foie gras}}\\\hline
+Filet blanc & 58 °C & *63 °C & 72 °C & -\\\hline\hline
+\multicolumn{5}{|c|}{\bsc{poisson}}\\\hline
+cabillaud / Lieu & - & - & 51 °C & 54 °C\\\hline
+Lotte & - & - & 52 °C & 54 °C\\\hline
+sandre / Turbo & - & - & 51 °C & 54 °C\\\hline
+saumon & 40 °C & 48 °C & 50 °C & 52 °C\\\hline
+Thon & 42 °C & 48 °C & 50 °C & 52 °C\\\hline
+Espadon / marlin & - & 48 °C & 50 °C & 52 °C\\\hline
+poisson entier (avec arête) & - & - & + 48 °C & -\\\hline\hline
+\end{tabular}
+\caption{Cuisson viande et poisson : Température à coeur}
+\end{table}
+
+% If any, the index must be right after the bibliography, and before appendixes
+\clearpage
+\phantomsection
+\printindex
+
+\end{document}
