@@ -12,4 +12,8 @@
 *.tex2
 *.toc
 *.tex~
-
+*.pdf
+*.jpg
+*.gz
+*~
+*#
