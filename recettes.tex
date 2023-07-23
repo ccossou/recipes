@@ -25,6 +25,9 @@
 \newcommand{\ingredientsTopSep}{\vspace{.4cm} \hrule height0.75pt width\hsize\vspace*{1\p@}\hrule height0.25pt width\hsize \vspace{1em}}
 \newcommand{\partStyle}{\bfseries \large}
 
+% Custom column definition with paragraph centered horizontally and vertically
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+
 % redéfinition d'une nouvelle commande de section qui n'a pas de numérotation, est centrée, avec mise en page modifiée. C'est pour afficher le titre des recettes et qu'elles apparaissent dans le menu. J'avais fait avec addcontentline mais la référence n'était pas bonne et pointait sur la page précédente parfois. Bref, pas propre.
 \newcommand\nomRecette{\@startsection {section}{6}{\z@}{0ex}{2.3ex }%
 	{\reset@font\Huge\bfseries\centering}}
@@ -1493,8 +1496,8 @@ Surveillez le pain et sortez-le du four quand la cuisson vous convient.
 \end{recette}
 
 %recette de la campaillette grand siècle
-\section{Pain (frigo/nuit) 1 fournée}
-\begin{recette}{Pain (frigo/nuit) 1 fournée}{3}{45min+12h+2h}{30 min}\index{pain}\index{levure de boulanger}
+\section{Pain 1 fournée}
+\begin{recette}{Pain 1 fournée}{3}{2h30(+12h)+2h}{30 min}\index{pain}\index{levure de boulanger}
 \begin{ingredients}[4 baguettes]
 \ingredient 500g de farine de blé T55
 \ingredient 350g d'eau (30-35°C)
@@ -1504,34 +1507,47 @@ Surveillez le pain et sortez-le du four quand la cuisson vous convient.
 \end{ingredients}
 
 
-\begin{preparation}
-\etape La veille au soir, la farine et le sel dans un bol de robot.
-\etape Dans un bol, délayez la levure dans l'eau tiède
-\etape Versez alors l'eau dans la farine sans faire de puit
-\etape \textbf{Frasage} Pétrissez pendant 5 minutes à vitesse 1
-\etape \textbf{Autolyse} Laissez reposer 1h
-\etape Pétrissez pendant 10 minutes à vitesse 1
-\etape \textbf{Bassinage} Ajoutez l'eau de bassinage en filet pendant que vous pétrissez pendant 2 minutes à vitesse 2 (laissez bien l'eau absorber avant d'en rajouter pour ne pas casser les réseaux de gluten).
-\etape \textbf{Pointage} laissez la pâte reposer pendant 1h (je met une plaque de verre sur le bol du robot)
-% la mie n'était pas parfaitement développée, peut-être qu'elle avait trop de force et qu'il faudrait rabattre un peu moins.  J'ai donc temporairement désactivé cette étape puisque je fais aussi un rabattage le lendemain matin quand la pâte est plus froide.
-%\etape \textbf{Rabatage} Rabattez la pâte. Comme elle est trop liquide, faites des rabattages dans le bol du robot, à l'aide d'une spatule en silicone, en prenant un bord et en passant par dessus la pâte pour l'emmener de l'autre coté. Répétez l'opération une vingtaine de fois. 
-
-\etape \textbf{Blocage} Mettez au frigo, couvert, pendant 12 à 14h à 4°C
-\etape \textbf{Rabatage} Le lendemain, à l'aide d'une spatule silicone, décollez la pâte et versez la sur un plan de travail fariné. Effectuez un nouveau rabattage tant que la pâte est froide, ce coup ci de façon classique en étalant la pâte puis en ramenant les coins au centre.
-
-\etape \textbf{Détente} Découpez 4 morceaux égaux en volume. Laissez-les reposer 1h
-\etape \textbf{Façonnage} Déposez une couche de farine sur le moule à baguette à l'aide d'une passoire fine.
-\begin{remarque}
-L'eau de bassinage rend la pâte beaucoup plus collante, il faut donc une petite couche. 
-\end{remarque}
-
-\etape Formez un boudin grossièrement sans trop le manipuler, puis saisissez une extrémité dans chaque main. Faites des 
+\begin{preparation*}
+\begin{tabular}{|c|M{6cm}|M{6cm}|}
+\hline 
+Etapes & Tout en une fois & nuit entre deux étapes \\ 
+\hline 
+ & \multicolumn{2}{M{12cm}|}{Mettez la farine et le sel dans un bol de robot.} \\ 
+\hline 
+ & \multicolumn{2}{M{12cm}|}{Dans un bol, délayez la levure dans l'eau tiède} \\ 
+\hline 
+ & \multicolumn{2}{M{12cm}|}{Versez alors l'eau dans la farine sans faire de puit} \\ 
+\hline 
+\textbf{Frasage}  & \multicolumn{2}{M{12cm}|}{Pétrissez pendant 5 minutes à vitesse 1} \\ 
+\hline 
+\textbf{Autolyse} & \multicolumn{2}{M{12cm}|}{Laissez reposer 1h} \\ 
+\hline 
+ & \multicolumn{2}{M{12cm}|}{Pétrissez pendant 10 minutes à vitesse 1} \\ 
+\hline 
+\textbf{Bassinage}  & \multicolumn{2}{M{12cm}|}{Ajoutez l'eau de bassinage en filet pendant que vous pétrissez pendant 2 minutes à vitesse 2 (laissez bien l'eau absorber avant d'en rajouter pour ne pas casser les réseaux de gluten).} \\ 
+\hline 
+\textbf{Pointage} & \multicolumn{2}{M{12cm}|}{Laissez la pâte reposer pendant 1h (je met une plaque de verre sur le bol du robot)} \\ 
+\hline
+\textbf{Blocage} & - & Mettez au frigo, couvert, pendant 12 à 14h à 4°C \\
+\hline
+\textbf{Rabattage} & Effectuez un rabattage et laissez pointer 1h de plus. & Le lendemain, à l'aide d'une spatule silicone, décollez la pâte et versez la sur un plan de travail fariné. Effectuez un nouveau rabattage tant que la pâte est froide, ce coup ci de façon classique en étalant la pâte puis en ramenant les coins au centre. \\
+\hline 
+ & \multicolumn{2}{M{12cm}|}{Découpez 4 morceaux égaux en volume} \\ 
+\hline 
+\textbf{Détente} & Laissez reposer 20 minutes & Laissez reposer 1h (au moins 13°C à coeur) \\ 
+\hline 
+• & \multicolumn{2}{M{12cm}|}{Déposez une couche de farine sur le moule à baguette à l'aide d'une passoire fine.
+L'eau de bassinage rend la pâte beaucoup plus collante, il faut donc une petite couche.} \\  
+\hline 
+ \textbf{Façonnage}  & \multicolumn{2}{M{12cm}|}{Formez un boudin grossièrement sans trop le manipuler, puis saisissez une extrémité dans chaque main. Faites des 
 mouvements de haut en bas pour que la pâte s'étire jusqu'à la longueur voulue, en prenant garde que la section reste à peu 
-près constante partout
-\etape \textbf{Apprêt} Disposez-les sur le moule fariné. 
-Couvrez avec un torchon sec afin que ça ne sèche pas et que ça soit à l'abri de l'air. Laissez monter 30-45 minutes environ
-\end{preparation}
-
+près constante partout} \\  
+\hline 
+\textbf{Apprêt} & \multicolumn{2}{M{12cm}|}{Disposez-les sur le moule fariné. 
+Couvrez avec un torchon sec afin que ça ne sèche pas et que ça soit à l'abri de l'air. Laissez monter 30-45 minutes environ} \\  
+\hline 
+\end{tabular} 
+\end{preparation*}
 
 \begin{cuisson}
 Préchauffez le four pendant 10 minutes à 240°C avec un lèche frite en bas.
@@ -1550,69 +1566,6 @@ Mettez alors le four à 240°C pendant 16 minutes à chaleur tournante.
 Surveillez le pain et sortez-le du four quand la cuisson vous convient.
 
 \textbf{Ressuage} Laissez le pain refroidir sur une grille (ou perpendiculairement au moule que vous avez utilisé) pendant 30 minutes pour bien évacuer l'humidité.
-
-
-\end{cuisson}
-\end{recette}
-
-\section{Pain (frigo/nuit) 2 fournées}
-\begin{recette}{Pain (frigo/nuit) 2 fournées}{3}{45min+10h+3h}{30 min}\index{pain}\index{levure de boulanger}
-\begin{ingredients}[4 baguettes]
-\ingredient 1kg de farine de blé T55
-\ingredient 700mL d'eau tiède (30-35°C)
-\ingredient 15 mL d'eau de bassinage (encore en train d'optimiser la valeur. En mettre améliore la tenue, mais trop et c'est très difficile à manipuler)
-\ingredient 7g de levure sèche
-\ingredient 16g de sel 
-\end{ingredients}
-
-
-\begin{preparation}
-\etape La veille au soir, Pesez la farine dans un bol de robot.
-\etape Dans un bol, délayez la levure dans l'eau tiède, ajoutez deux cuillères à soupe de la farine pesée et laissez reposer 20 minutes jusqu'à que ça fasse de la mousse en surface (il faudra peut-être plus longtemps si la levure sèche n'est plus trop active, une pincée de sucre pourra alors aider). 
-\etape Pendant ce temps, pesez le sel et mélangez le à la farine. Puis faites un puit. 
-\etape Versez l'eau dans le puit puis effondrez les bords du puits dans l'eau (sinon ça met trop de temps à se mélanger)
-\etape Pétrissez 3 minutes à vitesse 1 (ou à défaut, arrêtez quand il n'y a plus de farine sur le coté du récipient.
-\etape Laissez alors reposer 20 minutes
-\etape Pétrissez 8 minutes à vitesse 1
-\etape Pétrissez 4 minutes à vitesse 2 tout en versant l'eau de bassinage en un mince filet. Stoppez le filet quand ça ruisselle et reprenez quand l'eau est incorporée (il ne faut pas que ça dénature la pâte)
-\etape Disposez la pâte dans un récipient hermétique (de préférence avec un couvercle transparent) et mettez au frigo toute la 
-nuit (10h environ) 
-\etape Le lendemain matin, démarrez un chrono de 2h30. Rabattez la pâte, attendez 20 minutes à température ambiante, rabattez à 
-nouveau, 20 minutes de plus et rabattez une 3e et dernière fois
-\etape Couvrez puis attendez la fin du décompte, $\sim$ (total - 1h) si vous avez oublié de regarder le temps total depuis la 
-sortie du frigo.
- 
-\etape Toujours à l'aide d'une spatule silicone, décollez la pâte et versez la sur un plan de travail fariné (utilisez une passoire fine) . Découpez 8 
-morceaux égaux en volume. 
-\etape Déposez une couche de farine sur le moule à baguette à l'aide d'une passoire fine. L'eau de bassinage rend la pâte 
-beaucoup plus 
-collante, il faut donc une petite couche. 
-\etape Formez un boudin grossièrement sans trop le manipuler, puis saisissez une extrémité dans chaque main. Faites des 
-mouvements de haut en bas pour que la pâte s'étire jusqu'à la longueur voulue, en prenant garde que la section reste à peu 
-près constante partout
-\etape Disposez-les sur le moule fariné. 
-Couvrez avec un torchon sec afin que ça ne sèche pas et que ça soit à l'abris de l'air. Laissez monter 1h environ
-\end{preparation}
-
-
-\begin{cuisson}
-Préchauffez le four pendant 20 minutes à 240°C avec un lèche frite en bas. (Notez que les 20 minutes de préchauffe sont comprises dans le temps de la dernière montée. Au bout de l'heure, le four doit déjà être chaud)
-
-Saupoudrez un peu de farine. Puis à l'aide d'un couteau tranchant, entaillez 
-le pain en diagonale à plusieurs endroits, pas besoin de tailler trop profond. Des mouvements vifs du couteau permettent 
-d'entailler plus 
-facilement.
-
-Juste après avoir mis les patons, mais avant de fermer la porte du four, versez un tiers (entre 1/3 et 1/2) de verre d'eau 
-chaude sur le lèche 
-frite.
-
-Mettez alors le four à 240°C pendant 16 minutes à chaleur tournante.
-
-Surveillez le pain et sortez-le du four quand la cuisson vous convient.
-
-Faites de même avec la 2e fournée dans la foulée, 16 minutes à chaleur tournante. 
-
 \end{cuisson}
 \end{recette}
 
