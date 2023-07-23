@@ -1,0 +1,21 @@
+Une piste pour mon pain c'est que ma farine T55 n'a pas assez de gluten pour une mie bien élastique et légère. Une possibilité est donc de rajouter du gluten à la main dans ma farine, pour artificiellement augmenter ce taux. 
+
+Estimation de la quantité de gluten dans ma farine (source: https://tpe-sur-le-pain.webnode.fr/influence-de-la-quantite-de-gluten/)
+> La farine que nous utilisons (T55) contient 9,4g de proteines pour 100g de farine soit 7,5g de gluten, ce qui donne 6g de gluten pour 80g de farine (étant la quantité de farine prise pour nos pains). 
+
+9.4g de protéine -> 7.5g de gluten
+
+La farine T55 eco+ a 10g de protéine
+
+Dans la farine campaillette grand siècle, il y a 10.3g de protéine pour 100g
+il y a aussi 10g d'améliorant par kg de farine qui lui contient 49g de protéines. Je sais que c'est faux mais je vais supposer que l'additif est du gluten pur. 
+
+
+Dans la recette de baguette tradition de pro, il y a donc 103g de protéine, donc environ 
+103 * 7.5/9.4 = 82g de gluten
++
+10
+= 92g de gluten pour 1k de farine
+
+Si j'utilise 1kg de farine T55, ça fait 100 * 7.5/9.4 = 79.78g de gluten
+il faut donc techniquement 12g de gluten pur. On peut peut-être mettre 10g pour commencer. 

@@ -1,0 +1,27 @@
+Conseils de jérome:
+	il faut que le bouillon soit bouillant avant de le mettre sur le riz
+	une fois qu'on a mis le bouillon, il ne faut plus toucher du tout
+	il prépare le sofrito de tomate
+	il utilise le mélange d'épice de carrouf. Boite blanche avec un truc bleu. El paellero je crois. Pour sa grosse paella, dans le plat à paella spécial (qui est au cea et que je peux emprunter si je veux), il utilise 2 ou 3 sachets. il faut que ça ait du gout a-t-il dit. 
+	
+Recette de sofrito que j'ai fait:
+\ingredient[1kg de sofrito]
+\ingredient 1 carotte
+\ingredient 1 poireau
+\ingredient 1 poivron vert
+\ingredient 2 oignon
+\ingredient 3 gousses d'ail
+\ingredient 50cl de coulis de tomate
+\ingredient 20cl de vin blanc sec
+\ingredient romarin, laurier, sel, sucre
+
+\etape Emincez l'ail et l'oignon et mettez dans la marmite
+\etape Emincez carotte poireau et poicron et réservez à part. 
+\etape Faites revenir l'oignon et l'ail dans l'huile
+\etape Rajoutez carotte, poivron et poireau et laissez cuire à feu doux (4/9) sans couvercle pendant 20 minutes. 
+\etape Déglacez avec le vin blanc, puis ajoutez le coulis de tomate, le romarin, le laurier, le sel et le sucre
+\etape Laissez cuire à feu doux et à couvert pendant 50 minutes. 
+\etape Enlevez le laurier et le romarin, puis mixez. 
+
+jérome dit qu'il faut maximum 5cm de hauteur quand on fait cuire la paella, qu'il la fait dans une poele s'il n'a pas de plat à paella. 
+Il dit aussi que pour faire revenir le riz dans l'huile, il le laisse 10-15 minutes, et non 2 minutes. 
