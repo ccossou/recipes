@@ -27,3 +27,64 @@ jérome dit qu'il faut maximum 5cm de hauteur quand on fait cuire la paella, qu'
 Il dit aussi que pour faire revenir le riz dans l'huile, il le laisse 10-15 minutes, et non 2 minutes. 
 
 J'ai fait du riz seul, j'ai fait revenir dans l'huile pendant 15 minutes, au début à 7/9 puis j'ai baissé à 5. J'ai ensuite rajouté de l'eau, préalablement chauffée au micro onde avec le sel (10g de sel pour 600g de riz), compter 800g d'eau pour 600g de riz, dans la poele, et j'ai couvert avec le couvercle en verre (qui en fait est trop petit). J'ai ensuite fait cuire 20 minutes avec couvercle à 4/9. Le riz a éclaté, mais il avait assez d'eau. Nacrer, c'est, si je comprend bien, le riz qui devient translucide, puis redevient blanc ensuite. ça permet de faciliter l'absorption de l'eau. 15 minutes c'est peut-être trop par contre, la prochaine fois, viser 10 minutes à 5/9. Je dois aussi pouvoir réduire la quantité d'eau pour essayer que le riz n'éclate pas. mais je peux aussi essayer du riz étuvé, si ça se trouve ça sera mieux. 
+
+j'utilise pour base riz en paella au poulet, au gambas et aux calmars
+
+
+ingredients
+200g de crevettes cuites
+200g de calmars
+200g de chorizo
+200g de poulet
+\ingredient[Paella]
+\ingredient 1kg de crevettes cuites
+\ingredient 1kg d'anneaux de calmars décongelés (le moins cher en fait)
+\ingredient 500g-1kg de moules
+\ingredient 500g de coques (facultatif mais mieux)
+\ingredient 1kg de riz étuvé
+\ingredient 1800g de bouillon
+\ingredient 20g de sel (attention, le sel doit être mis dans le bouillon, mais la quantité dépend de la quantité de riz)
+\ingredient 200g de chorizo doux
+\ingredient 1kg de pilons de poulet
+\ingredient 140g de petits pois (les petites boites)
+\ingredient 5g de paprika (2.5 cac)
+\ingredient 1 dose de safran
+\ingredient[fumet de poisson]
+\ingredient les têtes et écailles des crevettes et autres coquilles
+\ingredient 20g de beurre
+\ingredient 1 oignon
+\ingredient 1 petit poireau
+\ingredient Thym, laurier
+\ingredient sel (voir la quantité de riz)
+\ingredient 75cl de vin blanc
+
+\etape Durant la recettes, vous aurez besoin des récipients suivants:
+\begin{itemize}
+\item un tupperware si vous préparez la veille, sinon un saladier, dans lequel stocker chair de crevettes, moule et fruits à coque
+\item un saladier dans lequel stocker les déchets de crevettes, moule et fruits à coque (une fois le bouillon fait, vous n'en aurez plus besoin)
+\item un grand récipient dans lequel stocker le bouillon et tous les liquides au fur et à mesure
+\item Une assiette ou n'importe quoi pour stocker le chorizo
+\item un saladier pour stocker le poulet cuit
+\end{itemize}
+\etape Ces étapes peuvent être faites la veille pour gagner du temps
+\etape Coupez grossièrement l'oignon et le poireau et réservez dans un grand saladier.
+\etape Pelez les crevettes et réservez d'une part la chair dans un tupperware et d'autre part les déchets dans le saladier avec poireau et oignon.
+\etape Faites cuire les fruits à coques et les moules dans du vin blanc et sortez au fur et à mesure quand ils sont ouverts.
+\etape Réservez le jus de cuisson pour plus tard. 
+\etape Réservez la chair des moules et des fruits à coques avec la chair des crevettes, et les coquilles avec les déchets des crevettes.
+\etape Faites cuire les déchets de crustacés 3 minutes dans le beurre avec l'oignon et le poireau
+\etape Ajoutez alors thym, laurier, le sel. Ajoutez le jus de cuisson des fruits à coque et compléter pour avoir environ 1L de bouillon
+\etape Portez à ébullition. Une fois que ça bout, baissez le feu, couvrez et maintenez à petite ébullittion pendant 30 minutes environ. 
+\etape Filtrez et réservez le bouillon pour plus tard
+\etape Ensuite, ou le lendemain:
+\etape Faites cuire la moitié du chorizo, réservez, puis faites cuire le poulet dans le gras du chorizo. Rajoutez un peu d'eau (20cl maxi), couvrez et faites cuire 30 minutes à feu doux et réservez. Récupérez l'eau et mettez dans le bouillon
+\etape Pendant ce temps Emincez les anneaux d'encornets: je coupe les petits anneaux en deux, et les gros anneaux en 4. Puis mettez dans une passoire pour les égoutter (pensez à récupérer le jus)
+\etape Faites chauffer la marmite à feu très vif. Faites cuire les encornets pendant 5 minutes en remuant. Réservez avec les fruits de mers
+\etape Faites cuire le reste de chorizo émincé puis réservez avec la première moitié que vous avez déjà fait cuire
+\etape Faites alors cuire le riz, le paprika et le safran dans le gras du chorizo pendant 5 à 10 minutes
+\etape Ajoutez alors le bouillon et complétez avec de l'eau pour avoir la quantité nécessaire (adaptez en fonction de la quantité de riz, voir plus haut). 
+\etape Faites bouillir, couvrez, et laissez cuire à feu moyen pendant 15 minutes. 
+\etape Eteignez sans ouvrir et laisser reposer pendant 15 minutes
+\etape Ajoutez alors le poulet et les fruits de mers et réchauffez 5 minutes puis servez.
+
+il faut que je teste la cuisson du riz étuvé pour avoir la bonne quantité d'eau
