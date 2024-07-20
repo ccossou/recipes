@@ -1,0 +1,14 @@
+500g de flocon d'avoine
+100g de raisins
+
+les raisins, c'est 68g de sucre
+
+avoine = 500  # g
+raisin = 100  # g
+
+raisin_sugar = 68  # g/100g
+
+# sugar content g/100g
+sugar_content = (raisin / 100) * raisin_sugar / (raisin + avoine) * 100
+
+11.33g
