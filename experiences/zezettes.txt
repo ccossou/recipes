@@ -1,0 +1,87 @@
+recette tatie
+\section{Zézettes de Sète}
+\begin{recette}{Zézettes de Sète}{0}{20 min.+1h}{25 min.}\index{biscuit}\index{orange confite}\index{zezette}
+
+\begin{ingredients}[15 biscuits]
+\ingredient 275 g Farine tamisée
+\ingredient 75 g Sucre en poudre
+\ingredient 75g Muscat de Frontignan (ou vin blanc)
+\ingredient 75g d'huile
+\ingredient 1 c. à soupe Fleur d'oranger
+\ingredient 1 c. à café Extrait de vanille
+\ingredient 5.5g Levure chimique (1/2 sachet)
+\ingredient 150g de zeste d'orange confite émincés en petits cube de 3mm de coté
+\end{ingredients}
+
+
+\begin{preparation}
+\etape Préchauffez le four à 180° en chaleur tournante.
+\etape Dans un saladier, mélangez le sucre en poudre, la farine et la levure
+\etape Ajoutez le muscat, la fleur d'oranger, l'huile et la vanille puis bien mélanger le tout.
+\etape Faire une saucisse, la filmer et la mettre au frigo 1 heure.
+\etape Après on fait des petits morceaux; on les tord, il faut bien les séparer afin qu'ils ne se collent pas entre eux (au besoin rajouter un peu de farine).
+\begin{remarque}
+Comptez environ 1cm de diamètre et 7cm de long. L'ordre de grandeur c'est 15g de pâte %source: https://lacuisinedebernard.com/zezettes-de-sete/
+\end{remarque}
+\etape Avant de les mettre sur la plaque de cuisson les rouler dans du sucre en poudre
+\etape Enfournez pour 25 minutes de cuisson jusqu'à ce que les biscuits soient bien dorés.
+\end{preparation}
+\end{recette}
+__________
+
+source: https://gateauetcuisinerachida.com/zezettes-de-sete/
+
+Pour 60  zézettes 
+
+    500 g de farine
+    150 g d’huile de tournesol et huile d’olive (J’ai utilisé moitié-moitié mais vous pouvez utiliser l’une ou l’autre)
+    150 g de Muscat ou vin rosé -J’ai utilisé de l’eau avec 4 gouttes de vinaigre balsamique mais vous pouvez n’utiliser que de l’eau. Vous pouvez remplacez un peu d’eau par de l’eau de fleur d’oranger.
+    120 g de sucre (vous pouvez en mettre un peu plus mais avec l’enrobage dans le sucre, je trouve que c’est assez sucré ).
+    7 g de levure chimique
+    1 pincée de sel
+    1 sachet de sucre vanillé
+    1 cuillère à café d’extrait de vanille
+    Sucre pour l’enrobage 
+
+Facultatif :
+
+1 à 2 cuillères de grains d’anis pour la moitié de la pâte
+
+ingrédient zezette de sete
+Étapes de préparation :
+
+1. Dans un saladier ou dans le bol du pétrin, versez l’huile, le Muscat , le vin rosé ou l’eau, puis ajoutez le sucre, le sucre vanillé et l’extrait de vanille. Mélangez bien jusqu’à ce que le sucre soit dissous dans les liquides.
+
+Si vous voulez utilisez 1 à 2 cuillères à soupe d’eau de fleur d’oranger, faites-en sorte de garder  au total 150 g (ou ml) de liquide.
+
+2. Ajoutez la levure tamisée et mélangez bien.
+
+3. Incorporez la farine tamisée et la pincée de sel en trois fois, d’abord en mélangeant avec un fouet, puis terminez à la main. À chaque ajout, mélangez jusqu’à ce que la farine soit bien incorporée. Continuez à mélanger jusqu’à obtenir une pâte homogène et souple.
+
+Note : Selon l’absorption de la farine, il se peut que vous ayez besoin d’un peu moins ou d’un peu plus de farine. Vous devez obtenir une pâte souple, pas dure et non collante. Elle doit pouvoir se rouler facilement, mais le boudin doit rester très souple.
+
+4. Pétrissez légèrement la pâte, juste assez pour la rassembler en une boule lisse, sans la rendre élastique.pâte zezette de sete sans alcool
+
+5. Préchauffez le four à 180°C en mode chaleur tournante.
+
+Vous pouvez divisez la pâte en deux et à une part, rajoutez 2 cuillères à café d’anis en grains.
+
+6. Prélevez des petites portions de pâte de 15 g pour obtenir des zézettes de taille identique.
+
+7. Roulez chaque morceau de pâte en boule lisse, puis sur un plan de travail légèrement huilé, roulez-les avec vos mains pour former des boudins longs et fins d’environ 15 cm. En les roulant, affinez légèrement les extrémités pour leur donner la forme typique des zézettes.
+
+8. Roulez chaque zézette dans du sucre pour les enrober, en prenant soin de ne pas les déformer.
+
+9. Disposez les zézettes sur une plaque recouverte de papier sulfurisé en les espaçant légèrement.
+
+Façonnage des zezettes des sete
+
+10. Enfournez pendant environ 15 à 20 minutes plus moins selon votre four. Elles doivent prendre une dorure uniforme pas très foncée, comme sur les photos. Finissez le reste de la pâte de la même façon.
+
+11. Déposez les zézettes sur une grille à la sortie du four et laissez-les refroidir. Elles deviendront très croustillantes en refroidissant.
+Conservation des zézettes de Sète :
+
+Ces biscuits se conservent très bien pendant plus de 2 semaines sans soucis en restant très croustillants. C’est l’avantage des zézettes car elles ne contiennent ni oeuf, ni lait.
+
+Une fois qu’elles ont bien refroidies, rangez-les dans une boite hermétique en verre ou en métal de préférence. Si vous n’avez que des boites en plastique, couvrez la boite de papier aluminium. Cela permettra de garder tout le croustillant.
+
