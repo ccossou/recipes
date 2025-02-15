@@ -144,3 +144,17 @@ par kg de viande:
 dans sac congélation, compter 1 jour par centimètre + 1j. Pour une poitrine de 2cm, il faut 3jour, pour 4cm, il faut 5 jours
 
 np.array([1000, 30, 15])
+
+== queues de cochon en saumure
+J'ai mis les mêmes doses que pour la saumure, à savoir:
+par litre de saumure
+154g de sel
+44g de sucre
+1 feuille de laurier
+1.6 baies de genièvre 
+0.6 clous de girofle
+0.4g de 5 baies
+
+J'ai fait 1L de saumure, mais c'était pas assez, alors j'ai rajouté un peu d'eau (peut-être 300ml) et du sel sur les parties non immergées)
+pour les queues de cochon, c'est 13g de sel pour 100g dans les ingrédients des queues de la marque Marion mais j'ai mis plus de sel dans la saumure, pour compter que la viande a un certain volume qui n'est pas salé. 
+
