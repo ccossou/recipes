@@ -14,3 +14,15 @@ avant de filter, tu goutes pour le sucre
 
 avec la bouteille de pulpe de 1.5L, on peut faire environ 10 à 13L de jus. 
 Pour 1.5L de jus, il faut le jus de 6 maracudjas
+
+__ 23/02/2025
+356g de pulpe de maracudja
+150g
+1.5L (compter 10g de sucre par 100mL)
+
+avant de mixer, j'ai mis 1l pile, et je pourrai rajouter ensuite, ça fait moins à mixer, c'est plus facile. 
+En tout, ça a fait environ 1.85L de jus
+
+C'était bien. J'ai donc corrigé pour faire 1.5L de jus pil poil en conservant le ratio de sucre et de pulpe. 
+
+array([ 288.64864865,  121.62162162, 1216.21621622, 1500.        ])

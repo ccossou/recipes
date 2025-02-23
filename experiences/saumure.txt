@@ -19,10 +19,34 @@ Par rapport à un salage à sec, la saumure liquide possède deux avantages prin
 
     Elle assure une pénétration plus rapide du sel à l’intérieur des pièces de viande immergées.
     La diffusion du sel et sa régularité sont optimales.
+	
+La saumure en saturation c'est environ 250g de sel pour 1L de saumure. il faut compter 3/4 de sel et 1/4 de sucre
+
+Les doses pour la saumure, sauf mention contraire sont par défaut:
+(source: les bases de la charcuterie d'andré Delplanque)
+(infos: 16° baumé, densité 1126)
+1L d'eau
+200g de sel
+20g de sucre
+10g de salpetre
+0.35g de thym sec (ou 0.7 de thym frais)
+0.15g de laurier
+3.5g d'ail non epluché émincé
+0.3g de baies de genièvre
+.5g de poivre en grain
+0.3 clous de girofle (3 clous par 10L)
+il faut porter à ebullition et laisser bouillir les aromates pendant 10 minutes à couvert
 
 Cette technique nécessite deux à quatre jours de saumurage.
 
 A noter que le salage à sec en saloir, technique ancestrale de conservation du temps où l'on tuait le cochon dans les fermes, permet d'obtenir une excellente conservation, mais avec un résultat très salé et une viande grisâtre. Elle nécessite un dessalage impératif avant utilisation.
+
+== avec ou sans salpetre:
+source: https://nicrunicuit.com/faire/fermenter/comment-faire-du-corned-beef-maison/
+
+Avec une saumure à 20 % de sel, il est  tout simplement égal à zéro, le pourcentage recommandé par les autorités sanitaires est de 10 %. Ne descendez pas en dessous de cette proportion et laissez la viande fermenter assez longtemps. La viande ainsi traitée étant, de plus, toujours consommée après une longue cuisson à l’eau bouillante, il n’y a donc ni risque, ni danger de ce côté-là. Les cas de botulisme proviennent d’une hygiène insuffisante et/ou d’une teneur en sel insuffisante.
+
+Vous pouvez donc très bien faire la recette sans le sel nitrité ou sans salpêtre, ce sera aussi bon, et ça se conservera aussi bien, mais vous n’aurez pas la couleur rose. La viande sera grise comme du boeuf ordinaire. Je l’ai fait sans la première fois, mais j’ai voulu essayer avec pour voir la différence. Ça ne change rien au goût, juste à la couleur. Donc, maintenant je n’en mets plus, et je ne conseille pas d’en mettre.
 
 == recette
 Ingrédients
