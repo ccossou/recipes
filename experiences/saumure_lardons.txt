@@ -79,3 +79,18 @@ Pour un tupperware, j'ai mis 1L d'eau pour 1.5kg de viande. Le tupperware débor
 j'ai mis dans la saumure le 29/11 à 12h
 j'ai sorti de la saumure le 05/12 à 17h
 j'ai rincé à l'eau froide, puis mis direct dans une marmite avec de l'eau froide non salée pour recouvrir la viande, j'ai mis à ébullition et mis à cuire 2h. 
+
+13/01/2026
+[j'ai essayé avec 42g/kg, c'était plus salé que l'autre batch où j'ai mis 21g/kg, mais toujours pas la texture. ]
+j'ai donc rajouté du sel dans mon expérience pour arriver à 120g de sel / kg, et voir si ça allait jouer sur la texture. 
+Et ensuite, je vais essayer de dessaler  pour ramener à 21g/kg avec la technique que j'ai mise au point dans saumure_main.
+
+le 17/01 j'ai mis à dessaler les lardons, j'ai rajouté 1.603kg d'eau, car il y avait 340g de viande une fois égoutté (en comptant l'eau je pense). 
+à sortir le 18 au matin
+
+le 18/01 à 10h, j'ai égoutté dans passoire, puis mis à congeler. J'ai goûté un morceau, c'est hyper salé. donc pas top comme technique. Et pas de changement majeur par rapport aux autres lardons que j'ai fait sans les deux étapes incluant dessalage. 
+
+conclusion: 
+	saler puis dessaler, ça marche pas, et en plus, dessaler c'est pas fiable en calculant, c'était trop salé quand j'ai mis à dessaler. 
+	lardons, ça vaut pas le coup je pense, j'arrive pas à faire comme des lardons, alors que la viande demi sel, ça marche pas mal. 
+	

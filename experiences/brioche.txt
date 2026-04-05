@@ -1,3 +1,102 @@
 Résumé de toutes les recettes que j'ai pu tester. Celle de bocuse avait trop de beurre. Je ne me souviens plus des autres, mais j'ai trouvé celle là aussi:
 https://empreintesucree.fr/brioche-boulanger/
 
+TODO pour la prochaine fois
+tester une brioche sans beaucoup de beurre (utilisé le même site que pour la baguette magique)
+https://cookingmumu.com/tangzhong/
+
+Pain brioché méthode Tang zhong
+source originale pour tang zhong: https://en.christinesrecipes.com/2010/03/japanese-style-bacon-and-cheese-bread.html
+	
+	optimum pour lever la pâte, 28°C
+	cuisson à 180°C
+	
+
+LE TANG ZHONG
+
+Ingrédients : 20g de farine type 45, 100g d’eau. (1 pour 5)
+
+    La veille, chauffer sur feu moyen l’eau et la farine pour atteindre 65°, sans jamais cesser de remuer au fouet.
+    Vous allez obtenir une mélange gélatineux. Même sans thermomètre, vous saurez que la température est atteinte lorsque le fouet laissera ses stries dans la préparation.
+    Laisser refroidir, puis mettre au frais.
+    Le lendemain, sortir le tang zhong 30 mn avant, pour qu’il revienne à température ambiante.
+
+LA BRIOCHE, recette CAP boulangerie
+250g de farine
+162g d'oeufs (3 oeufs ça faisait 150g, j'ai complété avec du lait pour avoir le bon poids de liquide)
+4.5g de sel
+5g de levure sèche
+37.5g de sucre
+125g de beurre mou
+
+mélanger levure sèche et oeuf
+tout mélanger sauf le beurre
+ajouter beurre et battre 3 minutes
+laisser reposer 1h30 (28°C), puis mettre dans un moule à cake
+Couvrir et mettre au frais 12h
+Laisser pousser 1h30 à 28°C
+Faites cuire à 200°C, chaleur dessous sans ventilation sur la plaque à pizza. 
+Faites cuire 15 à 30 minutes
+
+24/01/2026
+oublié de dorer au lait, croute pas brillante
+beurre a figé, un peu d'huile à la place pour permettre de mieux gonfler?
+
+cuisson 19 minutes à 200°C
+bon goût, mais dense. 
+
+
+30/01/2026
+J'essaie la recette de pain au lait du CAP boulangerie. J'ai changé les doses pour faire à partir de 250g de farine pour que ça rentre dans le moule à cake. 
+J'ai aussi mis du tang-zhong (pris sur les quantité de farine et eau) et un oeuf en plus (en m'inspirant des recettes https://www.yumelise.fr/petit-pain-lait/ et https://oventales.com/hokkaido-milk-bread/)
+
+\ingredient[Tang-Zhong]
+\ingredient 12.5 g de farine T45
+\ingredient 62.5 g de lait
+\ingredient[Pâte]
+\ingredient 237.5 g de farine T45
+\ingredient 87.5 g de lait
+\ingredient 4.5 g de sel
+\ingredient 7.5 g de levure
+\ingredient 30 g de sucre
+\ingredient 62.5 g de beurre
+\ingredient 1 oeuf
+
+\etape faire le tang-zhong puis laissez refroidir à couvert
+\etape mettez le beurre dans un sac congélation hermétique et plongez le au bain marie dans de l'eau chaude s'il n'est pas déjà mou
+\etape mélangez le sucre, la levure, l'oeuf et le lait au fouet jusqu'à ce que ce soit parfaitement mélangé
+\etape ajoutez le tang-zhong, la farine et le sel, puis pétrir jusqu'à ce que ce soit grossièrement mélangé
+\etape laissez reposer 20 minutes
+\etape Pétrissez 3 minutes, puis ajoutez le beurre mou et pétrissez de nouveau 3 minutes
+\etape Laissez pointer 2h
+\etape Versez dans le moule à cake, et à l'aide de deux spatules, étirez la pâte pour qu'elle touche bien tous les bords
+\etape Laissez monter pendant 1h15 à 28°C
+\etape Faites préchauffer le four chaleur uniquement en bas, avec la pierre à pizza, sans ventilation, à 220°C. Pendant ce temps, posez le moule à cake sur la plaque à lézard réglée au minimum, et couvrez avec du cellophane.
+\etape Si en enlevant le cellophane, la pâte y est collée, utilisez une spatule pour racler délicatement, ça devrait venir tout seul à cause de la matière grasse dans la pâte
+\etape Dorez au lait avant d'enfourner
+\etape Faites cuire 15 minutes. 
+\etape Démoulez de suite et mettez sur une grille à température ambiante pendant 1h environ.
+
+pas assez léger je trouve. je sais pas trop quoi changer. 
+
+TODO:
+tester remplacer beurre par huile (125*0.8)
+tester avec tang zhong
+samuel m'a envoyé une recette de pain au lait: https://www.yumelise.fr/petit-pain-lait/
+
+# test à partir dosage extrait des ingredients des pains au lait pasquier: 
+import numpy as np
+
+total = 12.5+62.5+237.5+87.5+4.5+7.5+30+62.5+60
+
+ingredients = ["farine", "oeuf", "beurre+huile", "sel"]
+t = np.array([0.43+0.21*0.11, 0.09, 0.11, 0.011])
+
+print(f"Recette pain au lait pasquier:")
+print(f"Pour {total:.2f}g")
+
+for ingredient, quantity in zip(ingredients, t):
+    print(f"* {ingredient}: {quantity*total:.2f}g")
+
+reste = (1-t.sum())*total
+print(f"* autre: {reste:.2f}g")

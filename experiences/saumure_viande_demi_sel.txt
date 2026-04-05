@@ -1,0 +1,64 @@
+Les doses pour la saumure, sauf mention contraire sont par défaut:
+(source: les bases de la charcuterie d'andré Delplanque)
+(infos: 16° baumé, densité 1126)
+1L d'eau
+200g de sel
+20g de sucre
+10g de salpetre
+0.35g de thym sec (ou 0.7 de thym frais)
+0.15g de laurier
+3.5g d'ail non epluché émincé
+0.3g de baies de genièvre
+.5g de poivre en grain
+0.3 clous de girofle (3 clous par 10L)
+il faut porter à ebullition et laisser bouillir les aromates pendant 10 minutes à couvert
+
+recette bizarre parce que je comprends pas si le bouillon doit être salé ou pas
+
+saumure d'immersion (ci dessus)
+pour la cuison, je cite "bouillon coupé d'eau à moitié. Légume (carottes, oignons celeri, etc...), aromates (thym laurier)
+
+immergier en saumure pendant 12h minimum
+rincer le petit salé à l'eau fraiche
+éplucher et couper les létgumes
+préparer les aromateschauffer le bouillon coupé d'eau à moitié, écumer et porter à ébullition (là, je pense qu'il faut utiliser pour moitié la saumure)
+ajouter les légumes et les aromates
+mettre dans le bouillon bouillant le petit salé entier ou coupé en morceaux
+régler et cuire:
+* 1h15 environ à 95-98° pour le petit salé entier
+* 1h environ à 95-98° pour le petit salé coupé en morceaux.
+
+porc coupé en morceau mis dans la saumure le 09/03/2025 à 8h46
+j'ai sorti un morceau le 14/03/2025 à 12h. J'ai fait cuire une heure à ébullition et à couvert, dans 2L d'eau non salée. La viande n'était pas salée du tout ensuite, mais il faut faire attention pour la cuisson dans moins d'eau de plus de viande. ça risque de piquer. 
+La viande était super tendre. 
+
+j'ai vraiment sorti toute la viande le 16/03. J'ai fait cuire une heure dans de l'eau sans les lentilles, puis j'ai gouté et c'était pas hyper salé, donc j'ai mis les lentilles, mais une fois recuit c'était hyper salé, j'ai du rincer le tout à l'écumoire avec de l'eau froide. 
+
+Je pense donc qu'il faut faire dessaler une nuit avant de mettre à cuire. 
+
+15/11/2025
+	15/11/2025 19h00 j'ai mis un roti, coupé en cube grossier, dans 500g de sel, sans rien d'autre, sans eau
+	16/11/2025 à 9h, j'ai sorti la viande du sel et rincé sous l'eau froide. 
+	j'ai ensuite mis dans un torchon au frigo. Ils conseillent de laisser 12h au frigo pour que le sel se répartisse dans la viande. 
+	17/11/2025 à 19h00 j'ai enlevé du frigo et j'ai mis à cuire dans de l'eau froide (à niveau de la viande, pas plus), avec herbe de provence, laurier, un clou de girofle). 
+	j'ai mis à ébullition et cuit 2h à petite ébullition (4-5/9)
+	c'est un peu trop salé mais ça reste mangeable. Après cuisson, c'est encore un peu dur, il aurait peut-être fallu 3h de cuisson. 
+	Pour moi il faut laisser 48h au frais dans le torchon, mais il faut laisser un peu moins longtemps dans le sel. Là, j'ai laissé 14h au frais. Soit il faut que je mette moins de sel, soit il faut que je fasse une saumure à 60g de sel (j'avais noté la quantité dans une recette, mais je crois pas qu'il faisait une saumure, c'était 60g par kg)
+	
+29/11/2025
+	# Poids total en kg, sel, sucre
+	r = np.array([1, 35, 3.5])
+	poids = 2.455  # 1.445 viande et 1 d'eau
+	r * poids
+	86g de sel et 9g de sucre
+
+	remarque: Essayer de ne pas toucher la viande, l'eau et l'intérieur du récipient avec les doigts. Pour des raisons sanitaires, ce genre de préparation a un risque plus élevé de contamination et il faut faire attention, même si le sel aide, ce n'est pas saturé en sel et sans nitrite, ça protège pas du botulisme. 
+	Calculer la quantité de sel et sucre par rapport à la quantité d'eau et de viande (poids total). 
+	Si possible, évaluer la quantité de sel avant, l'avantage, c'est qu'on peut ainsi dissoudre le sel et sucre dans l'eau sans la viande, puis la rajouter après
+	Pour un tupperware, j'ai mis 1L d'eau pour 1.5kg de viande. Le tupperware déborde pas, et il y a assez d'eau
+
+	j'ai mis dans la saumure le 29/11 à 12h
+	j'ai sorti de la saumure le 05/12 à 17h
+	j'ai rincé à l'eau froide, puis mis direct dans une marmite avec de l'eau froide non salée pour recouvrir la viande, j'ai mis à ébullition et mis à cuire 2h. 
+	
+	pas forcément besoin de rincer, et niveau sel c'était bon, donc on peut faire cuire direct avec lentilles ou autre sans craintes. 

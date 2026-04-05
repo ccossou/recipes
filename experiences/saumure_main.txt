@@ -1,0 +1,24 @@
+## Helper function
+(see saumure.py)
+
+Pour toutes les viandes et marinade, je peux faire pareil:
+* pour avoir une quantité calibrée de sel dans la viande, je calcule la quantité de sel qu'il faut pour la masse viande+eau. Et si je laisse suffisamment longtemps, le sel va s'équilibrer et je pourrai avoir la bonne quantité dans la viande
+* je peux aussi avec ce même principe, mettre beaucoup plus de sel, puis faire une 2e phase pour dessaler, en qualibrant la quantité d'eau non salée pour enlevée la quantité que je veux de sel. 
+
+Quantité de sel en fonction de ce que je prépare
+* lardon: 25g de sel /kg (magasin: 21)
+* viande demi sel: 30g de sel / kg (magasin, 30 à 35) (35 c'était trop salé)
+* morue dessalée:  10g de sel / kg
+* marinade barbecue: 20g de sel / kg
+* morue salée séchée: 200g de sel / kg
+* eau saturée en sel: 360g de sel / kg
+
+RECETTE
+Pour calculer la quantité de sel et sucre dans la saumure il faut:
+* évaluer la quantité par kg qu'on veut pour la viande (par exemple 3.1g de sel / 100g)
+* calculer la quantité totale de sel qu'il faut en comptant le poids de la viande ET de l'eau de saumure
+* mélanger le sel à l'eau de saumure et laisser suffisamment longtemps pour que ça s'équilibre, puisque l'équilibre aura la même proportion de sel dans l'eau et la viande par osmose
+
+la quantité d'eau, ça dépend du contenant et de la quantité de viande, mais la dernière fois pour 1.5kg de viande, 1kg de sel c'était assez. 
+pour viande demi sel, j'ai laissé 7 jours la dernière fois. 
+
