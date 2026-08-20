@@ -26,3 +26,11 @@ En tout, ça a fait environ 1.85L de jus
 C'était bien. J'ai donc corrigé pour faire 1.5L de jus pil poil en conservant le ratio de sucre et de pulpe. 
 
 array([ 288.64864865,  121.62162162, 1216.21621622, 1500.        ])
+
+18/06/2026
+j'ai refait, mais avec la fin de bouteille, donc j'ai fait les proportions suivantes (même ratio qu'en haut)
+206g de pulpe de maracudja
+87g
+0.868L (compter 10g de sucre par 100mL)
+en gouttant le soir, ça avait pas l'air assez sucré. Et j'ai pas mis de citron non plus. 
+j'ai rajouté 20g de sucre

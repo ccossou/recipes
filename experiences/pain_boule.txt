@@ -681,7 +681,8 @@ j'ai oublié le sel et la levure, une fois le petrissage fini, j'ai mis et repet
 j'ai fait cuire 35 puis 3 minutes sans couvercle. Il faut que j'essaie 40 minutes avec couvercle pour voir si ça continue de monter, parce que les 3 dernières minutes, ça montait encore j'ai l'impression
 essayer de faire lever moins aussi (40 au lieu de 50), c'est peut-être trop fermenté.
 
-Recette actuelle
+
+10/04/2026
 modernist bread volume 4, page 178 Direct french lean bread 90% hydration
 	mon type de four, c'est deck oven. (pas de ventilation, et chaleur en haut et en bas)
 	sinon c'est home with baking stone, mais j'ai pas de couvercle dessus par contre
@@ -694,10 +695,87 @@ ajouter la levure sèche et le sel , incorporez, puis pétrir pendant 9 minutes 
 Pointage / Bulk Ferment: 1h15
 	Laissez dans le bol du robot, laissez lever pendant 45 minutes
 	faire quelques tours de la feuille pendant 30s, puis laisser 30 minutes de plus. 
+huilez les doigts, effectuez un rabat ou à défaut mélangez un peu et mettez dans le plat de cuisson (pour moi, le couvercle de la cocotte en fonte)
+Faire lever 50 minutes à 27°C dans le four fermé.
+une fois fini, poser le couvercle en fonte en dehors du four, mettre un torchon dessus, et laisser comme ça jusqu'à enfourner
+faite préchauffer le four en mode chaleur tournante. Mettre la plaque à pizza sur une grille, et la marmite en fonte par dessus.
+Préchauffer à 245°C
+Entre 18 et 24 minutes plus tard, c'est chaud. 
+Huilez la lame du couteau entre chaque coup de lame. Faites quatre entailles pour dessiner un carré juste avant d'enfourner. Mettez la marmite à l'envers dessus et enfournez sur la pierre à pizza (couvercle sur la pierre pour qu'il chauffe rapidement). 
+Faites cuire à couvert pendant 40 minutes, puis enlevez le couvercle. Vous pouvez le laisser cuire un peu sans couvercle pour qu'il caramélise, mais pas plus de 3 minutes je pense. 
+Sortez du four et déposez le pain sur une grille pendant 30 minutes pour qu'il évacue le surplus d'humidité.
+
+pas de montée au frigo, mais c'est pas beaucoup monté à la cuisson, il faut vraiment faire une levée plus courte au lieu des 50 minutes+20 minutes en attendant que le four chauffe. C'était même pire cette fois là, peut-être parce que la pâte n'était pas froide contrairement à d'habitude. 
+35 minutes serait peut-être suffisant pour la levée?
+
+18/04/2026
+modernist bread volume 4, page 178 Direct french lean bread 90% hydration
+	mon type de four, c'est deck oven. (pas de ventilation, et chaleur en haut et en bas)
+	sinon c'est home with baking stone, mais j'ai pas de couvercle dessus par contre
+500g farine T65 (75 T110 et le reste de T65)
+453g eau
+3.4g levure sèche
+12g de sel
+mélanger l'eau et la farine à basse vitesse jusqu'à obtenir une bouillie grossière. 
+ajouter la levure sèche et le sel , incorporez, puis pétrir pendant 9 minutes avec la feuille à vitesse 3 jusqu'à ce que ça se détache des bords (réseau de gluten développés)
+Pointage / Bulk Ferment: 1h15
+	Laissez dans le bol du robot, laissez lever pendant 45 minutes
+	faire quelques tours de la feuille pendant 30s à vitesse 3, puis laisser 30 minutes de plus. 
 Verser la pâte dans un récipient et couvrir avant de mettre au frais.
 Le lendemain, sortir la pâte, huilez les doigts, effectuez un rabat ou à défaut mélangez un peu et mettez dans le plat de cuisson (pour moi, le couvercle de la cocotte en fonte)
 mettre la plaque à lézard de 20W en bas du four, au minimum (qui est 20W)
-Faire lever 40 minutes à 27°C dans le four fermé.
+Faire lever 30 minutes à 27°C dans le four fermé.
+une fois fini, poser le couvercle en fonte en dehors du four, mettre un torchon dessus, et laisser comme ça jusqu'à enfourner
+faite préchauffer le four en mode chaleur tournante. Mettre la plaque à pizza sur une grille, et la marmite en fonte par dessus.
+Préchauffer à 245°C
+Entre 18 et 24 minutes plus tard, c'est chaud. 
+Huilez la lame du couteau entre chaque coup de lame. Faites quatre entailles pour dessiner un carré juste avant d'enfourner. Mettez la marmite à l'envers dessus et enfournez sur la pierre à pizza (couvercle sur la pierre pour qu'il chauffe rapidement). 
+Faites cuire à couvert pendant 40 minutes, puis enlevez le couvercle. Vous pouvez le laisser cuire un peu sans couvercle pour qu'il caramélise, mais pas plus de 3 minutes je pense. 
+Sortez du four et déposez le pain sur une grille pendant 30 minutes pour qu'il évacue le surplus d'humidité.
+
+Pas pas mal du tout. 
+Moins de levure, et moins de levée, c'est pas mal. Je pense même parfois que je devrais pouvoir enfourner direct. Préchauffage avec pain dehors et hop.
+
+23/04/2026
+modernist bread volume 4, page 178 Direct french lean bread 90% hydration
+	mon type de four, c'est deck oven. (pas de ventilation, et chaleur en haut et en bas)
+	sinon c'est home with baking stone, mais j'ai pas de couvercle dessus par contre
+500g farine T65 (40 T110 et le reste de T65)
+453g eau
+3.4g levure sèche
+12g de sel
+mélanger l'eau et la farine à basse vitesse jusqu'à obtenir une bouillie grossière. 
+ajouter la levure sèche et le sel , incorporez, puis pétrir pendant 9 minutes avec la feuille à vitesse 3 jusqu'à ce que ça se détache des bords (réseau de gluten développés)
+Pointage / Bulk Ferment: 1h15
+	Laissez dans le bol du robot, laissez lever pendant 45 minutes
+	faire quelques tours de la feuille pendant 30s à vitesse 3, puis laisser 30 minutes de plus. 
+Touillez une dernière fois et verser la pâte dans un récipient et couvrir avant de mettre au frais.
+Le lendemain, sortir la pâte, huilez les doigts, effectuez un rabat ou à défaut mélangez un peu et mettez dans le plat de cuisson (pour moi, le couvercle de la cocotte en fonte)
+une fois fini, poser le couvercle en fonte en dehors du four, mettre un torchon dessus, et laisser comme ça jusqu'à enfourner
+faite préchauffer le four en mode chaleur tournante. Mettre la plaque à pizza sur une grille, et la marmite en fonte par dessus.
+Préchauffer à 245°C pendant 20 minutes
+Huilez la lame du couteau entre chaque coup de lame. Faites quatre entailles pour dessiner un carré juste avant d'enfourner. Mettez la marmite à l'envers dessus et enfournez sur la pierre à pizza (couvercle sur la pierre pour qu'il chauffe rapidement). 
+Faites cuire à couvert pendant 40 minutes, puis enlevez le couvercle. Vous pouvez le laisser cuire un peu sans couvercle pour qu'il caramélise, mais pas plus de 3 minutes je pense. 
+Sortez du four et déposez le pain sur une grille pendant 30 minutes pour qu'il évacue le surplus d'humidité.
+
+
+Recette actuelle
+modernist bread volume 4, page 178 Direct french lean bread 90% hydration
+	mon type de four, c'est deck oven. (pas de ventilation, et chaleur en haut et en bas)
+	sinon c'est home with baking stone, mais j'ai pas de couvercle dessus par contre
+500g farine T65 (40 T110 et le reste de T65)
+453g eau
+3.4g levure sèche
+12g de sel
+mélanger l'eau et la farine à basse vitesse jusqu'à obtenir une bouillie grossière. 
+ajouter la levure sèche et le sel , incorporez, puis pétrir pendant 9 minutes avec la feuille à vitesse 3 jusqu'à ce que ça se détache des bords (réseau de gluten développés)
+Pointage / Bulk Ferment: 1h15
+	Laissez dans le bol du robot, laissez lever pendant 45 minutes
+	faire quelques tours de la feuille pendant 30s à vitesse 3, puis laisser 30 minutes de plus. 
+Verser la pâte dans un récipient et couvrir avant de mettre au frais.
+Le lendemain, sortir la pâte, huilez les doigts, effectuez un rabat ou à défaut mélangez un peu et mettez dans le plat de cuisson (pour moi, le couvercle de la cocotte en fonte)
+mettre la plaque à lézard de 20W en bas du four, au minimum (qui est 20W)
+Faire lever 30 minutes à 27°C dans le four fermé.
 une fois fini, poser le couvercle en fonte en dehors du four, mettre un torchon dessus, et laisser comme ça jusqu'à enfourner
 faite préchauffer le four en mode chaleur tournante. Mettre la plaque à pizza sur une grille, et la marmite en fonte par dessus.
 Préchauffer à 245°C
