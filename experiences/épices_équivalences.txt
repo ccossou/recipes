@@ -1,0 +1,12 @@
+épice    volume    densité    masse
+paprika  10ml      0.467g/mL  5g
+
+1 Cuillère à café
+paprika  1.4g
+coriandre 1.4g
+cumin 1.4g
+curcuma 1.4g
+fénugrec 1.6g
+garam massala 1.4g
+sel 3g
+citron 3g
